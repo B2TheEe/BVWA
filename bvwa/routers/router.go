@@ -51,4 +51,10 @@ beego.Router("/integrity/vulnerable",
     &controllers.VulnerableIntegrityController{})
 beego.Router("/integrity/secure",
     &controllers.SecureIntegrityController{})
+    
+    // Security Logging & Alerting
+beego.Router("/logging/vulnerable",
+    &controllers.VulnerableLoggingController{})
+beego.Router("/logging/secure",
+    &controllers.SecureLoggingController{})
 }

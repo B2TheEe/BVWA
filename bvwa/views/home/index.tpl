@@ -95,6 +95,15 @@
     <a class="btn vuln" href="/integrity/vulnerable">Kwetsbaar</a>
     <a class="btn safe" href="/integrity/secure">Veilig</a>
     </div>
+    
+    <div class="card">
+    <span class="badge">A09</span>
+    <h3>Security Logging & Alerting Failures</h3>
+    <p>Ontbrekende logging van beveiligingsgebeurtenissen
+       en alerting bij aanvallen.</p>
+    <a class="btn vuln" href="/logging/vulnerable">Kwetsbaar</a>
+    <a class="btn safe" href="/logging/secure">Veilig</a>
+    </div>
 
     <footer style="margin-top:30px; color:#888; font-size:13px;">
         <p>⚠️ BVWA is uitsluitend bedoeld voor educatieve doeleinden.
