@@ -104,6 +104,15 @@
     <a class="btn vuln" href="/logging/vulnerable">Kwetsbaar</a>
     <a class="btn safe" href="/logging/secure">Veilig</a>
     </div>
+    
+    <div class="card">
+    <span class="badge">A10</span>
+    <h3>Mishandling of Exceptional Conditions</h3>
+    <p>Onjuiste foutafhandeling die interne details lekt
+       of fail-open gedrag veroorzaakt.</p>
+    <a class="btn vuln" href="/exceptions/vulnerable">Kwetsbaar</a>
+    <a class="btn safe" href="/exceptions/secure">Veilig</a>
+    </div>
 
     <footer style="margin-top:30px; color:#888; font-size:13px;">
         <p>⚠️ BVWA is uitsluitend bedoeld voor educatieve doeleinden.

@@ -57,4 +57,11 @@ beego.Router("/logging/vulnerable",
     &controllers.VulnerableLoggingController{})
 beego.Router("/logging/secure",
     &controllers.SecureLoggingController{})
+    
+    
+    // Exception Handling
+beego.Router("/exceptions/vulnerable",
+    &controllers.VulnerableExceptionController{})
+beego.Router("/exceptions/secure",
+    &controllers.SecureExceptionController{})
 }
