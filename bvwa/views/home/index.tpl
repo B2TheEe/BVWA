@@ -78,6 +78,14 @@
         <a class="btn vuln" href="/design/vulnerable">Kwetsbaar</a>
         <a class="btn safe" href="/design/secure">Veilig</a>
     </div>
+    
+    <div class="card">
+    <span class="badge">A07</span>
+    <h3>Authentication Failures</h3>
+    <p>Zwakke login, geen rate limiting, slechte sessiebeheer.</p>
+    <a class="btn vuln" href="/auth/vulnerable">Kwetsbaar</a>
+    <a class="btn safe" href="/auth/secure">Veilig</a>
+    </div>
 
     <footer style="margin-top:30px; color:#888; font-size:13px;">
         <p>⚠️ BVWA is uitsluitend bedoeld voor educatieve doeleinden.

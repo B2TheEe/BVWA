@@ -37,4 +37,12 @@ beego.Router("/injection/xss/secure",
     &controllers.VulnerableDesignController{})
 beego.Router("/design/secure",
     &controllers.SecureDesignController{})
+    
+    // Authentication Failures
+beego.Router("/auth/vulnerable",
+    &controllers.VulnerableLoginController{})
+beego.Router("/auth/secure",
+    &controllers.SecureLoginController{})
+beego.Router("/logout",
+    &controllers.LogoutController{})
 }
