@@ -19,7 +19,7 @@ beveiligingskwetsbaarheden te begrijpen en te leren verhelpen.
 ### Stappen
 ```bash
 # Clone het project
-git clone https://github.com/jouwgebruikersnaam/bvwa.git
+git clone https://github.com/B2TheEe/bvwa.git
 cd bvwa
 
 # Installeer dependencies
