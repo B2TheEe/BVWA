@@ -86,6 +86,15 @@
     <a class="btn vuln" href="/auth/vulnerable">Kwetsbaar</a>
     <a class="btn safe" href="/auth/secure">Veilig</a>
     </div>
+    
+    <div class="card">
+    <span class="badge">A08</span>
+    <h3>Software/Data Integrity Failures</h3>
+    <p>Gemanipuleerde geserialiseerde data zonder
+       integriteitscontrole.</p>
+    <a class="btn vuln" href="/integrity/vulnerable">Kwetsbaar</a>
+    <a class="btn safe" href="/integrity/secure">Veilig</a>
+    </div>
 
     <footer style="margin-top:30px; color:#888; font-size:13px;">
         <p>⚠️ BVWA is uitsluitend bedoeld voor educatieve doeleinden.

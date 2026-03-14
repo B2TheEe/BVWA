@@ -45,4 +45,10 @@ beego.Router("/auth/secure",
     &controllers.SecureLoginController{})
 beego.Router("/logout",
     &controllers.LogoutController{})
+    
+    // Data Integrity Failures
+beego.Router("/integrity/vulnerable",
+    &controllers.VulnerableIntegrityController{})
+beego.Router("/integrity/secure",
+    &controllers.SecureIntegrityController{})
 }
