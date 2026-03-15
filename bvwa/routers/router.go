@@ -7,6 +7,8 @@ import (
 
 func init() {
     beego.Router("/", &controllers.HomeController{})
+    beego.Router("/login",     &controllers.LoginController{})
+beego.Router("/dashboard", &controllers.DashboardController{})
     beego.Router("/admin/vulnerable", &controllers.VulnerableAdminController{})
     beego.Router("/admin/secure", &controllers.SecureAdminController{})
     beego.Router("/misconfig/vulnerable", 
