@@ -512,23 +512,105 @@ if err != nil {
     </div>
 
     <!-- Result box -->
-    <div class="result-box">
-        <h3>Resultaat: <strong>{{.Title}}</strong></h3>
+    <!-- Result box -->
+<div class="result-box">
+    <h3>Resultaat: <strong>{{.Title}}</strong></h3>
 
-        {{if eq .Title "Exception Handling (Kwetsbaar)"}}
-        <span class="tag-vuln">KWETSBAAR</span>
+    {{if eq .Title "Exception Handling (Kwetsbaar)"}}
+    <span class="tag-vuln">KWETSBAAR</span>
 
-        {{if .Product}}
-        <div class="msg-success">
-            Product gevonden: <strong>{{.Product}}</strong>
-        </div>
-        {{else if .Error}}
-        <div class="msg-error">{{.Error}}</div>
-        {{if .Warning}}
-        <p style="color:#e74c3c; font-size:13px; margin-top:6px;">
-            {{.Warning}}
-        </p>
+    {{if .StatusCode}}
+    <div style="display:inline-block; margin-left:10px;
+                background:#ecf0f1; border-radius:4px;
+                padding:3px 10px; font-size:12px;
+                font-family:monospace; color:#2c3e50;">
+        HTTP {{.StatusCode}}
+        {{if eq .StatusCode "200"}} - OK
+        {{else if eq .StatusCode "400"}} - Bad Request
+        {{else if eq .StatusCode "404"}} - Not Found
+        {{else if eq .StatusCode "500"}} - Internal Server Error
         {{end}}
+    </div>
+    {{end}}
+
+    {{if .Product}}
+    <div class="msg-success" style="margin-top:10px;">
+        Product gevonden: <strong>{{.Product}}</strong>
+    </div>
+    {{else if .Error}}
+    <div class="msg-error" style="margin-top:10px;">
+        <strong>Stack trace / interne fout gelekt:</strong><br>
+        {{.Error}}
+    </div>
+    <p style="color:#e74c3c; font-size:13px; margin-top:6px;">
+        Interne databasedetails zijn zichtbaar voor de aanvaller!
+    </p>
+    {{end}}
+
+    {{if .Warning}}
+    <div style="background:#fff3cd; border:1px solid #ffc107;
+                border-radius:6px; padding:12px 16px;
+                font-size:14px; color:#856404; margin-top:10px;">
+        <strong>Fail-open gedetecteerd:</strong> {{.Warning}}
+    </div>
+    {{end}}
+
+    {{if not .Product}}{{if not .Error}}{{if not .Warning}}
+    <p style="margin-top:10px;">
+        Voer een product ID in om de kwetsbaarheid te testen.
+    </p>
+    <p style="font-size:12px; color:#888; margin-top:6px;">
+        Producten: 1=Laptop, 2=Telefoon, 3=Tablet
+    </p>
+    {{end}}{{end}}{{end}}
+
+    {{else}}
+    <span class="tag-safe">VEILIG</span>
+
+    {{if .StatusCode}}
+    <div style="display:inline-block; margin-left:10px;
+                background:#ecf0f1; border-radius:4px;
+                padding:3px 10px; font-size:12px;
+                font-family:monospace; color:#2c3e50;">
+        Zou zijn: HTTP {{.StatusCode}}
+        {{if eq .StatusCode "200"}} - OK
+        {{else if eq .StatusCode "400"}} - Bad Request
+        {{else if eq .StatusCode "404"}} - Not Found
+        {{else if eq .StatusCode "500"}} - Internal Server Error
+        {{end}}
+    </div>
+    {{end}}
+
+    {{if .Product}}
+    <div class="msg-success" style="margin-top:10px;">
+        Product gevonden: <strong>{{.Product}}</strong>
+    </div>
+    {{else if .Error}}
+    <div class="msg-safe-error" style="margin-top:10px;">
+        {{.Error}}
+    </div>
+    <p style="color:#27ae60; font-size:13px; margin-top:6px;">
+        Generieke melding — geen interne details gelekt.
+        Correcte HTTP statuscode zou worden teruggegeven.
+    </p>
+    {{else}}
+    <p style="margin-top:10px;">
+        Voer een product ID in om correcte foutafhandeling
+        te testen.
+    </p>
+    <p style="font-size:12px; color:#888; margin-top:6px;">
+        Producten: 1=Laptop, 2=Telefoon, 3=Tablet
+    </p>
+    {{end}}
+    {{end}}
+
+    <div class="tip">
+        Tip: Vergelijk het gedrag van beide versies met
+        input: abc (tekst), -1 (negatief), 999 (niet gevonden)
+        en 1 (geldig). Let op de HTTP-statuscodes en
+        foutmeldingen.
+    </div>
+</div>
         {{else}}
         <p>Voer een product ID in om de kwetsbaarheid te testen.</p>
         <p style="font-size:12px; color:#888; margin-top:6px;">

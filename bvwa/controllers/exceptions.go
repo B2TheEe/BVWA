@@ -24,10 +24,11 @@ type VulnerableExceptionController struct {
 func (c *VulnerableExceptionController) Get() {
     idStr := c.GetString("id")
 
-    c.Data["Title"]   = "Exception Handling (Kwetsbaar)"
-    c.Data["Product"] = ""
-    c.Data["Error"]   = ""
-    c.Data["Warning"] = ""
+    c.Data["Title"]      = "Exception Handling (Kwetsbaar)"
+    c.Data["Product"]    = ""
+    c.Data["Error"]      = ""
+    c.Data["Warning"]    = ""
+    c.Data["StatusCode"] = ""
 
     if idStr == "" {
         c.TplName = "exceptions/index.tpl"
@@ -41,20 +42,23 @@ func (c *VulnerableExceptionController) Get() {
     if id < 0 {
         id = 1
         c.Data["Warning"] = fmt.Sprintf(
-            "Negatief ID '%s' stilletjes gecorrigeerd naar 1!",
-            idStr)
+            "Negatief ID '%s' stilletjes gecorrigeerd naar 1! "+
+                "(fail-open gedrag)", idStr)
     }
 
-    // KWETSBAAR 3: interne info gelekt in foutmelding
+    // KWETSBAAR 3: interne info gelekt
     product, exists := productDB[id]
     if !exists {
+        c.Data["StatusCode"] = "500"
         c.Data["Error"] = fmt.Sprintf(
-            "Product met ID %d bestaat niet. "+
-                "Beschikbare IDs: 1, 2, 3. "+
-                "Query: SELECT * FROM products WHERE id=%d",
+            "INTERNE FOUT: Product met ID %d bestaat niet "+
+                "in tabel 'products'. "+
+                "Query: SELECT * FROM products WHERE id=%d. "+
+                "Server: bvwa-db-01, Port: 3306",
             id, id)
     } else {
-        c.Data["Product"] = product
+        c.Data["Product"]    = product
+        c.Data["StatusCode"] = "200"
     }
 
     c.TplName = "exceptions/index.tpl"
@@ -76,31 +80,28 @@ func getProductSafe(idStr string) (string, error) {
     if idStr == "" {
         return "", ErrInvalidInput
     }
-
     id, err := strconv.Atoi(idStr)
     if err != nil {
         return "", ErrInvalidInput
     }
-
     if id <= 0 {
         return "", ErrInvalidInput
     }
-
     product, exists := productDB[id]
     if !exists {
         return "", ErrNotFound
     }
-
     return product, nil
 }
 
 func (c *SecureExceptionController) Get() {
     idStr := c.GetString("id")
 
-    c.Data["Title"]   = "Exception Handling (Veilig)"
-    c.Data["Product"] = ""
-    c.Data["Error"]   = ""
-    c.Data["Warning"] = ""
+    c.Data["Title"]      = "Exception Handling (Veilig)"
+    c.Data["Product"]    = ""
+    c.Data["Error"]      = ""
+    c.Data["Warning"]    = ""
+    c.Data["StatusCode"] = ""
 
     if idStr == "" {
         c.TplName = "exceptions/index.tpl"
@@ -110,18 +111,18 @@ func (c *SecureExceptionController) Get() {
     product, err := getProductSafe(idStr)
 
     if err != nil {
-        // VEILIG: gebruik SetStatus — sluit response NIET af
-        // zodat de template nog steeds gerenderd kan worden
+        // VEILIG: altijd HTTP 200 + template renderen
+        // Statuscode wordt als educatieve info getoond
         switch {
         case errors.Is(err, ErrInvalidInput):
-            c.Ctx.Output.SetStatus(400)
+            c.Data["StatusCode"] = "400"
             c.Data["Error"] = "Ongeldig verzoek: voer een " +
                 "geldig product ID in (1, 2 of 3)"
         case errors.Is(err, ErrNotFound):
-            c.Ctx.Output.SetStatus(404)
+            c.Data["StatusCode"] = "404"
             c.Data["Error"] = "Product niet gevonden"
         default:
-            c.Ctx.Output.SetStatus(500)
+            c.Data["StatusCode"] = "500"
             c.Data["Error"] = "Er is een interne fout " +
                 "opgetreden. Probeer later opnieuw."
         }
@@ -129,6 +130,7 @@ func (c *SecureExceptionController) Get() {
         return
     }
 
-    c.Data["Product"] = product
+    c.Data["Product"]    = product
+    c.Data["StatusCode"] = "200"
     c.TplName = "exceptions/index.tpl"
 }
