@@ -2,11 +2,12 @@ package controllers
 
 import (
     "errors"
+    "fmt"
     "strconv"
     beego "github.com/beego/beego/v2/server/web"
 )
 
-// Gesimuleerde database
+// Gesimuleerde productdatabase
 var productDB = map[int]string{
     1: "Laptop",
     2: "Telefoon",
@@ -23,59 +24,61 @@ type VulnerableExceptionController struct {
 func (c *VulnerableExceptionController) Get() {
     idStr := c.GetString("id")
 
+    c.Data["Title"]   = "Exception Handling (Kwetsbaar)"
+    c.Data["Product"] = ""
+    c.Data["Error"]   = ""
+    c.Data["Warning"] = ""
+
     if idStr == "" {
-        c.Data["Title"]   = "Exception Handling (Kwetsbaar)"
-        c.Data["Warning"] = "Voer een product ID in"
         c.TplName = "exceptions/index.tpl"
         return
     }
 
-    // KWETSBAAR 1: geen foutafhandeling bij ongeldige invoer
-    id, _ := strconv.Atoi(idStr) // fout wordt genegeerd!
+    // KWETSBAAR 1: fout genegeerd met _
+    id, _ := strconv.Atoi(idStr)
 
-    // KWETSBAAR 2: interne foutdetails worden getoond
+    // KWETSBAAR 2: fail-open — negatief ID stilletjes gecorrigeerd
+    if id < 0 {
+        id = 1
+        c.Data["Warning"] = fmt.Sprintf(
+            "Negatief ID '%s' stilletjes gecorrigeerd naar 1!",
+            idStr)
+    }
+
+    // KWETSBAAR 3: interne info gelekt in foutmelding
     product, exists := productDB[id]
     if !exists {
-        // Lekt interne informatie aan aanvaller
-        c.Abort("500") // geeft volledige stack trace!
-        return
+        c.Data["Error"] = fmt.Sprintf(
+            "Product met ID %d bestaat niet. "+
+                "Beschikbare IDs: 1, 2, 3. "+
+                "Query: SELECT * FROM products WHERE id=%d",
+            id, id)
+    } else {
+        c.Data["Product"] = product
     }
 
-    // KWETSBAAR 3: fail-open — bij fout toch doorgaan
-    if id < 0 {
-        id = 1 // stille correctie zonder logging
-    }
-
-    c.Data["Title"]   = "Exception Handling (Kwetsbaar)"
-    c.Data["Product"] = product
-    c.Data["Warning"] = "Fouten worden genegeerd of intern " +
-                        "geëxposeerd!"
     c.TplName = "exceptions/index.tpl"
 }
 
 // =====================
 // VEILIG: correcte foutafhandeling
 // =====================
+var (
+    ErrInvalidInput = errors.New("ongeldige invoer")
+    ErrNotFound     = errors.New("product niet gevonden")
+)
+
 type SecureExceptionController struct {
     beego.Controller
 }
 
-// Aangepaste fout types
-var (
-    ErrInvalidInput  = errors.New("ongeldige invoer")
-    ErrNotFound      = errors.New("product niet gevonden")
-    ErrUnauthorized  = errors.New("geen toegang")
-)
-
-// Veilige product opzoek functie
-func getProduct(idStr string) (string, error) {
+func getProductSafe(idStr string) (string, error) {
     if idStr == "" {
         return "", ErrInvalidInput
     }
 
     id, err := strconv.Atoi(idStr)
     if err != nil {
-        // VEILIG: specifieke foutmelding zonder interne details
         return "", ErrInvalidInput
     }
 
@@ -85,7 +88,6 @@ func getProduct(idStr string) (string, error) {
 
     product, exists := productDB[id]
     if !exists {
-        // VEILIG: fail-closed — bij twijfel weigeren
         return "", ErrNotFound
     }
 
@@ -95,39 +97,38 @@ func getProduct(idStr string) (string, error) {
 func (c *SecureExceptionController) Get() {
     idStr := c.GetString("id")
 
-    product, err := getProduct(idStr)
+    c.Data["Title"]   = "Exception Handling (Veilig)"
+    c.Data["Product"] = ""
+    c.Data["Error"]   = ""
+    c.Data["Warning"] = ""
 
-    if err != nil {
-        // VEILIG: generieke foutmelding voor gebruiker
-        // Geen interne details gelekt!
-        switch {
-        case errors.Is(err, ErrInvalidInput):
-            c.Ctx.ResponseWriter.WriteHeader(400)
-            c.Data["Error"] = "Ongeldig verzoek: " +
-                              "voer een geldig ID in (1-3)"
-        case errors.Is(err, ErrNotFound):
-            c.Ctx.ResponseWriter.WriteHeader(404)
-            c.Data["Error"] = "Product niet gevonden"
-        default:
-            // VEILIG: onbekende fouten worden generiek afgehandeld
-            c.Ctx.ResponseWriter.WriteHeader(500)
-            c.Data["Error"] = "Er is een interne fout " +
-                              "opgetreden. Probeer later opnieuw."
-            // Log intern (niet zichtbaar voor gebruiker)
-            logSecurityEvent("ERROR",
-                "Onverwachte fout: "+err.Error(),
-                c.Ctx.Input.IP(), "systeem")
-        }
-
-        c.Data["Title"] = "Exception Handling (Veilig)"
-        c.Data["Info"]  = "Fout correct afgehandeld — geen " +
-                          "interne details gelekt!"
+    if idStr == "" {
         c.TplName = "exceptions/index.tpl"
         return
     }
 
-    c.Data["Title"]   = "Exception Handling (Veilig)"
+    product, err := getProductSafe(idStr)
+
+    if err != nil {
+        // VEILIG: gebruik SetStatus — sluit response NIET af
+        // zodat de template nog steeds gerenderd kan worden
+        switch {
+        case errors.Is(err, ErrInvalidInput):
+            c.Ctx.Output.SetStatus(400)
+            c.Data["Error"] = "Ongeldig verzoek: voer een " +
+                "geldig product ID in (1, 2 of 3)"
+        case errors.Is(err, ErrNotFound):
+            c.Ctx.Output.SetStatus(404)
+            c.Data["Error"] = "Product niet gevonden"
+        default:
+            c.Ctx.Output.SetStatus(500)
+            c.Data["Error"] = "Er is een interne fout " +
+                "opgetreden. Probeer later opnieuw."
+        }
+        c.TplName = "exceptions/index.tpl"
+        return
+    }
+
     c.Data["Product"] = product
-    c.Data["Info"]    = "Verzoek succesvol en veilig verwerkt!"
     c.TplName = "exceptions/index.tpl"
 }
