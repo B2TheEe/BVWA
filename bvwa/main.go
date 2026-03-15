@@ -5,6 +5,7 @@ import (
     beego "github.com/beego/beego/v2/server/web"
     "github.com/beego/beego/v2/client/orm"
     _ "github.com/go-sql-driver/mysql"
+    "strings"
 )
 
 func init() {
@@ -13,5 +14,6 @@ func init() {
 }
 
 func main() {
+    beego.AddFuncMap("contains", strings.Contains)
     beego.Run()
 }
