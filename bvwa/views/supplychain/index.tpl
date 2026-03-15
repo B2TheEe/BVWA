@@ -592,22 +592,7 @@ hash := sha256.Sum256([]<span class="kw">byte</span>(password))
     gebruik alleen in een geïsoleerde testomgeving.
 </footer>
 
-<script>
-    function openModal() {
-        document.getElementById('infoModal').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-        document.getElementById('infoModal').classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    document.getElementById('infoModal').addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
-    });
-</script>
+<script type="text/javascript" src="/static/js/modal.js"></script>
 
 </body>
 </html>

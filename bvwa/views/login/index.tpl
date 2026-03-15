@@ -188,6 +188,6 @@
 <footer>
     ⚠️ Uitsluitend voor educatieve doeleinden
 </footer>
-
+<script type="text/javascript" src="/static/js/modal.js"></script>
 </body>
 </html>

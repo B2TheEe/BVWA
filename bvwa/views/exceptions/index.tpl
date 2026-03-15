@@ -788,43 +788,9 @@ if err != nil {
     gebruik alleen in een geisoleerde testomgeving.
 </footer>
 
-<script type="text/javascript">
-function setVuln(val) {
-    document.getElementById('vulnInput').value = val;
-}
-function setSecure(val) {
-    document.getElementById('secureInput').value = val;
-}
 
-window.onload = function() {
-    var modal    = document.getElementById('infoModal');
-    var openBtn  = document.getElementById('openInfoBtn');
-    var closeBtn = document.getElementById('closeInfoBtn');
-
-    if (!modal || !openBtn || !closeBtn) { return; }
-
-    openBtn.onclick = function() {
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    };
-    closeBtn.onclick = function() {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-    };
-    modal.onclick = function(e) {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        }
-    };
-    document.onkeydown = function(e) {
-        if (e.key === 'Escape') {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        }
-    };
-};
-</script>
+   
+<script type="text/javascript" src="/static/js/modal.js"></script>
 
 </body>
 </html>

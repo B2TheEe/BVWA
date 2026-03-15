@@ -155,11 +155,9 @@
             border-radius: 6px;
             overflow-x: auto;
             margin: 10px 0;
-            line-height: 1.6;
+            line-height: 1.8;
+            white-space: pre;
         }
-        .ckw  { color: #569cd6; }
-        .cstr { color: #ce9178; }
-        .ccmt { color: #6a9955; }
 
         .btn-link {
             display: block;
@@ -217,14 +215,12 @@
             margin-top: 12px;
         }
 
-        /* Modal — gebruikt display:none/block via JS, geen classList */
+        /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0,0,0,0.55);
             z-index: 9999;
             overflow-y: auto;
@@ -242,8 +238,7 @@
         }
         .modal-close {
             position: absolute;
-            top: 14px;
-            right: 18px;
+            top: 14px; right: 18px;
             background: none;
             border: none;
             font-size: 24px;
@@ -358,15 +353,12 @@
 
         <!-- KWETSBAAR -->
         <div class="card">
-            <div class="card-header vuln">
-                Kwetsbare versie
-            </div>
+            <div class="card-header vuln">Kwetsbare versie</div>
             <div class="card-body">
                 <p>
                     Wachtwoord gehasht met <strong>MD5</strong>
-                    &mdash; een gebroken algoritme dat in
-                    milliseconden gekraakt kan worden via
-                    rainbow tables.
+                    - een gebroken algoritme dat in milliseconden
+                    gekraakt kan worden via rainbow tables.
                 </p>
 
                 <table class="crypto-table">
@@ -399,11 +391,9 @@
                 </div>
                 {{end}}
 
-                <div class="code-block">
-<span class="ccmt">// KWETSBAAR: MD5</span>
-hash := md5.Sum([]<span class="ckw">byte</span>(password))
-fmt.Sprintf(<span class="cstr">"%x"</span>, hash)
-                </div>
+                <div class="code-block">// KWETSBAAR: MD5
+hash := md5.Sum([]byte(password))
+fmt.Sprintf("%x", hash)</div>
 
                 <a href="/crypto/vulnerable" class="btn-link btn-red">
                     Open kwetsbare versie
@@ -413,14 +403,12 @@ fmt.Sprintf(<span class="cstr">"%x"</span>, hash)
 
         <!-- VEILIG -->
         <div class="card">
-            <div class="card-header safe">
-                Veilige versie
-            </div>
+            <div class="card-header safe">Veilige versie</div>
             <div class="card-body">
                 <p>
                     Wachtwoord gehasht met <strong>bcrypt</strong>
-                    &mdash; opzettelijk traag, met ingebouwde
-                    salt, speciaal ontworpen voor wachtwoorden.
+                    - opzettelijk traag, met ingebouwde salt,
+                    speciaal ontworpen voor wachtwoorden.
                 </p>
 
                 <table class="crypto-table">
@@ -453,12 +441,10 @@ fmt.Sprintf(<span class="cstr">"%x"</span>, hash)
                 </div>
                 {{end}}
 
-                <div class="code-block">
-<span class="ccmt">// VEILIG: bcrypt</span>
+                <div class="code-block">// VEILIG: bcrypt
 hash, _ := bcrypt.GenerateFromPassword(
-    []<span class="ckw">byte</span>(password),
-    bcrypt.DefaultCost)
-                </div>
+    []byte(password),
+    bcrypt.DefaultCost)</div>
 
                 <a href="/crypto/secure" class="btn-link btn-green">
                     Open veilige versie
@@ -484,6 +470,7 @@ hash, _ := bcrypt.GenerateFromPassword(
         <p>
             Hash gegenereerd met <strong>bcrypt</strong>.
             Elke hash is uniek door de ingebouwde random salt.
+            bcrypt is opzettelijk traag.
         </p>
         {{end}}
 
@@ -507,7 +494,8 @@ hash, _ := bcrypt.GenerateFromPassword(
 <!-- INFO MODAL -->
 <div class="modal-overlay" id="infoModal">
     <div class="modal">
-        <button type="button" class="modal-close" id="closeInfoBtn">X</button>
+        <button type="button" class="modal-close"
+                id="closeInfoBtn">X</button>
 
         <h2>A04:2025 - Cryptographic Failures</h2>
         <p class="subtitle">
@@ -542,8 +530,94 @@ hash, _ := bcrypt.GenerateFromPassword(
                 <span class="cwe-tag">CWE-325 Missing Cryptographic Step</span>
                 <span class="cwe-tag">CWE-326 Inadequate Encryption Strength</span>
                 <span class="cwe-tag">CWE-327 Broken/Risky Crypto Algorithm</span>
-                <span class="cwe-tag">CWE-328 Use of Weak Hash</span>
+                <span class="cwe-tag">CWE-328 Use of Weak Hash (MD5/SHA-1)</span>
                 <span class="cwe-tag">CWE-329 No Random IV with CBC</span>
                 <span class="cwe-tag">CWE-330 Insufficiently Random Values</span>
                 <span class="cwe-tag">CWE-331 Insufficient Entropy</span>
-                <span class="cwe-tag">
+                <span class="cwe-tag">CWE-335 Incorrect Seed Usage in PRNG</span>
+                <span class="cwe-tag">CWE-336 Same Seed in PRNG</span>
+                <span class="cwe-tag">CWE-337 Predictable Seed in PRNG</span>
+                <span class="cwe-tag">CWE-338 Cryptographically Weak PRNG</span>
+                <span class="cwe-tag">CWE-340 Predictable Numbers</span>
+                <span class="cwe-tag">CWE-347 Improper Signature Verification</span>
+                <span class="cwe-tag">CWE-523 Unprotected Transport of Credentials</span>
+                <span class="cwe-tag">CWE-757 Less-Secure Algorithm Selection</span>
+                <span class="cwe-tag">CWE-759 One-Way Hash Without Salt</span>
+                <span class="cwe-tag">CWE-760 Hash with Predictable Salt</span>
+                <span class="cwe-tag">CWE-780 RSA Without OAEP</span>
+                <span class="cwe-tag">CWE-818 Insufficient Transport Layer Protection</span>
+                <span class="cwe-tag">CWE-916 Insufficient Password Hash Effort</span>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Waarom is de kwetsbare versie onveilig?</h3>
+            <div class="vuln-box">
+                De kwetsbare versie gebruikt
+                <strong>MD5</strong> voor wachtwoord-hashing
+                (CWE-328):
+                <ul>
+                    <li><strong>MD5 is gekraakt:</strong>
+                        collision aanvallen zijn praktisch
+                        uitvoerbaar</li>
+                    <li><strong>Rainbow tables:</strong>
+                        miljarden voorberekende hashes gratis
+                        online beschikbaar</li>
+                    <li><strong>Geen salt:</strong> zelfde input
+                        geeft altijd zelfde hash (CWE-759)</li>
+                    <li><strong>Te snel:</strong> 50+ miljard
+                        hashes/seconde op GPU mogelijk</li>
+                    <li><strong>128-bit output:</strong> te kort
+                        voor moderne veiligheidseisen</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Waarom is de veilige versie correct?</h3>
+            <div class="safe-box">
+                De veilige versie gebruikt
+                <strong>bcrypt</strong> - speciaal voor
+                wachtwoorden:
+                <ul>
+                    <li><strong>Ingebouwde salt:</strong>
+                        elke hash uniek, rainbow tables
+                        nutteloos</li>
+                    <li><strong>Opzettelijk traag:</strong>
+                        ~100ms per hash met cost=10</li>
+                    <li><strong>Aanpasbare cost factor:</strong>
+                        schaalbaar met snellere hardware</li>
+                    <li><strong>Timing-safe vergelijking</strong>
+                        via CompareHashAndPassword()</li>
+                    <li><strong>Alternatief:</strong> Argon2id
+                        voor nieuwe applicaties</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Mitigatie</h3>
+            <p>
+                Gebruik bcrypt of Argon2id voor wachtwoorden.
+                Gebruik AES-256-GCM voor symmetrische encryptie.
+                Gebruik SHA-256/SHA-3 voor hashing.
+                Gebruik TLS 1.3 voor alle dataverkeer.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    BVWA is uitsluitend bedoeld voor educatieve doeleinden -
+    gebruik alleen in een geisoleerde testomgeving.
+</footer>
+
+<!-- Stap 3: extern modal.js in plaats van inline script -->
+<script type="text/javascript" src="/static/js/modal.js"></script>
+
+</body>
+</html>

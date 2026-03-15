@@ -157,6 +157,15 @@
         .btn-submit.green { background: #27ae60; }
         .btn-submit.green:hover { background: #1e8449; }
 
+        .credentials-hint {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+
         .result-box {
             background: white;
             border-radius: 10px;
@@ -205,29 +214,6 @@
             color: #c0392b;
             margin-top: 10px;
         }
-        .msg-blocked {
-            background: #f8d7da;
-            border: 1px solid #721c24;
-            border-radius: 6px;
-            padding: 12px 16px;
-            font-size: 14px;
-            color: #721c24;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .credentials-hint {
-            background: #f8f9fa;
-            border-radius: 6px;
-            padding: 12px 14px;
-            font-size: 12px;
-            color: #666;
-            margin-top: 12px;
-        }
-        .credentials-hint strong {
-            display: block;
-            margin-bottom: 4px;
-            color: #444;
-        }
         .tip {
             background: #eaf4fb;
             border: 1px solid #aed6f1;
@@ -238,6 +224,7 @@
             margin-top: 12px;
         }
 
+        /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -406,13 +393,13 @@ if exists &amp;&amp; storedPass == password {
                         <input type="password" name="password"
                                placeholder="password123">
                     </div>
-                    <button type="submit" class="btn-submit red">
+                    <button type="submit"
+                            class="btn-submit red">
                         Inloggen (kwetsbaar)
                     </button>
                 </form>
 
                 <div class="credentials-hint">
-                    <strong>Test credentials:</strong>
                     admin / password123 &nbsp;|&nbsp;
                     user / user123
                 </div>
@@ -434,7 +421,7 @@ if loginAttempts[ip] &gt;= maxAttempts {
 }
 err := bcrypt.CompareHashAndPassword(
     hash, []byte(password))
-c.DestroySession() // vernieuw sessie
+c.DestroySession()
 c.SetSession("user", username)</div>
 
                 <p style="font-size:13px; color:#27ae60;
@@ -454,13 +441,13 @@ c.SetSession("user", username)</div>
                         <input type="password" name="password"
                                placeholder="password123">
                     </div>
-                    <button type="submit" class="btn-submit green">
+                    <button type="submit"
+                            class="btn-submit green">
                         Inloggen (veilig)
                     </button>
                 </form>
 
                 <div class="credentials-hint">
-                    <strong>Test credentials:</strong>
                     admin / password123 &nbsp;|&nbsp;
                     user / user123
                 </div>
@@ -475,10 +462,11 @@ c.SetSession("user", username)</div>
 
         {{if eq .Title "Login (Kwetsbaar)"}}
         <span class="tag-vuln">KWETSBAAR</span>
+
         {{if .Success}}
         <div class="msg-success">{{.Success}}</div>
         <p style="margin-top:10px; color:#e74c3c; font-size:13px;">
-            Ingelogd! Geen rate limiting — brute force mogelijk.
+            Ingelogd! Geen rate limiting - brute force mogelijk.
             Wachtwoord vergeleken als plaintext.
         </p>
         {{else if .Error}}
@@ -494,6 +482,7 @@ c.SetSession("user", username)</div>
 
         {{else}}
         <span class="tag-safe">VEILIG</span>
+
         {{if .Success}}
         <div class="msg-success">{{.Success}}</div>
         {{if .Info}}
@@ -521,3 +510,129 @@ c.SetSession("user", username)</div>
 <!-- INFO MODAL -->
 <div class="modal-overlay" id="infoModal">
     <div class="modal">
+        <button type="button" class="modal-close"
+                id="closeInfoBtn">X</button>
+
+        <h2>A07:2025 - Authentication Failures</h2>
+        <p class="subtitle">
+            OWASP Top 10:2025 - Positie #7 -
+            Voorheen: Broken Authentication
+        </p>
+        <hr>
+
+        <div class="info-section">
+            <h3>Wat is het?</h3>
+            <p>
+                Authentication Failures treden op wanneer een
+                applicatie authenticatie- en sessiebeheer
+                onjuist implementeert. Een aanvaller kan
+                wachtwoorden kraken, sessies overnemen of
+                authenticatie volledig omzeilen via zwakke
+                implementaties van login, logout of
+                wachtwoordherstel.
+            </p>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Gerelateerde CWEs</h3>
+            <div class="cwe-list">
+                <span class="cwe-tag">CWE-255 Credentials Management Errors</span>
+                <span class="cwe-tag">CWE-259 Use of Hard-coded Password</span>
+                <span class="cwe-tag">CWE-287 Improper Authentication</span>
+                <span class="cwe-tag">CWE-288 Authentication Bypass Using Alternate Path</span>
+                <span class="cwe-tag">CWE-290 Authentication Bypass by Spoofing</span>
+                <span class="cwe-tag">CWE-294 Authentication Bypass by Capture-replay</span>
+                <span class="cwe-tag">CWE-295 Improper Certificate Validation</span>
+                <span class="cwe-tag">CWE-297 Improper Validation of Certificate with Host Mismatch</span>
+                <span class="cwe-tag">CWE-300 Channel Accessible by Non-Endpoint</span>
+                <span class="cwe-tag">CWE-302 Authentication Bypass by Assumed-Immutable Data</span>
+                <span class="cwe-tag">CWE-304 Missing Critical Step in Authentication</span>
+                <span class="cwe-tag">CWE-306 Missing Authentication for Critical Function</span>
+                <span class="cwe-tag">CWE-307 Improper Restriction of Excessive Auth Attempts</span>
+                <span class="cwe-tag">CWE-346 Origin Validation Error</span>
+                <span class="cwe-tag">CWE-384 Session Fixation</span>
+                <span class="cwe-tag">CWE-521 Weak Password Requirements</span>
+                <span class="cwe-tag">CWE-613 Insufficient Session Expiration</span>
+                <span class="cwe-tag">CWE-620 Unverified Password Change</span>
+                <span class="cwe-tag">CWE-640 Weak Password Recovery Mechanism</span>
+                <span class="cwe-tag">CWE-798 Use of Hard-coded Credentials</span>
+                <span class="cwe-tag">CWE-940 Improper Verification of Communication Channel</span>
+                <span class="cwe-tag">CWE-1216 Lockout Mechanism Errors</span>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Waarom is de kwetsbare versie onveilig?</h3>
+            <div class="vuln-box">
+                De kwetsbare versie heeft meerdere fouten:
+                <ul>
+                    <li><strong>Plaintext vergelijking (CWE-256):
+                        </strong> wachtwoorden opgeslagen als
+                        plaintext - bij datalek direct leesbaar</li>
+                    <li><strong>Geen rate limiting (CWE-307):
+                        </strong> onbeperkte loginpogingen -
+                        brute force en credential stuffing mogelijk</li>
+                    <li><strong>Geen sessie-vernieuwing (CWE-384):
+                        </strong> dezelfde sessie-ID voor en na
+                        login - session fixation mogelijk</li>
+                    <li><strong>Info-lekkage:</strong>
+                        foutmelding geeft aan of gebruiker
+                        bestaat - user enumeration</li>
+                    <li><strong>Geen MFA:</strong> enkelfactor
+                        authenticatie kwetsbaar voor
+                        gestolen credentials</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Waarom is de veilige versie correct?</h3>
+            <div class="safe-box">
+                De veilige versie implementeert correcte
+                authenticatie:
+                <ul>
+                    <li><strong>bcrypt hashing:</strong>
+                        wachtwoorden als bcrypt hash opgeslagen -
+                        bij datalek niet direct bruikbaar</li>
+                    <li><strong>Rate limiting per IP (CWE-307 fix):
+                        </strong> max 5 pogingen, daarna geblokkeerd</li>
+                    <li><strong>Sessie-vernieuwing (CWE-384 fix):
+                        </strong> DestroySession() voor nieuwe
+                        sessie na login</li>
+                    <li><strong>Generieke foutmelding:</strong>
+                        geen aanwijzing of gebruiker bestaat</li>
+                    <li><strong>Timing-safe vergelijking:</strong>
+                        bcrypt.CompareHashAndPassword() voorkomt
+                        timing attacks</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Mitigatie</h3>
+            <p>
+                Gebruik bcrypt of Argon2 voor wachtwoorden.
+                Implementeer MFA. Voeg rate limiting toe op
+                alle auth-endpoints. Vernieuw sessie-IDs na
+                login en logout. Gebruik generieke foutmeldingen.
+                Log alle authenticatiegebeurtenissen.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    BVWA is uitsluitend bedoeld voor educatieve doeleinden -
+    gebruik alleen in een geisoleerde testomgeving.
+</footer>
+
+<!-- Stap 3: extern modal.js in plaats van inline script -->
+<script type="text/javascript" src="/static/js/modal.js"></script>
+
+</body>
+</html>
