@@ -5,63 +5,67 @@ import (
     beego "github.com/beego/beego/v2/server/web"
 )
 
-// =====================
-// INSECURE DESIGN: Password Reset zonder rate limiting
-// =====================
+// Bijhouden van pogingen per e-mail (in-memory)
+var resetAttempts = map[string]int{}
 
-// KWETSBAAR: geen rate limiting, geen verificatie
+// KWETSBAAR: geen rate limiting
 type VulnerableDesignController struct {
     beego.Controller
 }
 
 func (c *VulnerableDesignController) Get() {
-    email := c.GetString("email")
-    // GEVAARLIJK: reset direct zonder verificatie of limiet
-    // Aanvaller kan onbeperkt reset-verzoeken sturen (brute force)
+    email   := c.GetString("email")
     message := ""
+
     if email != "" {
         message = fmt.Sprintf(
-            "Reset-link verstuurd naar: %s (geen limiet!)", email)
+            "Reset-link verstuurd naar: %s (geen limiet!)",
+            email)
     }
+
     c.Data["Title"]   = "Insecure Design (Kwetsbaar)"
+    c.Data["Email"]   = email
     c.Data["Message"] = message
-    c.Data["Warning"] = "Geen rate limiting of verificatie — " +
-                        "brute force mogelijk!"
+    c.Data["Warning"] = ""
+    c.Data["Info"]    = ""
     c.TplName = "design/index.tpl"
 }
 
-// VEILIG: met rate limiting simulatie en token-verificatie
-var resetAttempts = map[string]int{}
-
+// VEILIG: met rate limiting en token
 type SecureDesignController struct {
     beego.Controller
 }
 
 func (c *SecureDesignController) Get() {
-    email := c.GetString("email")
+    email   := c.GetString("email")
     message := ""
     warning := ""
+    info    := ""
 
     if email != "" {
         resetAttempts[email]++
+        attempts := resetAttempts[email]
 
-        if resetAttempts[email] > 3 {
-            // Rate limiting: max 3 pogingen
+        if attempts > 3 {
             warning = fmt.Sprintf(
-                "Te veel pogingen voor %s. Geblokkeerd!", email)
+                "Te veel pogingen voor %s. Geblokkeerd! (%d pogingen)",
+                email, attempts)
         } else {
-            // Simuleer token-gebaseerde reset
-            token := fmt.Sprintf("TOKEN-%s-%d", 
-                email, resetAttempts[email])
+            token := fmt.Sprintf(
+                "TOKEN-%d", attempts)
             message = fmt.Sprintf(
-                "Reset-link met token verstuurd: %s "+
-                "(poging %d/3)", token, resetAttempts[email])
+                "Reset verstuurd met token: %s (poging %d/3)",
+                token, attempts)
+            info = fmt.Sprintf(
+                "Rate limiting actief: nog %d pogingen over.",
+                3-attempts)
         }
     }
 
     c.Data["Title"]   = "Insecure Design (Veilig)"
+    c.Data["Email"]   = email
     c.Data["Message"] = message
     c.Data["Warning"] = warning
-    c.Data["Info"]    = "Rate limiting actief — max 3 pogingen!"
+    c.Data["Info"]    = info
     c.TplName = "design/index.tpl"
 }
