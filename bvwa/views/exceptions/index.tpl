@@ -140,7 +140,6 @@
             white-space: pre;
         }
 
-        /* Test scenarios */
         .scenarios {
             background: #f8f9fa;
             border-radius: 6px;
@@ -263,6 +262,7 @@
             margin-top: 12px;
         }
 
+        /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -413,11 +413,10 @@ id, _ := strconv.Atoi(idStr)
 // fout genegeerd met _!
 if id &lt; 0 {
     id = 1 // stille correctie
-}
-// geen foutmelding aan gebruiker</div>
+}</div>
 
                 <div class="scenarios">
-                    <strong>Test scenarios (klik om in te vullen):</strong>
+                    <strong>Test scenarios:</strong>
                     <div class="scenario-item">
                         <button class="scenario-btn"
                                 onclick="setVuln('abc')">abc</button>
@@ -444,7 +443,8 @@ if id &lt; 0 {
                       id="vulnForm">
                     <div class="input-group">
                         <label>Product ID:</label>
-                        <input type="text" name="id" id="vulnInput"
+                        <input type="text" name="id"
+                               id="vulnInput"
                                placeholder="1, 2, 3, abc, -1, 999">
                     </div>
                     <button type="submit" class="btn-submit red">
@@ -459,9 +459,10 @@ if id &lt; 0 {
             <div class="card-header safe">Veilige versie</div>
             <div class="card-body">
                 <p>
-                    Elke fout wordt <strong>correct afgehandeld</strong>
-                    met generieke meldingen. Geen interne
-                    details gelekt. Fail-closed principe.
+                    Elke fout wordt <strong>correct
+                    afgehandeld</strong> met generieke meldingen.
+                    Geen interne details gelekt.
+                    Fail-closed principe.
                 </p>
                 <div class="code-block">// VEILIG: correcte foutafhandeling
 id, err := strconv.Atoi(idStr)
@@ -472,7 +473,7 @@ if err != nil {
 // fail-closed: bij twijfel weigeren</div>
 
                 <div class="scenarios">
-                    <strong>Test scenarios (klik om in te vullen):</strong>
+                    <strong>Test scenarios:</strong>
                     <div class="scenario-item">
                         <button class="scenario-btn"
                                 onclick="setSecure('abc')">abc</button>
@@ -499,7 +500,8 @@ if err != nil {
                       id="secureForm">
                     <div class="input-group">
                         <label>Product ID:</label>
-                        <input type="text" name="id" id="secureInput"
+                        <input type="text" name="id"
+                               id="secureInput"
                                placeholder="1, 2, 3, abc, -1, 999">
                     </div>
                     <button type="submit" class="btn-submit green">
@@ -512,107 +514,38 @@ if err != nil {
     </div>
 
     <!-- Result box -->
-    <!-- Result box -->
-<div class="result-box">
-    <h3>Resultaat: <strong>{{.Title}}</strong></h3>
+    <div class="result-box">
+        <h3>Resultaat: <strong>{{.Title}}</strong></h3>
 
-    {{if eq .Title "Exception Handling (Kwetsbaar)"}}
-    <span class="tag-vuln">KWETSBAAR</span>
+        {{if eq .Title "Exception Handling (Kwetsbaar)"}}
+        <span class="tag-vuln">KWETSBAAR</span>
 
-    {{if .StatusCode}}
-    <div style="display:inline-block; margin-left:10px;
-                background:#ecf0f1; border-radius:4px;
-                padding:3px 10px; font-size:12px;
-                font-family:monospace; color:#2c3e50;">
-        HTTP {{.StatusCode}}
-        {{if eq .StatusCode "200"}} - OK
-        {{else if eq .StatusCode "400"}} - Bad Request
-        {{else if eq .StatusCode "404"}} - Not Found
-        {{else if eq .StatusCode "500"}} - Internal Server Error
+        {{if .Product}}
+        <div class="msg-success">
+            Product gevonden: <strong>{{.Product}}</strong>
+        </div>
         {{end}}
-    </div>
-    {{end}}
 
-    {{if .Product}}
-    <div class="msg-success" style="margin-top:10px;">
-        Product gevonden: <strong>{{.Product}}</strong>
-    </div>
-    {{else if .Error}}
-    <div class="msg-error" style="margin-top:10px;">
-        <strong>Stack trace / interne fout gelekt:</strong><br>
-        {{.Error}}
-    </div>
-    <p style="color:#e74c3c; font-size:13px; margin-top:6px;">
-        Interne databasedetails zijn zichtbaar voor de aanvaller!
-    </p>
-    {{end}}
-
-    {{if .Warning}}
-    <div style="background:#fff3cd; border:1px solid #ffc107;
-                border-radius:6px; padding:12px 16px;
-                font-size:14px; color:#856404; margin-top:10px;">
-        <strong>Fail-open gedetecteerd:</strong> {{.Warning}}
-    </div>
-    {{end}}
-
-    {{if not .Product}}{{if not .Error}}{{if not .Warning}}
-    <p style="margin-top:10px;">
-        Voer een product ID in om de kwetsbaarheid te testen.
-    </p>
-    <p style="font-size:12px; color:#888; margin-top:6px;">
-        Producten: 1=Laptop, 2=Telefoon, 3=Tablet
-    </p>
-    {{end}}{{end}}{{end}}
-
-    {{else}}
-    <span class="tag-safe">VEILIG</span>
-
-    {{if .StatusCode}}
-    <div style="display:inline-block; margin-left:10px;
-                background:#ecf0f1; border-radius:4px;
-                padding:3px 10px; font-size:12px;
-                font-family:monospace; color:#2c3e50;">
-        Zou zijn: HTTP {{.StatusCode}}
-        {{if eq .StatusCode "200"}} - OK
-        {{else if eq .StatusCode "400"}} - Bad Request
-        {{else if eq .StatusCode "404"}} - Not Found
-        {{else if eq .StatusCode "500"}} - Internal Server Error
+        {{if .Error}}
+        <div class="msg-error">{{.Error}}</div>
+        <p style="color:#e74c3c; font-size:13px; margin-top:6px;">
+            Interne databasedetails zichtbaar voor aanvaller!
+        </p>
         {{end}}
-    </div>
-    {{end}}
 
-    {{if .Product}}
-    <div class="msg-success" style="margin-top:10px;">
-        Product gevonden: <strong>{{.Product}}</strong>
-    </div>
-    {{else if .Error}}
-    <div class="msg-safe-error" style="margin-top:10px;">
-        {{.Error}}
-    </div>
-    <p style="color:#27ae60; font-size:13px; margin-top:6px;">
-        Generieke melding — geen interne details gelekt.
-        Correcte HTTP statuscode zou worden teruggegeven.
-    </p>
-    {{else}}
-    <p style="margin-top:10px;">
-        Voer een product ID in om correcte foutafhandeling
-        te testen.
-    </p>
-    <p style="font-size:12px; color:#888; margin-top:6px;">
-        Producten: 1=Laptop, 2=Telefoon, 3=Tablet
-    </p>
-    {{end}}
-    {{end}}
+        {{if .Warning}}
+        <div style="background:#fff3cd; border:1px solid #ffc107;
+                    border-radius:6px; padding:12px 16px;
+                    font-size:14px; color:#856404; margin-top:10px;">
+            <strong>Fail-open gedetecteerd:</strong>
+            {{.Warning}}
+        </div>
+        {{end}}
 
-    <div class="tip">
-        Tip: Vergelijk het gedrag van beide versies met
-        input: abc (tekst), -1 (negatief), 999 (niet gevonden)
-        en 1 (geldig). Let op de HTTP-statuscodes en
-        foutmeldingen.
-    </div>
-</div>
-        {{else}}
-        <p>Voer een product ID in om de kwetsbaarheid te testen.</p>
+        {{if .ShowHint}}
+        <p style="margin-top:10px;">
+            Voer een product ID in om de kwetsbaarheid te testen.
+        </p>
         <p style="font-size:12px; color:#888; margin-top:6px;">
             Producten: 1=Laptop, 2=Telefoon, 3=Tablet
         </p>
@@ -624,30 +557,32 @@ if err != nil {
         {{if .Product}}
         <div class="msg-success">
             Product gevonden: <strong>{{.Product}}</strong>
-            (HTTP 200 OK)
         </div>
-        {{else if .Error}}
-        <div class="msg-safe-error">
-            {{.Error}}
-        </div>
+        {{end}}
+
+        {{if .Error}}
+        <div class="msg-safe-error">{{.Error}}</div>
         <p style="color:#27ae60; font-size:13px; margin-top:6px;">
-            Generieke foutmelding — geen interne details gelekt.
-            Juiste HTTP status code teruggegeven.
+            Generieke melding - geen interne details gelekt.
         </p>
-        {{else}}
-        <p>Voer een product ID in om correcte foutafhandeling
-           te testen.</p>
+        {{end}}
+
+        {{if .ShowHint}}
+        <p style="margin-top:10px;">
+            Voer een product ID in om correcte foutafhandeling
+            te testen.
+        </p>
         <p style="font-size:12px; color:#888; margin-top:6px;">
             Producten: 1=Laptop, 2=Telefoon, 3=Tablet
         </p>
         {{end}}
+
         {{end}}
 
         <div class="tip">
             Tip: Vergelijk het gedrag van beide versies met
             input: abc (tekst), -1 (negatief), 999 (niet gevonden)
-            en 1 (geldig). Let op de HTTP-statuscodes en
-            foutmeldingen.
+            en 1 (geldig). Let op de foutmeldingen.
         </div>
     </div>
 
@@ -671,12 +606,11 @@ if err != nil {
             <p>
                 Mishandling of Exceptional Conditions omvat
                 beveiligingszwakheden die ontstaan door onjuiste
-                foutafhandeling, logicafouten en fail-open
-                gedrag. Een applicatie is kwetsbaar als fouten
-                worden genegeerd, interne details lekken via
+                foutafhandeling, logicafouten en fail-open gedrag.
+                Een applicatie is kwetsbaar als fouten worden
+                genegeerd, interne details lekken via
                 foutmeldingen, of het systeem bij een fout
-                per ongeluk toegang verleent in plaats van
-                weigert.
+                toegang verleent in plaats van weigert.
             </p>
         </div>
         <hr>
@@ -684,7 +618,7 @@ if err != nil {
         <div class="info-section">
             <h3>Gerelateerde CWEs</h3>
             <div class="cwe-list">
-                <span class="cwe-tag">CWE-vacuüm 390 Detection of Error Condition Without Action</span>
+                <span class="cwe-tag">CWE-390 Detection of Error Condition Without Action</span>
                 <span class="cwe-tag">CWE-391 Unchecked Error Condition</span>
                 <span class="cwe-tag">CWE-392 Missing Report of Error Condition</span>
                 <span class="cwe-tag">CWE-393 Return of Wrong Status Code</span>
@@ -693,20 +627,14 @@ if err != nil {
                 <span class="cwe-tag">CWE-396 Declaration of Catch for Generic Exception</span>
                 <span class="cwe-tag">CWE-397 Declaration of Throws for Generic Exception</span>
                 <span class="cwe-tag">CWE-544 Missing Standardized Error Handling Mechanism</span>
-                <span class="cwe-tag">CWE-616 Incomplete Identification of Uploaded File Variables</span>
                 <span class="cwe-tag">CWE-617 Reachable Assertion</span>
-                <span class="cwe-tag">CWE-621 Variable Extraction Error</span>
                 <span class="cwe-tag">CWE-636 Not Failing Securely (Fail Open)</span>
                 <span class="cwe-tag">CWE-639 Authorization Bypass Through User-Controlled Key</span>
-                <span class="cwe-tag">CWE-662 Improper Synchronization</span>
-                <span class="cwe-tag">CWE-667 Improper Locking</span>
                 <span class="cwe-tag">CWE-691 Insufficient Control Flow Management</span>
-                <span class="cwe-tag">CWE-694 Use of Multiple Resources with Duplicate Identifier</span>
-                <span class="cwe-tag">CWE-695 Use of Low-Level Functionality</span>
                 <span class="cwe-tag">CWE-696 Incorrect Behavior Order</span>
                 <span class="cwe-tag">CWE-698 Execution After Redirect (EAR)</span>
-                <span class="cwe-tag">CWE-703 Improper Check or Handling of Exceptional Conditions</span>
-                <span class="cwe-tag">CWE-754 Improper Check for Unusual or Exceptional Conditions</span>
+                <span class="cwe-tag">CWE-703 Improper Check of Exceptional Conditions</span>
+                <span class="cwe-tag">CWE-754 Improper Check for Unusual Conditions</span>
                 <span class="cwe-tag">CWE-755 Improper Handling of Exceptional Conditions</span>
             </div>
         </div>
@@ -715,25 +643,22 @@ if err != nil {
         <div class="info-section">
             <h3>Waarom is de kwetsbare versie onveilig?</h3>
             <div class="vuln-box">
-                De kwetsbare versie heeft meerdere
-                foutafhandelingsfouten:
+                De kwetsbare versie heeft meerdere fouten:
                 <ul>
                     <li><strong>Fouten genegeerd (CWE-391):</strong>
-                        <code>id, _ := strconv.Atoi(idStr)</code>
-                        — de fout wordt weggegooid met _</li>
+                        id, _ := strconv.Atoi() - de fout
+                        wordt weggegooid met _</li>
                     <li><strong>Fail-open (CWE-636):</strong>
-                        negatief ID (-1) wordt stilletjes
-                        naar 1 gecorrigeerd — aanvaller
-                        krijgt altijd een resultaat</li>
+                        negatief ID wordt stilletjes naar 1
+                        gecorrigeerd - aanvaller krijgt altijd
+                        een resultaat</li>
                     <li><strong>Info-lekkage:</strong>
-                        stack traces en interne paden
-                        worden aan de gebruiker getoond</li>
+                        interne database-details, tabelnamen
+                        en queries zichtbaar in foutmelding</li>
                     <li><strong>Verkeerde HTTP status:</strong>
-                        altijd 200 OK, ook bij fouten —
-                        monitoring tools missen problemen</li>
+                        altijd 200 OK, ook bij fouten</li>
                     <li><strong>Geen logging:</strong>
-                        fouten worden niet intern gelogd
-                        voor debugging</li>
+                        fouten worden niet intern gelogd</li>
                 </ul>
             </div>
         </div>
@@ -747,20 +672,17 @@ if err != nil {
                 <ul>
                     <li><strong>Fouten altijd afgehandeld
                         (CWE-391 fix):</strong>
-                        elke error wordt gecontroleerd
-                        en verwerkt — geen _ negatie</li>
+                        elke error wordt gecontroleerd - geen
+                        _ negatie</li>
                     <li><strong>Fail-closed (CWE-636 fix):</strong>
                         bij ongeldige input wordt toegang
-                        geweigerd, niet stilletjes gecorrigeerd</li>
+                        geweigerd</li>
                     <li><strong>Generieke foutmeldingen:</strong>
-                        "Ongeldige invoer" zonder interne
-                        details of paden</li>
+                        geen interne details of paden zichtbaar</li>
                     <li><strong>Juiste HTTP statuscodes:</strong>
-                        400 voor bad input, 404 voor niet
-                        gevonden, 500 voor server errors</li>
+                        400 bad input, 404 niet gevonden</li>
                     <li><strong>Interne logging:</strong>
-                        onbekende fouten worden intern
-                        gelogd zonder aan gebruiker te tonen</li>
+                        fouten intern gelogd zonder te tonen</li>
                 </ul>
             </div>
         </div>
@@ -769,14 +691,12 @@ if err != nil {
         <div class="info-section">
             <h3>Mitigatie</h3>
             <p>
-                Implementeer het fail-closed principe: bij
-                een fout altijd toegang weigeren. Gebruik
-                specifieke fout-types voor verschillende
-                situaties. Stuur generieke meldingen naar
+                Implementeer het fail-closed principe: bij een
+                fout altijd toegang weigeren. Gebruik specifieke
+                fout-types. Stuur generieke meldingen naar
                 gebruikers en log details intern. Retourneer
-                altijd de juiste HTTP status codes. Vermijd
-                het onderdrukken van fouten met _. Test
-                alle foutpaden expliciet.
+                altijd de juiste HTTP statuscodes. Vermijd het
+                onderdrukken van fouten met _.
             </p>
         </div>
 
@@ -788,8 +708,16 @@ if err != nil {
     gebruik alleen in een geisoleerde testomgeving.
 </footer>
 
+<script type="text/javascript">
+function setVuln(val) {
+    document.getElementById('vulnInput').value = val;
+}
+function setSecure(val) {
+    document.getElementById('secureInput').value = val;
+}
+</script>
 
-   
+<!-- Stap 3: extern modal.js -->
 <script type="text/javascript" src="/static/js/modal.js"></script>
 
 </body>
