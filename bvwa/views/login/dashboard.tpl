@@ -186,6 +186,7 @@
             font-size: 12px;
         }
     </style>
+    <link rel="stylesheet" href="/static/css/bvwa.css">
 </head>
 <body>
 

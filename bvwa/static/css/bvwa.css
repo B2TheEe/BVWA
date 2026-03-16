@@ -1,0 +1,85 @@
+/* ── Responsive breakpoints ── */
+
+/* Tablet: 768px */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 14px;
+    }
+    .module-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .module-header h1 {
+        font-size: 18px;
+    }
+    .btn-info {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+    .cards {
+        grid-template-columns: 1fr;
+    }
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 14px 20px;
+    }
+    header nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    header nav a {
+        margin-left: 0;
+    }
+    .breadcrumb {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+    .sub-nav {
+        flex-wrap: wrap;
+    }
+}
+
+/* Mobiel: 480px */
+@media (max-width: 480px) {
+    .module-header h1 {
+        font-size: 16px;
+    }
+    .card-body {
+        padding: 14px;
+    }
+    .result-box {
+        padding: 14px;
+    }
+    .modal {
+        padding: 20px;
+    }
+    .cwe-list {
+        gap: 6px;
+    }
+    .cwe-tag {
+        font-size: 11px;
+        padding: 3px 8px;
+    }
+    .stats {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .modules-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .error-code {
+        font-size: 64px !important;
+    }
+    .error-card {
+        padding: 30px 20px !important;
+    }
+    .btn-home, .btn-back, .btn-login {
+        display: block;
+        margin: 6px 0 !important;
+        width: 100%;
+        text-align: center;
+    }
+}

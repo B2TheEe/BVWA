@@ -348,6 +348,7 @@
             margin-top: 40px;
         }
     </style>
+    <link rel="stylesheet" href="/static/css/bvwa.css">
 </head>
 <body>
 

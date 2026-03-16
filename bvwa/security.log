@@ -1,0 +1,20 @@
+SECURITY: 2026/03/14 21:01:15 [WARNING] Mislukte login (poging 1) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:01:15
+SECURITY: 2026/03/14 21:01:15 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:01:15
+SECURITY: 2026/03/14 21:01:44 [WARNING] Mislukte login (poging 2) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:01:44
+SECURITY: 2026/03/14 21:01:44 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:01:44
+SECURITY: 2026/03/14 21:02:07 [WARNING] Mislukte login (poging 3) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:02:07
+SECURITY: 2026/03/14 21:02:07 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:02:07
+SECURITY: 2026/03/14 21:02:07 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:02:07
+SECURITY: 2026/03/14 21:02:07 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:02:07
+SECURITY: 2026/03/14 21:02:32 [WARNING] Mislukte login (poging 4) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:02:32
+SECURITY: 2026/03/14 21:02:32 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:02:32
+SECURITY: 2026/03/14 21:02:32 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:02:32
+SECURITY: 2026/03/14 21:02:32 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 127.0.0.1 | Gebruiker: admin | Tijd: 2026-03-14 21:02:32
+SECURITY: 2026/03/15 16:24:47 [WARNING] Mislukte login (poging 1) | IP: ::1 | Gebruiker: admin | Tijd: 2026-03-15 16:24:47
+SECURITY: 2026/03/15 16:24:47 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: ::1 | Gebruiker: admin | Tijd: 2026-03-15 16:24:47
+SECURITY: 2026/03/15 16:25:10 [WARNING] Mislukte login (poging 2) | IP: ::1 | Gebruiker: admin | Tijd: 2026-03-15 16:25:10
+SECURITY: 2026/03/15 16:25:10 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: ::1 | Gebruiker: admin | Tijd: 2026-03-15 16:25:10
+SECURITY: 2026/03/15 16:25:22 [WARNING] Mislukte login (poging 3) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-15 16:25:22
+SECURITY: 2026/03/15 16:25:22 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-15 16:25:22
+SECURITY: 2026/03/15 16:25:22 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-15 16:25:22
+SECURITY: 2026/03/15 16:25:22 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-15 16:25:22
