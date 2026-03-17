@@ -47,9 +47,11 @@ func (c *VulnerableSQLController) Get() {
             result = fmt.Sprintf(
                 "Gebruiker gevonden: %s", name)
         } else {
-            result = "Geen gebruiker gevonden"
+            result = "Geen gebruiker gevonden <!-- BVWA{SQLi_Un10n_2026} -->"
         }
     }
+
+
 
     c.Data["Title"]    = "SQL Injection (Kwetsbaar)"
     c.Data["Username"] = username

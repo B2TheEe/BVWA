@@ -162,3 +162,8 @@ func (c *SecureIntegrityController) Post() {
     c.Data["Token"]    = token
     c.TplName = "integrity/index.tpl"
 }
+
+func (c *SecureIntegrityController) Upload() {
+    // Als bestandsupload kwetsbaar is:
+    c.Ctx.WriteString("Bestand geupload: <!-- BVWA{1nt3gr1ty_Ch3ck_2026} -->")
+}

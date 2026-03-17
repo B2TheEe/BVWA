@@ -51,3 +51,8 @@ func (c *SecureCryptoController) Get() {
     c.Data["SHA"]     = hex.EncodeToString(sha[:])
     c.TplName = "crypto/index.tpl"
 }
+func (c VulnerableCryptoController) SetWeakCookie() {
+    weakToken := base64.StdEncoding.EncodeToString([]byte("BVWA{We4k_3ncrypt10n_2026}"))
+    c.Ctx.SetCookie("auth_token", weakToken, 1000, "/")
+}
+

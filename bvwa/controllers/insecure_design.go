@@ -69,3 +69,8 @@ func (c *SecureDesignController) Get() {
     c.Data["Info"]    = info
     c.TplName = "design/index.tpl"
 }
+
+func (c *SecureDesignController) Debug() {
+    c.Ctx.WriteString("BVWA{D3sign_Fl4w_2026}")
+}
+

@@ -17,4 +17,6 @@ SECURITY: 2026/03/15 16:25:10 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (
 SECURITY: 2026/03/15 16:25:22 [WARNING] Mislukte login (poging 3) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-15 16:25:22
 SECURITY: 2026/03/15 16:25:22 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-15 16:25:22
 SECURITY: 2026/03/15 16:25:22 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-15 16:25:22
-SECURITY: 2026/03/15 16:25:22 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-15 16:25:22
+SECURITY: 2026/03/15 16:25:22 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-15 
+SECURITY: 2026/03/17 16:25:22   BVWA{L0g_1nj3ct10n_2026}
+

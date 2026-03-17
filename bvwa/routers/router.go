@@ -47,7 +47,9 @@ beego.Router("/auth/secure",
     &controllers.SecureLoginController{})
 beego.Router("/logout",
     &controllers.LogoutController{})
-    
+    // In routers/router.go
+beego.Router("/api/v1/debug", &controllers.DesignController{}, "*:Debug")
+
     // Data Integrity Failures
 beego.Router("/integrity/vulnerable",
     &controllers.VulnerableIntegrityController{})
