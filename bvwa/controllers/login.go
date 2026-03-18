@@ -12,7 +12,7 @@ func (c *LoginController) Get() {
     c.TplName = "login/index.tpl"
 }
 
-func FailedAttempts(x int) int {
+func (c *LoginController) FailedAttempts(x int) int {
       x = x+ 1
       return x
 }
@@ -20,7 +20,7 @@ func FailedAttempts(x int) int {
 func (c *LoginController) Post() {
     username := c.GetString("username")
     password := c.GetString("password")
-    
+    var FailedAttempts int
     // Veilige gebruikers (bcrypt in productie!)
     validUsers := map[string]string{
         "admin": "password123",
@@ -32,7 +32,7 @@ func (c *LoginController) Post() {
         c.Data["Title"] = "Login — BVWA"
         c.Data["Error"] = "Ongeldige gebruikersnaam of wachtwoord"
         c.TplName = "login/index.tpl"
-        c.FailedAttempts()
+        FailedAttempts = c.FailedAttempts(FailedAttempts)
         return
     }
     if FailedAttempts > 10 {

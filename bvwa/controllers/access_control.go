@@ -27,6 +27,7 @@ func (c  *VulnerableAdminController) AdminPanel() {
 func (c *VulnerableAdminController) Get() {
     c.Data["Title"] = "Admin Dashboard (Kwetsbaar)"
     c.TplName = "admin/dashboard.tpl"
+    var username string
     // Als de gebruiker een admin is, zet de sessievariabele
         if username == "admin" {
             c.SetSession("is_admin", true)
