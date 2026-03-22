@@ -114,6 +114,18 @@
             align-items: center;
             gap: 8px;
         }
+        .success-box {
+            background: #eafaf1;
+            border: 1px solid #27ae60;
+            color: #1e8449;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         .credentials-hint {
             margin-top: 24px;
             background: #f8f9fa;
@@ -133,6 +145,18 @@
             border-radius: 3px;
             font-size: 11px;
         }
+        .register-link {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+        .register-link a {
+            color: #e67e22;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .register-link a:hover { text-decoration: underline; }
         footer {
             text-align: center;
             padding: 16px;
@@ -148,6 +172,7 @@
     <a href="/" class="logo">🔐 <span>BVWA</span></a>
     <nav>
         <a href="/">🏠 Home</a>
+        <a href="/register">Registreren</a>
     </nav>
 </header>
 
@@ -158,9 +183,11 @@
         <p class="subtitle">Beego Vulnerable Web Application</p>
 
         {{if .Error}}
-        <div class="error-box">
-            ❌ {{.Error}}
-        </div>
+        <div class="error-box">❌ {{.Error}}</div>
+        {{end}}
+
+        {{if .Success}}
+        <div class="success-box">✅ {{.Success}}</div>
         {{end}}
 
         <form method="POST" action="/login">
@@ -177,6 +204,10 @@
                 Inloggen →
             </button>
         </form>
+
+        <div class="register-link">
+            Nog geen account? <a href="/register">Registreer hier</a>
+        </div>
 
         <div class="credentials-hint">
             <strong>🧪 Test credentials:</strong>

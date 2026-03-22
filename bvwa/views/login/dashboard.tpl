@@ -54,7 +54,6 @@
             flex: 1;
         }
 
-        /* Welcome bar */
         .welcome-bar {
             background: white;
             border-radius: 10px;
@@ -65,10 +64,7 @@
             align-items: center;
             justify-content: space-between;
         }
-        .welcome-bar h1 {
-            font-size: 20px;
-            color: #2c3e50;
-        }
+        .welcome-bar h1 { font-size: 20px; color: #2c3e50; }
         .welcome-bar .role-badge {
             background: #e67e22;
             color: white;
@@ -107,6 +103,68 @@
             margin-top: 4px;
         }
         .stat-card .icon { font-size: 24px; margin-bottom: 8px; }
+
+        /* CTF widget */
+        .ctf-widget {
+            background: white;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            border-left: 4px solid #e67e22;
+        }
+        .ctf-widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .ctf-widget-header h2 {
+            font-size: 16px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ctf-widget-header a {
+            background: #e67e22;
+            color: white;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .ctf-widget-header a:hover { background: #ca6f1e; }
+        .ctf-progress-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .ctf-score {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e67e22;
+            white-space: nowrap;
+        }
+        .ctf-track {
+            flex: 1;
+            background: #ecf0f1;
+            border-radius: 20px;
+            height: 12px;
+            overflow: hidden;
+        }
+        .ctf-fill {
+            height: 100%;
+            background: #e67e22;
+            border-radius: 20px;
+            transition: width 0.4s ease;
+        }
+        .ctf-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            white-space: nowrap;
+        }
 
         /* OWASP modules grid */
         .section-title {
@@ -151,23 +209,10 @@
             text-align: center;
             flex-shrink: 0;
         }
-        .module-info h3 {
-            font-size: 13px;
-            color: #2c3e50;
-            margin-bottom: 2px;
-        }
-        .module-info p {
-            font-size: 11px;
-            color: #7f8c8d;
-        }
-        .module-arrow {
-            margin-left: auto;
-            color: #bdc3c7;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
+        .module-info h3 { font-size: 13px; color: #2c3e50; margin-bottom: 2px; }
+        .module-info p  { font-size: 11px; color: #7f8c8d; }
+        .module-arrow   { margin-left: auto; color: #bdc3c7; font-size: 18px; flex-shrink: 0; }
 
-        /* Security notice */
         .notice {
             background: #fef9e7;
             border: 1px solid #f9e79f;
@@ -195,6 +240,7 @@
     <nav>
         <a href="/">🏠 Home</a>
         <a href="/dashboard">Dashboard</a>
+        <a href="/ctf">🚩 CTF</a>
         <a href="/logout" class="btn-logout">Uitloggen</a>
     </nav>
 </header>
@@ -225,9 +271,24 @@
             <div class="label">Veilige versies</div>
         </div>
         <div class="stat-card">
-            <div class="icon">📚</div>
-            <div class="number">34</div>
-            <div class="label">CWEs gedekt</div>
+            <div class="icon">🚩</div>
+            <div class="number">{{.CTFSolved}}/{{.CTFTotal}}</div>
+            <div class="label">CTF Flags gevonden</div>
+        </div>
+    </div>
+
+    <!-- CTF widget -->
+    <div class="ctf-widget">
+        <div class="ctf-widget-header">
+            <h2>🚩 Capture The Flag — Voortgang</h2>
+            <a href="/ctf">Ga naar CTF →</a>
+        </div>
+        <div class="ctf-progress-row">
+            <div class="ctf-score">{{.CTFSolved}}/{{.CTFTotal}}</div>
+            <div class="ctf-track">
+                <div class="ctf-fill" style="width: {{.CTFPercent}}%"></div>
+            </div>
+            <div class="ctf-label">{{.CTFPercent}}% voltooid</div>
         </div>
     </div>
 
