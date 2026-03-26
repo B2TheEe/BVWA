@@ -32,6 +32,9 @@
         <button type="button" class="btn-info" id="openInfoBtn">
             Info &amp; CWEs
         </button>
+        <button type="button" class="btn-examples" id="openExamplesBtn">
+            Echte Voorbeelden
+        </button>
     </div>
 
     <div class="cards">
@@ -156,6 +159,76 @@ h.Set("X-Frame-Options", "DENY")</div>
         </div>
     </div>
 
+</div>
+
+<!-- ECHTE VOORBEELDEN MODAL -->
+<div class="modal-overlay" id="examplesModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeExamplesBtn">X</button>
+
+        <h2>Echte Voorbeelden — Security Misconfiguration</h2>
+        <p class="subtitle">
+            Historische incidenten veroorzaakt door verkeerde configuratie
+        </p>
+        <hr>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2019</span>
+                Capital One — Misconfigured AWS WAF
+            </h4>
+            <p>
+                Een oud-Amazon medewerker exploiteerde een verkeerd geconfigureerde AWS
+                Web Application Firewall via SSRF (Server-Side Request Forgery). De WAF
+                had te ruime permissies, waardoor de AWS metadata-service bereikbaar was
+                en IAM-credentials konden worden gestolen.
+            </p>
+            <p class="example-impact">Impact: 106 miljoen klantgegevens gelekt &mdash; boete van $80 miljoen</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2021</span>
+                Microsoft Exchange ProxyLogon
+            </h4>
+            <p>
+                Verkeerd geconfigureerde Exchange-servers met standaard open poorten
+                (CVE-2021-26855) werden massaal aangevallen. Aanvallers installeerden
+                web shells voor persistente toegang. Overheidsinstanties, defensiebedrijven
+                en Fortune 500-bedrijven werden getroffen wereldwijd.
+            </p>
+            <p class="example-impact">Impact: 250.000+ servers gecompromitteerd in de eerste dagen</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2021</span>
+                Twitch Datalek
+            </h4>
+            <p>
+                Een anonieme aanvaller publiceerde 125 GB aan Twitch-data, waaronder
+                volledige broncode, interne tools, uitbetalingsgegevens van streamers en
+                beveiligingsrapporten. Oorzaak: misconfigureerde serverinstellingen zonder
+                adequate toegangscontroles.
+            </p>
+            <p class="example-impact">Impact: Broncode, verdiensten van creators en interne tools openbaar</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2020</span>
+                SolarWinds — Standaard Wachtwoord op GitHub
+            </h4>
+            <p>
+                Een stagiair had het FTP-wachtwoord "solarwinds123" gepubliceerd op
+                een openbare GitHub-repository. Dit was onderdeel van bredere
+                misconfiguraties die bijdroegen aan de grootste supplychain-aanval ooit.
+                Het wachtwoord stond maanden openbaar zonder dat iemand het opmerkte.
+            </p>
+            <p class="example-impact">Impact: 18.000+ organisaties gecompromitteerd, waaronder de Amerikaanse overheid</p>
+        </div>
+
+    </div>
 </div>
 
 <!-- INFO MODAL -->

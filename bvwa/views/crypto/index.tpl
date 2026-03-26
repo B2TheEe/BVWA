@@ -32,6 +32,9 @@
         <button type="button" class="btn-info" id="openInfoBtn">
             Info &amp; CWEs
         </button>
+        <button type="button" class="btn-examples" id="openExamplesBtn">
+            Echte Voorbeelden
+        </button>
     </div>
 
     <div class="cards">
@@ -174,6 +177,76 @@ hash, _ := bcrypt.GenerateFromPassword(
         </div>
     </div>
 
+</div>
+
+<!-- ECHTE VOORBEELDEN MODAL -->
+<div class="modal-overlay" id="examplesModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeExamplesBtn">X</button>
+
+        <h2>Echte Voorbeelden — Cryptographic Failures</h2>
+        <p class="subtitle">
+            Historische datalekken veroorzaakt door zwakke of verkeerde cryptografie
+        </p>
+        <hr>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2012</span>
+                LinkedIn Wachtwoordlek
+            </h4>
+            <p>
+                6,5 miljoen SHA-1 wachtwoordhashes zonder salt werden gestolen en gepubliceerd
+                op een Russisch forum. Omdat er geen salt werd gebruikt, waren identieke
+                wachtwoorden direct herkenbaar. In 2016 bleek de werkelijke omvang 117 miljoen
+                accounts te zijn. Populaire wachtwoorden werden binnen uren gekraakt.
+            </p>
+            <p class="example-impact">Impact: 117 miljoen accounts blootgesteld &mdash; wachtwoorden in dagen gekraakt</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2013</span>
+                Adobe Datalek
+            </h4>
+            <p>
+                Adobe sloeg 153 miljoen wachtwoorden op met 3DES-encryptie in ECB-modus
+                &mdash; dit is encryptie, geen hashing. Hetzelfde wachtwoord gaf altijd
+                dezelfde output, waardoor patronen zichtbaar waren. Bovendien lagen
+                wachtwoordhints in plaintext naast de encrypted wachtwoorden.
+            </p>
+            <p class="example-impact">Impact: 153 miljoen accounts &mdash; honderden miljoenen euro's schade</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2009</span>
+                RockYou Wachtwoorddatabase
+            </h4>
+            <p>
+                De socialemediadienst RockYou sloeg 32 miljoen wachtwoorden op in
+                volledig plaintext in een MySQL-database. Een SQL injection onthulde
+                alles. De RockYou.txt wordlist die hieruit ontstond wordt vandaag
+                nog steeds standaard gebruikt in penetratietests.
+            </p>
+            <p class="example-impact">Impact: 32 miljoen plaintext wachtwoorden &mdash; RockYou.txt is nu de standaard pentest-wordlist</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2015</span>
+                Ashley Madison
+            </h4>
+            <p>
+                De overspelsite gebruikte een mix van bcrypt (voor betalende leden)
+                en MD5 (voor gratis "wegwerp"-accounts). De 11 miljoen MD5-hashes
+                werden binnen 10 dagen volledig gekraakt via GPU-clusters. De bcrypt-hashes
+                hielden stand, wat aantoont hoe groot het verschil is.
+            </p>
+            <p class="example-impact">Impact: 37 miljoen profielen gelekt &mdash; MD5-hashes in 10 dagen volledig gekraakt</p>
+        </div>
+
+    </div>
 </div>
 
 <!-- INFO MODAL -->

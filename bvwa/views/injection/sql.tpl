@@ -34,6 +34,9 @@
         <button type="button" class="btn-info" id="openInfoBtn">
             Info &amp; CWEs
         </button>
+        <button type="button" class="btn-examples" id="openExamplesBtn">
+            Echte Voorbeelden
+        </button>
     </div>
 
     <!-- Sub-navigation -->
@@ -192,6 +195,72 @@ o.Raw(
     </div>
 </div>
 
+</div>
+
+<!-- ECHTE VOORBEELDEN MODAL -->
+<div class="modal-overlay" id="examplesModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeExamplesBtn">X</button>
+
+        <h2>Echte Voorbeelden — SQL Injection</h2>
+        <p class="subtitle">
+            Historische incidenten waarbij SQL Injection grote schade veroorzaakte
+        </p>
+        <hr>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2008</span>
+                Heartland Payment Systems
+            </h4>
+            <p>
+                Aanvallers gebruikten SQL injection via een webformulier om spyware
+                te installeren die betalingskaartdata onderschepte. De aanval bleef
+                maandenlang onopgemerkt. Het was de grootste datalek ooit op dat moment.
+            </p>
+            <p class="example-impact">Impact: 134 miljoen creditcards gestolen &mdash; $140M boete</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2011</span>
+                Sony Pictures (LulzSec)
+            </h4>
+            <p>
+                Hackersgroep LulzSec gebruikte een eenvoudige SQL injection om toegang
+                te krijgen tot meerdere Sony Pictures-databases tegelijk. Ze noemden het
+                "de meest amateuristische beveiliging die ze ooit hadden gezien."
+            </p>
+            <p class="example-impact">Impact: 1 miljoen gebruikersgegevens gelekt, inclusief plaintext wachtwoorden</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2012</span>
+                Yahoo Voices
+            </h4>
+            <p>
+                SQL injection op Yahoo Voices onthulde 450.000 combinaties van
+                gebruikersnamen en wachtwoorden. De wachtwoorden lagen in plaintext opgeslagen
+                in de database. De aanvallers publiceerden alles openbaar.
+            </p>
+            <p class="example-impact">Impact: 450.000 plaintext credentials openbaar gepubliceerd</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2019</span>
+                7-Eleven Japan
+            </h4>
+            <p>
+                SQL injection via de "wachtwoord vergeten"-functie van de 7pay app gaf
+                aanvallers toegang tot klantaccounts. Ze konden rechtstreeks betalingen
+                initiëren. De app werd na slechts 3 dagen gesloten.
+            </p>
+            <p class="example-impact">Impact: ~$500.000 frauduleus overgeboekt van klantrekeningen</p>
+        </div>
+
+    </div>
 </div>
 
 <!-- INFO MODAL -->

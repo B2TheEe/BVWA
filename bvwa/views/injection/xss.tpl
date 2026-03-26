@@ -34,6 +34,9 @@
         <button type="button" class="btn-info" id="openInfoBtn">
             Info &amp; CWEs
         </button>
+        <button type="button" class="btn-examples" id="openExamplesBtn">
+            Echte Voorbeelden
+        </button>
     </div>
 
     <!-- Sub-navigation -->
@@ -170,6 +173,76 @@
         </div>
     </div>
 
+</div>
+
+<!-- ECHTE VOORBEELDEN MODAL -->
+<div class="modal-overlay" id="examplesModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeExamplesBtn">X</button>
+
+        <h2>Echte Voorbeelden — Cross-Site Scripting (XSS)</h2>
+        <p class="subtitle">
+            Historische incidenten waarbij XSS grote schade aanrichtte
+        </p>
+        <hr>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2005</span>
+                MySpace Samy Worm
+            </h4>
+            <p>
+                Samy Kamkar ontdekte een stored XSS-kwetsbaarheid in MySpace en schreef
+                een worm die zichzelf automatisch verspreide. Elk profiel dat zijn profiel
+                bezocht voegde hem toe als vriend en kopieerde de worm naar hun eigen profiel.
+                Hij werd later gearresteerd door de Secret Service.
+            </p>
+            <p class="example-impact">Impact: 1 miljoen profielen besmet in minder dan 20 uur</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2010</span>
+                Twitter "onmouseover" Worm
+            </h4>
+            <p>
+                Een stored XSS-kwetsbaarheid in de URL-verwerking van tweets zorgde ervoor
+                dat kwaadaardige code werd uitgevoerd zodra een gebruiker over een tweet
+                bewoog. Tweets werden automatisch geretweeted, popups verschenen en gebruikers
+                werden omgeleid naar externe sites.
+            </p>
+            <p class="example-impact">Impact: Tienduizenden accounts automatisch gecompromitteerd voor patch</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2018</span>
+                British Airways — Magecart Aanval
+            </h4>
+            <p>
+                De Magecart-groep injecteerde 22 regels JavaScript op de BA-betaalpagina
+                via een XSS-kwetsbaarheid. Het script stuurde ingevoerde betalingsgegevens
+                in realtime naar een server van de aanvallers. De aanval bleef 15 dagen
+                actief onopgemerkt.
+            </p>
+            <p class="example-impact">Impact: 500.000 klanten getroffen &mdash; GDPR-boete van &pound;20 miljoen</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2015</span>
+                eBay Stored XSS
+            </h4>
+            <p>
+                Meerdere stored XSS-kwetsbaarheden in productomschrijvingen op eBay lieten
+                aanvallers actieve scripts insluiten. Bezoekers van die listings werden
+                automatisch omgeleid naar phishing-pagina's die eruitzagen als de echte
+                eBay-inlogpagina.
+            </p>
+            <p class="example-impact">Impact: Miljoenen gebruikers potentieel blootgesteld aan credential-diefstal</p>
+        </div>
+
+    </div>
 </div>
 
 <!-- INFO MODAL -->

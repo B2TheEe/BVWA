@@ -89,6 +89,59 @@ header nav a:hover { color: #e67e22; }
 }
 .btn-info:hover { background: #2980b9; }
 
+/* ── Echte Voorbeelden Button ── */
+.btn-examples {
+    background: #8e44ad;
+    color: white;
+    border: none;
+    padding: 9px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    margin-left: 10px;
+}
+.btn-examples:hover { background: #6c3483; }
+
+/* ── Echte Voorbeelden Modal-inhoud ── */
+.example-item {
+    border-left: 4px solid #8e44ad;
+    background: #f8f0fc;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    border-radius: 0 6px 6px 0;
+}
+.example-item h4 {
+    color: #6c3483;
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.example-year {
+    display: inline-block;
+    background: #8e44ad;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+.example-item p { font-size: 13px; color: #555; line-height: 1.6; margin: 4px 0 0; }
+.example-impact {
+    font-size: 12px;
+    color: #c0392b;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
 /* ── Section Title ── */
 .section-title {
     font-size: 16px;
@@ -941,6 +994,7 @@ footer {
     .module-header { flex-wrap: wrap; gap: 10px; }
     .module-header h1 { font-size: 18px; }
     .btn-info { margin-left: 0; width: 100%; justify-content: center; }
+    .btn-examples { margin-left: 0; width: 100%; justify-content: center; }
     .cards { grid-template-columns: 1fr; }
     header { flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 20px; }
     header nav { display: flex; flex-wrap: wrap; gap: 8px; }

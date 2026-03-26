@@ -32,6 +32,9 @@
         <button type="button" class="btn-info" id="openInfoBtn">
             Info &amp; CWEs
         </button>
+        <button type="button" class="btn-examples" id="openExamplesBtn">
+            Echte Voorbeelden
+        </button>
     </div>
 
     <div class="cards">
@@ -198,6 +201,76 @@ logSecurityEvent("CRITICAL",
         </div>
     </div>
 
+</div>
+
+<!-- ECHTE VOORBEELDEN MODAL -->
+<div class="modal-overlay" id="examplesModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeExamplesBtn">X</button>
+
+        <h2>Echte Voorbeelden — Logging &amp; Alerting Failures</h2>
+        <p class="subtitle">
+            Historische incidenten waarbij ontbrekende logging aanvallen onzichtbaar maakte
+        </p>
+        <hr>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2017</span>
+                Equifax &mdash; 76 Dagen Onopgemerkt
+            </h4>
+            <p>
+                Aanvallers exploiteerden een Apache Struts-kwetsbaarheid. Een verlopen
+                SSL-inspectiecertificaat (19 maanden verlopen) zorgde ervoor dat beveiligingstools
+                versleuteld verkeer niet konden analyseren. Hierdoor bleven 700 zoekopdrachten
+                door de database volledig onopgemerkt gedurende 76 dagen.
+            </p>
+            <p class="example-impact">Impact: 147 miljoen SSN's en geboortedata gelekt &mdash; boete van $575 miljoen</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2013</span>
+                Target &mdash; Genegeerde FireEye Alerts
+            </h4>
+            <p>
+                FireEye's beveiligingssysteem detecteerde de Citadel-malware en stuurde
+                automatische alerts naar Target's beveiligingsteam in Bangalore. Het team
+                beoordeelde de alerts als vals-positief en schakelde de automatische
+                reactiefunctie bewust uit. 40 miljoen betaalkaarten werden gestolen.
+            </p>
+            <p class="example-impact">Impact: 40 miljoen betaalkaarten + 70 miljoen klantrecords &mdash; $162 miljoen schade</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2014</span>
+                Yahoo &mdash; 2 Jaar Onopgemerkt
+            </h4>
+            <p>
+                Aanvallers hadden 2&ndash;3 jaar onbeperkte toegang tot Yahoo's systemen
+                voordat de breuk werd ontdekt. De breuk van 2013&ndash;2014 betrof 3 miljard
+                accounts maar werd pas in 2016 ontdekt &mdash; via een externe melding,
+                niet door Yahoo's eigen monitoring.
+            </p>
+            <p class="example-impact">Impact: 3 miljard accounts &mdash; grootste datalek ooit; Yahoo-verkoop $350M goedkoper</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2019</span>
+                Capital One &mdash; 700 Queries Zonder Alert
+            </h4>
+            <p>
+                De aanvaller voerde meer dan 700 opeenvolgende AWS S3 ListBucket-commando's
+                uit over meerdere dagen zonder &eacute;&eacute;n alert te triggeren. Er was
+                wel een WAF aanwezig, maar die genereerde geen alerting op ongebruikelijke
+                toegangspatronen. De breuk werd uiteindelijk gemeld via een GitHub-vondst.
+            </p>
+            <p class="example-impact">Impact: 106 miljoen records gestolen &mdash; boete van $80 miljoen</p>
+        </div>
+
+    </div>
 </div>
 
 <!-- INFO MODAL -->

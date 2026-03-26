@@ -32,6 +32,9 @@
         <button type="button" class="btn-info" id="openInfoBtn">
             Info &amp; CWEs
         </button>
+        <button type="button" class="btn-examples" id="openExamplesBtn">
+            Echte Voorbeelden
+        </button>
     </div>
 
     <div class="cards">
@@ -224,6 +227,79 @@ if err != nil {
         </div>
     </div>
 
+</div>
+
+<!-- ECHTE VOORBEELDEN MODAL -->
+<div class="modal-overlay" id="examplesModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeExamplesBtn">X</button>
+
+        <h2>Echte Voorbeelden — Mishandling of Exceptional Conditions</h2>
+        <p class="subtitle">
+            Historische incidenten waarbij foutafhandeling catastrofale gevolgen had
+        </p>
+        <hr>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2014</span>
+                Heartbleed &mdash; OpenSSL CVE-2014-0160
+            </h4>
+            <p>
+                Een "heartbeat"-extensie in OpenSSL controleerde de lengte van het
+                verzoek niet (CWE-126 buffer over-read). Aanvallers konden 64 KB
+                willekeurig servergeheugen per verzoek lezen &mdash; inclusief pri&euml;te
+                sleutels, wachtwoorden en sessietokens. Geen logging, geen error,
+                geen spoor van de aanval.
+            </p>
+            <p class="example-impact">Impact: 17&ndash;25% van alle HTTPS-webservers kwetsbaar; private keys van miljoenen sites gelekt</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2017</span>
+                Cloudbleed &mdash; Cloudflare Buffer Over-read
+            </h4>
+            <p>
+                Een buffer over-read bug in Cloudflares HTML-parser (ontdekt door
+                Google Project Zero) zorgde dat HTTP-responses willekeurige stukken
+                geheugen van andere klanten bevatten. Wachtwoorden, auth-tokens en
+                priv&eacute;-berichten lekten mee in responses die door zoekmachines
+                werden gecached.
+            </p>
+            <p class="example-impact">Impact: Miljoenen pagina's potentieel getroffen; gecachte data met gevoelige info via Google bereikbaar</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">1985</span>
+                Therac-25 &mdash; Dodelijke Race Condition
+            </h4>
+            <p>
+                Een medisch bestralingsapparaat had een race condition in de
+                foutafhandeling: bepaalde toetsaanslagsequenties zorgden dat een
+                fout stil werd genegeerd (fail-open) terwijl het apparaat in de
+                gevaarlijkste modus bleef. Pati&euml;nten ontvingen 100x de
+                bedoelde stralingsdosis.
+            </p>
+            <p class="example-impact">Impact: Minimaal 3 doden en 3 zwaargewonden &mdash; een van de ernstigste software-veiligheidsrampen</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2019</span>
+                BlueKeep &mdash; Windows RDP CVE-2019-0708
+            </h4>
+            <p>
+                Onjuiste foutafhandeling in de RDP-stack van Windows (XP/7/Server 2008)
+                bij pre-authenticatie berichten leidde tot een heap overflow (CWE-122).
+                Een aanvaller kon zonder credentials willekeurige code uitvoeren als SYSTEM.
+                Naar schatting 1 miljoen systemen waren direct via internet bereikbaar.
+            </p>
+            <p class="example-impact">Impact: 1 miljoen kwetsbare systemen publiek bereikbaar &mdash; wurm-potentieel vergelijkbaar met WannaCry</p>
+        </div>
+
+    </div>
 </div>
 
 <!-- INFO MODAL -->

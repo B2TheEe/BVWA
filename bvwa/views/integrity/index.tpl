@@ -32,6 +32,9 @@
         <button type="button" class="btn-info" id="openInfoBtn">
             Info &amp; CWEs
         </button>
+        <button type="button" class="btn-examples" id="openExamplesBtn">
+            Echte Voorbeelden
+        </button>
     </div>
 
     <div class="cards">
@@ -191,6 +194,76 @@ token := encoded + "." + signature
         </div>
     </div>
 
+</div>
+
+<!-- ECHTE VOORBEELDEN MODAL -->
+<div class="modal-overlay" id="examplesModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeExamplesBtn">X</button>
+
+        <h2>Echte Voorbeelden — Data Integrity Failures</h2>
+        <p class="subtitle">
+            Historische incidenten waarbij manipulatie van data of software onopgemerkt bleef
+        </p>
+        <hr>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2020</span>
+                SolarWinds SUNBURST — Gesigneerde Backdoor
+            </h4>
+            <p>
+                De SUNBURST-backdoor werd digitaal ondertekend met een geldig SolarWinds-
+                certificaat. Er waren geen runtime-integriteitscontroles op het uitgevoerde
+                binaire bestand. Beveiligingstools vertrouwden de handtekening en lieten de
+                backdoor passeren. Negen maanden lang bleef de aanval volledig onopgemerkt.
+            </p>
+            <p class="example-impact">Impact: 18.000+ organisaties gecompromitteerd; 9 maanden onopgemerkt actief</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2019</span>
+                ASUS Live Update — Operation ShadowHammer
+            </h4>
+            <p>
+                Aanvallers compromitteerden de ASUS-updateserver en signeerden backdoored
+                firmware-updates met een legitiem ASUS-certificaat. De updates werden via
+                het officiële ASUS Live Update-kanaal verspreid. De backdoor zocht naar
+                specifieke MAC-adressen van doelwitten.
+            </p>
+            <p class="example-impact">Impact: 500.000&ndash;1 miljoen apparaten ge&iuml;nfecteerd; backdoor aanwezig op Kaspersky-servers</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2021</span>
+                PHP Git Repository Compromise
+            </h4>
+            <p>
+                Aanvallers compromitteerden de php.net git-server en pushten twee commits
+                die een backdoor in de PHP-broncode zouden toevoegen. De commits leken op
+                normale bugfixes. Omdat commits niet cryptografisch werden gesigneerd,
+                was manipulatie aanvankelijk niet zichtbaar.
+            </p>
+            <p class="example-impact">Impact: Potentieel alle PHP-servers wereldwijd kwetsbaar; op tijd ontdekt</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2022</span>
+                PyPI Kwaadaardige Packages
+            </h4>
+            <p>
+                Duizenden kwaadaardige PyPI-packages met typosquatted namen (bijv.
+                "requets" i.p.v. "requests") bevatten datadiefstalcode. Bij installatie
+                stuurden ze credentials en environment variables naar externe servers.
+                PyPI heeft geen verplichte integriteitsverificatie bij download.
+            </p>
+            <p class="example-impact">Impact: Tienduizenden installaties van malafide packages &mdash; aanhoudend probleem</p>
+        </div>
+
+    </div>
 </div>
 
 <!-- INFO MODAL -->

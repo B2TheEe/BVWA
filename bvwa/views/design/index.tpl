@@ -32,6 +32,9 @@
         <button type="button" class="btn-info" id="openInfoBtn">
             Info &amp; CWEs
         </button>
+        <button type="button" class="btn-examples" id="openExamplesBtn">
+            Echte Voorbeelden
+        </button>
     </div>
 
     <div class="cards">
@@ -150,6 +153,76 @@ if resetAttempts[email] &gt; 3 {
         </div>
     </div>
 
+</div>
+
+<!-- ECHTE VOORBEELDEN MODAL -->
+<div class="modal-overlay" id="examplesModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeExamplesBtn">X</button>
+
+        <h2>Echte Voorbeelden — Insecure Design</h2>
+        <p class="subtitle">
+            Historische incidenten door fundamentele ontwerpfouten in beveiliging
+        </p>
+        <hr>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2019</span>
+                Instagram &mdash; SMS Reset Brute Force
+            </h4>
+            <p>
+                De 6-cijferige SMS-resetcode van Instagram had geen rate limiting.
+                Een beveiligingsonderzoeker kon alle 1 miljoen combinaties uitproberen
+                via Instagrams web-API. Elk willekeurig account kon worden overgenomen
+                zonder enige verdere verificatie van de echte eigenaar.
+            </p>
+            <p class="example-impact">Impact: Elk account kwetsbaar voor overname &mdash; bug bounty van $30.000</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2021</span>
+                Parler &mdash; Geen Rate Limiting op API
+            </h4>
+            <p>
+                Vlak voor de gedwongen shutdown van Parler gebruikten activisten het
+                ontbreken van rate limiting en sequenti&euml;le media-ID's om alle
+                70 TB aan content te scrapen &mdash; inclusief verwijderde berichten
+                en GPS-co&ouml;rdinaten in metadata van foto's en video's.
+            </p>
+            <p class="example-impact">Impact: 70 TB data inclusief GPS-metadata van 68.000 "verwijderde" berichten</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2020</span>
+                Zoom Meeting Bombing
+            </h4>
+            <p>
+                Zoom Meeting IDs waren 9&ndash;11 cijfers lang zonder rate limiting op
+                deelnamepogingen. Geautomatiseerde tools konden geldige meeting-ID's
+                raden en onuitgenodigd deelnemen aan vergaderingen. Meetings van scholen,
+                overheden en bedrijven werden verstoord met ongepaste content.
+            </p>
+            <p class="example-impact">Impact: Duizenden vergaderingen verstoord &mdash; verplichte wachtwoorden toegevoegd als noodmaatregel</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2023</span>
+                T-Mobile &mdash; Onveilig API-ontwerp
+            </h4>
+            <p>
+                Een API-endpoint bij T-Mobile vereiste geen authenticatie voor het
+                ophalen van klantgegevens. Aanvallers konden door sequenti&euml;le
+                ID's te itereren de gegevens van 37 miljoen abonnees opvragen.
+                Het was het achtste datalek bij T-Mobile in vijf jaar.
+            </p>
+            <p class="example-impact">Impact: 37 miljoen klantrecords blootgesteld &mdash; $350 miljoen schikking</p>
+        </div>
+
+    </div>
 </div>
 
 <!-- INFO MODAL -->

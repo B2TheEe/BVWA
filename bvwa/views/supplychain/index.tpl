@@ -30,8 +30,11 @@
     <div class="module-header">
         <span class="badge-a03">A03</span>
         <h1>Software Supply Chain Failures</h1>
-        <button class="btn-info" onclick="openModal()">
-            ℹ️ Info & CWEs
+        <button type="button" class="btn-info" id="openInfoBtn">
+            ℹ️ Info &amp; CWEs
+        </button>
+        <button type="button" class="btn-examples" id="openExamplesBtn">
+            Echte Voorbeelden
         </button>
     </div>
 
@@ -166,10 +169,81 @@ hash := sha256.Sum256([]<span class="kw">byte</span>(password))
 
 </div>
 
+<!-- ECHTE VOORBEELDEN MODAL -->
+<div class="modal-overlay" id="examplesModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeExamplesBtn">✕</button>
+
+        <h2>Echte Voorbeelden — Software Supply Chain Failures</h2>
+        <p class="subtitle">
+            Historische incidenten waarbij de supplychain als aanvalsvector diende
+        </p>
+        <hr>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2020</span>
+                SolarWinds SUNBURST
+            </h4>
+            <p>
+                Aanvallers infiltreerden het buildsysteem van SolarWinds en voegden de
+                SUNBURST-backdoor toe aan een legitieme software-update van Orion. De update
+                werd digitaal ondertekend met een geldig certificaat. Slachtoffers installeerden
+                de update vrijwillig, waarna aanvallers 9 maanden onopgemerkt actief waren.
+            </p>
+            <p class="example-impact">Impact: 18.000+ organisaties, inclusief US Treasury en NATO &mdash; grootste supplychain-aanval ooit</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2024</span>
+                XZ Utils Backdoor (CVE-2024-3094)
+            </h4>
+            <p>
+                "Jia Tan" bouwde gedurende 2 jaar vertrouwen op als open-source maintainer
+                van xz-utils. Vlak voor de release voegde hij een verborgen backdoor toe in
+                liblzma die via systemd SSH-authenticatie zou omzeilen. Toevallig ontdekt
+                door Microsoft-engineer Andres Freund, die een vertraging van 500ms in SSH
+                opmerkte.
+            </p>
+            <p class="example-impact">Impact: Bijna alle Linux-servers wereldwijd kwetsbaar &mdash; ontdekt op het nippertje</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2018</span>
+                Event-Stream npm Package
+            </h4>
+            <p>
+                Een aanvaller nam de maintainer-rol over van de populaire npm-package
+                "event-stream" (11 miljoen downloads/week) door aan te bieden het onderhoud
+                over te nemen. De nieuwe versie bevatte verborgen code die specifiek de
+                Copay Bitcoin-wallet aanviel om private keys te stelen.
+            </p>
+            <p class="example-impact">Impact: Miljoenen npm-installaties getroffen; Bitcoin-wallets gecompromitteerd</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2021</span>
+                CodeCov Supplychain Aanval
+            </h4>
+            <p>
+                Aanvallers wijzigden het Docker-image van CodeCov (code coverage tool) en
+                voegden code toe die environment variables uit CI/CD-omgevingen stal.
+                Duizenden bedrijven die CodeCov integreerden in hun pipelines stuurden
+                onbewust hun secrets (API keys, tokens) naar de aanvallers.
+            </p>
+            <p class="example-impact">Impact: Twilio, Twitch en HashiCorp onder de getroffen bedrijven</p>
+        </div>
+
+    </div>
+</div>
+
 <!-- ── INFO MODAL ── -->
 <div class="modal-overlay" id="infoModal">
     <div class="modal">
-        <button class="modal-close" onclick="closeModal()">✕</button>
+        <button type="button" class="modal-close" id="closeInfoBtn">✕</button>
 
         <h2>ℹ️ A03:2025 — Software Supply Chain Failures</h2>
         <p class="subtitle">

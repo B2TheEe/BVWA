@@ -32,6 +32,9 @@
         <button type="button" class="btn-info" id="openInfoBtn">
             Info &amp; CWEs
         </button>
+        <button type="button" class="btn-examples" id="openExamplesBtn">
+            Echte Voorbeelden
+        </button>
     </div>
 
     <div class="cards">
@@ -181,6 +184,76 @@ c.SetSession("user", username)</div>
         </div>
     </div>
 
+</div>
+
+<!-- ECHTE VOORBEELDEN MODAL -->
+<div class="modal-overlay" id="examplesModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeExamplesBtn">X</button>
+
+        <h2>Echte Voorbeelden — Authentication Failures</h2>
+        <p class="subtitle">
+            Historische incidenten door gebrekkige authenticatie en sessiebeheer
+        </p>
+        <hr>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2012</span>
+                Dropbox — Hergebruikt Wachtwoord
+            </h4>
+            <p>
+                Een Dropbox-medewerker hergebruikte zijn LinkedIn-wachtwoord voor zijn
+                werk-account. Nadat LinkedIn was gelekt in 2012 gebruikten aanvallers
+                die credentials om in te loggen bij Dropbox. Vervolgens werd het
+                adresboek van gebruikers gestolen en gebruikt voor spam.
+            </p>
+            <p class="example-impact">Impact: 68 miljoen gehashte credentials gestolen &mdash; ontdekt pas in 2016</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2022</span>
+                Uber — MFA Fatigue Aanval
+            </h4>
+            <p>
+                Een aanvaller kocht gelekte credentials en stuurde vervolgens meer dan
+                een uur lang MFA push-notificaties naar een Uber-medewerker. Tegelijkertijd
+                deed de aanvaller zich via WhatsApp voor als Uber IT-support. Uitgeput
+                accepteerde de medewerker uiteindelijk een push-bericht.
+            </p>
+            <p class="example-impact">Impact: Volledige toegang tot interne systemen, Slack, AWS en HackerOne</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2023</span>
+                23andMe — Credential Stuffing
+            </h4>
+            <p>
+                Aanvallers gebruikten miljoenen credentials uit eerdere datalekken
+                (credential stuffing) om in te loggen bij 23andMe-accounts. Via de
+                "DNA Relatives"-functie konden ze data van veel meer profielen inzien
+                dan alleen de gecompromitteerde accounts. Geen rate limiting aanwezig.
+            </p>
+            <p class="example-impact">Impact: 6,9 miljoen profielen blootgesteld, inclusief genetische data</p>
+        </div>
+
+        <div class="example-item">
+            <h4>
+                <span class="example-year">2022</span>
+                Rockstar Games / GTA 6
+            </h4>
+            <p>
+                Een 18-jarige hacker gebruikte social engineering om Slack-credentials
+                van een medewerker te stelen. Rockstar had geen MFA op Slack ingesteld.
+                Via Slack werd toegang verkregen tot Confluence en interne servers,
+                van waaruit GTA 6-broncode en video's werden gestolen.
+            </p>
+            <p class="example-impact">Impact: GTA 6 broncode en video's openbaar &mdash; geschatte schade van honderden miljoenen</p>
+        </div>
+
+    </div>
 </div>
 
 <!-- INFO MODAL -->

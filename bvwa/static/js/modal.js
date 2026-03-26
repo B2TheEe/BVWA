@@ -1,62 +1,56 @@
-// BVWA Modal Handler - werkt voor alle A-modules
+// BVWA Modal Handler - werkt voor alle A-modules (info- en voorbeelden-modal)
 (function() {
-    // Wacht tot DOM volledig geladen is
-    function initModal() {
-        var modal    = document.getElementById('infoModal');
-        var openBtn  = document.getElementById('openInfoBtn');
-        var closeBtn = document.getElementById('closeInfoBtn');
+    function initModal(modalId, openBtnId, closeBtnId) {
+        var modal    = document.getElementById(modalId);
+        var openBtn  = document.getElementById(openBtnId);
+        var closeBtn = document.getElementById(closeBtnId);
 
-        // Check of alle elementen bestaan
-        if (!modal) {
-            console.warn('BVWA: infoModal niet gevonden');
-            return;
-        }
-        if (!openBtn) {
-            console.warn('BVWA: openInfoBtn niet gevonden');
-            return;
-        }
-        if (!closeBtn) {
-            console.warn('BVWA: closeInfoBtn niet gevonden');
-            return;
-        }
+        if (!modal || !openBtn || !closeBtn) return;
 
-        // Open modal
         openBtn.onclick = function(e) {
             e.preventDefault();
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         };
 
-        // Sluit via X knop
         closeBtn.onclick = function(e) {
             e.preventDefault();
             modal.style.display = 'none';
             document.body.style.overflow = '';
         };
 
-        // Sluit via klik buiten modal
         modal.onclick = function(e) {
             if (e.target === modal) {
                 modal.style.display = 'none';
                 document.body.style.overflow = '';
             }
         };
+    }
 
-        // Sluit via Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' &&
-                modal.style.display === 'block') {
-                modal.style.display = 'none';
+    function closeAllModals() {
+        var modals = document.querySelectorAll('.modal-overlay');
+        modals.forEach(function(m) {
+            if (m.style.display === 'block') {
+                m.style.display = 'none';
                 document.body.style.overflow = '';
             }
         });
     }
 
-    // Gebruik DOMContentLoaded als het DOM nog niet klaar is
+    function initAllModals() {
+        initModal('infoModal',     'openInfoBtn',     'closeInfoBtn');
+        initModal('examplesModal', 'openExamplesBtn', 'closeExamplesBtn');
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeAllModals();
+        }
+    });
+
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initModal);
+        document.addEventListener('DOMContentLoaded', initAllModals);
     } else {
-        // DOM is al klaar
-        initModal();
+        initAllModals();
     }
 })();
