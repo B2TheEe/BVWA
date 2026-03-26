@@ -18,11 +18,8 @@ func (c *VulnerableAdminController) IsAdmin() bool {
 
 func (c *VulnerableAdminController) Get() {
     c.Data["Title"] = "Admin Dashboard (Kwetsbaar)"
-    c.Ctx.WriteString("<!-- BVWA{4cc3ss_D3n13d_2026} -->")
+    c.Ctx.ResponseWriter.Header().Set("X-CTF-Flag", "BVWA{4cc3ss_D3n13d_2026}")
     c.TplName = "admin/dashboard.tpl"
-    
-    c.Redirect("/admin/vulnerable", 302)
-    
 }
 
 // VEILIG: met rolcontrole
