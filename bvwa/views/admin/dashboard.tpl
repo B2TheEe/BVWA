@@ -237,27 +237,7 @@ role := c.GetSession(<span class="str">"role"</span>)
     gebruik alleen in een geïsoleerde testomgeving.
 </footer>
 
-<script>
-    function openModal()  {
-        document.getElementById('infoModal')
-            .classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-        document.getElementById('infoModal')
-            .classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    // Sluit modal bij klik buiten het modal venster
-    document.getElementById('infoModal')
-        .addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
-    });
-    // Sluit modal met Escape toets
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
-    });
-</script>
+<script type="text/javascript" src="/static/js/modal.js"></script>
 
 </body>
 </html>

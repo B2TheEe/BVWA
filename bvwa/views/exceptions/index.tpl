@@ -346,16 +346,7 @@ if err != nil {
     gebruik alleen in een geisoleerde testomgeving.
 </footer>
 
-<script type="text/javascript">
-function setVuln(val) {
-    document.getElementById('vulnInput').value = val;
-}
-function setSecure(val) {
-    document.getElementById('secureInput').value = val;
-}
-</script>
-
-<!-- Stap 3: extern modal.js -->
+<script type="text/javascript" src="/static/js/exceptions.js"></script>
 <script type="text/javascript" src="/static/js/modal.js"></script>
 
 </body>
