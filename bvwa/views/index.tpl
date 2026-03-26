@@ -71,6 +71,7 @@
       left: 0px;
     }
   </style>
+    <link rel="stylesheet" href="/static/css/bvwa.css">
 </head>
 
 <body>
