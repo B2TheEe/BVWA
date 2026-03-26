@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  bvwa:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    environment:
+      - GOTOOLCHAIN=local
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: bvwa
+      MYSQL_USER: bvwa
+      MYSQL_PASSWORD: bvwapassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

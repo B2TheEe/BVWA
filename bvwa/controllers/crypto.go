@@ -4,6 +4,7 @@ import (
     "crypto/md5"
     "crypto/sha256"
     "encoding/hex"
+    "encoding/base64"
     "fmt"
     beego "github.com/beego/beego/v2/server/web"
     "golang.org/x/crypto/bcrypt"

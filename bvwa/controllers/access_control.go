@@ -13,28 +13,16 @@ func (c *VulnerableAdminController) IsAdmin() bool {
     return c.GetSession("is_admin") != nil && c.GetSession("is_admin").(bool)
 }
 
-// In controllers/access_control.go
-func (c  *VulnerableAdminController) AdminPanel() {
-    // Als de gebruiker GEEN admin is, toon de flag
-    if !c.IsAdmin() {
-        c.Ctx.WriteString("<!-- BVWA{4cc3ss_D3n13d_2026} -->")
-    }
-    // Toon de admin-pagina voor admins
-    c.TplName = "admin/dashboard.tpl"
-}
+
 
 
 func (c *VulnerableAdminController) Get() {
     c.Data["Title"] = "Admin Dashboard (Kwetsbaar)"
+    c.Ctx.WriteString("<!-- BVWA{4cc3ss_D3n13d_2026} -->")
     c.TplName = "admin/dashboard.tpl"
-    // Als de gebruiker een admin is, zet de sessievariabele
-        if username == "admin" {
-            c.SetSession("is_admin", true)
-        }
-        c.Redirect("/admin", 302)
-    if !c.IsAdmin() {
-        c.Ctx.WriteString("<!-- BVWA{4cc3ss_D3n13d_2026} -->")
-    }
+    
+    c.Redirect("/admin/vulnerable", 302)
+    
 }
 
 // VEILIG: met rolcontrole

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{.Title}}</title>
+
     <link rel="stylesheet" href="/static/css/bvwa.css">
 </head>
 <body>
@@ -12,6 +13,7 @@
     <nav>
         <a href="/">🏠 Home</a>
         <a href="/dashboard">Dashboard</a>
+        <a href="/ctf">🚩 CTF</a>
         <a href="/logout" class="btn-logout">Uitloggen</a>
     </nav>
 </header>
@@ -42,9 +44,24 @@
             <div class="label">Veilige versies</div>
         </div>
         <div class="stat-card">
-            <div class="icon">📚</div>
-            <div class="number">34</div>
-            <div class="label">CWEs gedekt</div>
+            <div class="icon">🚩</div>
+            <div class="number">{{.CTFSolved}}/{{.CTFTotal}}</div>
+            <div class="label">CTF Flags gevonden</div>
+        </div>
+    </div>
+
+    <!-- CTF widget -->
+    <div class="ctf-widget">
+        <div class="ctf-widget-header">
+            <h2>🚩 Capture The Flag — Voortgang</h2>
+            <a href="/ctf">Ga naar CTF →</a>
+        </div>
+        <div class="ctf-progress-row">
+            <div class="ctf-score">{{.CTFSolved}}/{{.CTFTotal}}</div>
+            <div class="ctf-track">
+                <div class="ctf-fill" style="width: {{.CTFPercent}}%"></div>
+            </div>
+            <div class="ctf-label">{{.CTFPercent}}% voltooid</div>
         </div>
     </div>
 

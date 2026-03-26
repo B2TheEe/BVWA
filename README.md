@@ -1,38 +1,83 @@
 # 🔐 BVWA — Beego Vulnerable Web Application
 
-BVWA is een opzettelijk kwetsbare webapplicatie gebouwd met 
+BVWA is een opzettelijk kwetsbare webapplicatie gebouwd met
 het Go Beego framework, gebaseerd op de OWASP Top 10:2025.
-Het doel is om ontwikkelaars en security-studenten te helpen
-beveiligingskwetsbaarheden te begrijpen en te leren verhelpen.
 
-> ⚠️ **WAARSCHUWING:** BVWA is uitsluitend bedoeld voor 
-> educatieve doeleinden. Gebruik het NOOIT in productie 
+> ⚠️ **WAARSCHUWING:** BVWA is uitsluitend bedoeld voor
+> educatieve doeleinden. Gebruik het NOOIT in productie
 > of op een publiek toegankelijke server.
 
 ## 🚀 Installatie
 
-### Vereisten
-- Go 1.21+
+### Optie 1: Docker (aanbevolen)
+
+De eenvoudigste manier om BVWA te draaien — geen Go
+installatie vereist.
+
+#### Vereisten
+- Docker
+- Docker Compose
+
+#### Stappen
+```bash
+# Clone het project
+git clone https://github.com/B2TheEe/BVWA.git
+cd BVWA
+
+# Bouw en start alle containers
+docker-compose up --build
+
+# Of op de achtergrond
+docker-compose up --build -d
+```
+
+Ga naar: `http://localhost:8080`
+
+#### Handige Docker commando's
+```bash
+# Stoppen
+docker-compose down
+
+# Stoppen inclusief database
+docker-compose down -v
+
+# Logs bekijken
+docker-compose logs -f bvwa
+
+# Herbouwen zonder cache
+docker-compose build --no-cache
+```
+
+---
+
+### Optie 2: Lokaal draaien (zonder Docker)
+
+#### Vereisten
+- Go 1.24.2+
 - MySQL 5.7+
 - Beego v2 & bee CLI
 
-### Stappen
+#### Stappen
 ```bash
 # Clone het project
-git clone https://github.com/B2TheEe/bvwa.git
-cd bvwa
+git clone https://github.com/B2TheEe/BVWA.git
+cd BVWA
 
 # Installeer dependencies
 go mod tidy
 
-# Configureer database in conf/app.conf
-# Pas aan: db_user, db_pass, db_name
+# Installeer bee CLI
+go install github.com/beego/bee/v2@latest
+
+# Maak de database aan
+mysql -u root -p
+CREATE DATABASE bvwa;
 
 # Start de applicatie
 bee run
 ```
 
-Ga naar: `http://127.0.0.1:8080`
+Ga naar: `http://localhost:8080`
 
 ## 📋 OWASP Top 10:2025 Modules
 
@@ -51,54 +96,52 @@ Ga naar: `http://127.0.0.1:8080`
 
 ## 🗂️ Projectstructuur
 ```
-bvwa/
+BVWA/
 ├── conf/
-│   └── app.conf          # Applicatieconfiguratie
+│   └── app.conf
 ├── controllers/
-│   ├── access_control.go # A01
-│   ├── security_misconfig.go # A02
-│   ├── supply_chain.go   # A03
-│   ├── crypto.go         # A04
-│   ├── injection.go      # A05
-│   ├── insecure_design.go # A06
-│   ├── auth.go           # A07
-│   ├── integrity.go      # A08
-│   ├── logging.go        # A09
-│   └── exceptions.go     # A10
+│   ├── access_control.go   (A01)
+│   ├── security_misconfig.go (A02)
+│   ├── supply_chain.go     (A03)
+│   ├── crypto.go           (A04)
+│   ├── injection.go        (A05)
+│   ├── insecure_design.go  (A06)
+│   ├── auth.go             (A07)
+│   ├── integrity.go        (A08)
+│   ├── logging.go          (A09)
+│   ├── exceptions.go       (A10)
+│   ├── home.go
+│   └── login.go
 ├── routers/
 │   └── router.go
+├── static/
+│   ├── css/bvwa.css
+│   └── js/modal.js
 ├── views/
-│   ├── home/
-│   ├── admin/
-│   ├── misconfig/
-│   ├── supplychain/
-│   ├── crypto/
-│   ├── injection/
-│   ├── design/
-│   ├── auth/
-│   ├── integrity/
-│   ├── logging/
-│   └── exceptions/
+├── Dockerfile
+├── docker-compose.yml
 ├── main.go
 └── README.md
 ```
 
 ## 🔧 Configuratie
 
-Pas `conf/app.conf` aan:
+### Docker (automatisch via docker-compose.yml)
+Database configuratie wordt automatisch ingesteld.
+
+### Lokaal (`conf/app.conf`)
 ```ini
-appname = bvwa
-httpport = 8080
-runmode = dev
-sessionon = true
+appname     = bvwa
+httpport    = 8080
+runmode     = dev
+sessionon   = true
 sessionname = bvwasession
 
-# Database
-db_user = root
-db_pass = jouwwachtwoord
-db_host = 127.0.0.1
-db_port = 3306
-db_name = bvwa
+db_user     = root
+db_pass     = jouwwachtwoord
+db_host     = 127.0.0.1
+db_port     = 3306
+db_name     = bvwa
 ```
 
 ## 🧪 Test Credentials
@@ -108,31 +151,20 @@ db_name = bvwa
 | admin | password123 | Administrator |
 | user | user123 | Gebruiker |
 
-## 📚 Leerdoelen
-
-Elke module bevat:
-- ✅ Een **kwetsbare** versie om de aanval te demonstreren
-- ✅ Een **veilige** versie met de correcte implementatie
-- ✅ Uitleg over de kwetsbaarheid
-
 ## 🛠️ Technologieën
 
-- **Taal:** Go 1.21+
+- **Taal:** Go 1.24.2+
 - **Framework:** Beego v2
 - **Database:** MySQL
+- **Container:** Docker & Docker Compose
 - **Beveiliging:** bcrypt, HMAC-SHA256
 
 ## ⚖️ Disclaimer
 
-Dit project is uitsluitend voor educatieve doeleinden gemaakt.
-De auteurs zijn niet verantwoordelijk voor misbruik van de
-kennis opgedaan via BVWA. Gebruik altijd in een geïsoleerde,
-lokale testomgeving.
+Dit project is uitsluitend voor educatieve doeleinden.
+De auteurs zijn niet verantwoordelijk voor misbruik.
+Gebruik altijd in een geïsoleerde testomgeving.
 
 ## 📄 Licentie
 
 MIT License — zie LICENSE bestand voor details.
-
-## 🤝 Bijdragen
-
-Pull requests zijn welkom! Zie CONTRIBUTING.md voor richtlijnen.

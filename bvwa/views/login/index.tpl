@@ -11,6 +11,7 @@
     <a href="/" class="logo">🔐 <span>BVWA</span></a>
     <nav>
         <a href="/">🏠 Home</a>
+        <a href="/register">Registreren</a>
     </nav>
 </header>
 
@@ -21,9 +22,11 @@
         <p class="subtitle">Beego Vulnerable Web Application</p>
 
         {{if .Error}}
-        <div class="error-box">
-            ❌ {{.Error}}
-        </div>
+        <div class="error-box">❌ {{.Error}}</div>
+        {{end}}
+
+        {{if .Success}}
+        <div class="success-box">✅ {{.Success}}</div>
         {{end}}
 
         <form method="POST" action="/login">
@@ -40,6 +43,10 @@
                 Inloggen →
             </button>
         </form>
+
+        <div class="register-link">
+            Nog geen account? <a href="/register">Registreer hier</a>
+        </div>
 
         <div class="credentials-hint">
             <strong>🧪 Test credentials:</strong>

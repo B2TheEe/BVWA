@@ -20,3 +20,11 @@ SECURITY: 2026/03/15 16:25:22 [CRITICAL] Mogelijke brute force aanval (3 poginge
 SECURITY: 2026/03/15 16:25:22 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-15 
 SECURITY: 2026/03/17 16:25:22   BVWA{L0g_1nj3ct10n_2026}
 
+SECURITY: 2026/03/22 16:03:00 [WARNING] Mislukte login (poging 1) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-22 16:03:00
+SECURITY: 2026/03/22 16:03:00 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-22 16:03:00
+SECURITY: 2026/03/22 16:03:15 [WARNING] Mislukte login (poging 2) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-22 16:03:15
+SECURITY: 2026/03/22 16:03:15 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-22 16:03:15
+SECURITY: 2026/03/22 16:03:25 [WARNING] Mislukte login (poging 3) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-22 16:03:25
+SECURITY: 2026/03/22 16:03:25 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-22 16:03:25
+SECURITY: 2026/03/22 16:03:25 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-22 16:03:25
+SECURITY: 2026/03/22 16:03:25 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: ::1 | Gebruiker:  | Tijd: 2026-03-22 16:03:25
