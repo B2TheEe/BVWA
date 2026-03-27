@@ -4,7 +4,6 @@ import (
     _ "bvwa/routers"
     "html/template"
     "net/http"
-    "strings"
     "github.com/beego/beego/v2/client/orm"
     beego "github.com/beego/beego/v2/server/web"
     _ "github.com/go-sql-driver/mysql"
@@ -13,7 +12,6 @@ import (
 func init() {
     orm.RegisterDataBase("default", "mysql",
         "user:password@tcp(127.0.0.1:3306)/dbname?charset=utf8")
-    beego.AddFuncMap("contains", strings.Contains)
 }
 
 func main() {

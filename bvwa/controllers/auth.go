@@ -14,6 +14,8 @@ var users = map[string]string{
 var secureUsers = map[string]string{
     // bcrypt hash van "password123"
     "admin": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+    // bcrypt hash van "user123"
+    "user": "$2a$10$CHyCoMnMnFEFKNuGD7dGBuOhRHz6DJRFDk8vczpvg7xQ/oKhH0NN.",
 }
 
 // =====================
@@ -109,7 +111,13 @@ func (c *SecureLoginController) Post() {
     // VEILIG: nieuwe sessie aanmaken na login
     c.DestroySession()
     c.SetSession("user", username)
-    c.SetSession("role", "admin")
+    if username == "admin" {
+        c.SetSession("role", "admin")
+        c.SetSession("user_id", 1)
+    } else {
+        c.SetSession("role", "user")
+        c.SetSession("user_id", 2)
+    }
 
     c.Data["Title"]   = "Login (Veilig)"
     c.Data["Success"] = "Succesvol ingelogd als: " + username

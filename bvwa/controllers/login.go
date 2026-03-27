@@ -100,8 +100,10 @@ func (c *LoginController) Post() {
 
 	if username == "admin" {
 		c.SetSession("role", "admin")
+		c.SetSession("user_id", 1)
 	} else {
 		c.SetSession("role", "user")
+		c.SetSession("user_id", 2)
 	}
 
 	c.Redirect("/dashboard", 302)
