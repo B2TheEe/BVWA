@@ -766,9 +766,7 @@ header nav a:hover { color: #e67e22; }
     color: inherit;
     transition: transform 0.15s, box-shadow 0.15s;
     display: flex;
-    align-items: center;
-    padding: 14px 16px;
-    gap: 12px;
+    flex-direction: column;
 }
 .module-card:hover {
     transform: translateY(-2px);
@@ -887,6 +885,53 @@ header nav a:hover { color: #e67e22; }
     font-size: 12px;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+/* ── CTF-widget op dashboard ── */
+.ctf-widget {
+    background: white;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.ctf-widget-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+.ctf-widget-header h2 { font-size: 16px; color: #2c3e50; }
+.ctf-widget-header a  { font-size: 13px; color: #e67e22; text-decoration: none; font-weight: bold; }
+.ctf-widget-header a:hover { text-decoration: underline; }
+.ctf-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.ctf-score {
+    font-size: 22px;
+    font-weight: bold;
+    color: #e67e22;
+    white-space: nowrap;
+}
+.ctf-track {
+    flex: 1;
+    background: #ecf0f1;
+    border-radius: 20px;
+    height: 14px;
+    overflow: hidden;
+}
+.ctf-fill {
+    height: 100%;
+    background: #e67e22;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+.ctf-label {
+    font-size: 13px;
+    color: #7f8c8d;
+    white-space: nowrap;
 }
 
 /* ── Login-pagina ── */
