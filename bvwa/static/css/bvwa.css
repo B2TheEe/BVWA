@@ -765,6 +765,10 @@ header nav a:hover { color: #e67e22; }
     text-decoration: none;
     color: inherit;
     transition: transform 0.15s, box-shadow 0.15s;
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    gap: 12px;
 }
 .module-card:hover {
     transform: translateY(-2px);
