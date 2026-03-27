@@ -9,7 +9,7 @@ var knownFlags = map[string]string{
 	"BVWA{D3sign_Fl4w_2026}":     "Insecure Design — Debug endpoint",
 	"BVWA{1nt3gr1ty_Ch3ck_2026}": "Data Integrity — Upload",
 	"BVWA{Brute_F0rc3_2026}":     "Auth — Brute force",
-	"BVWA{M1scC0nf1g_D1r_2026}":  "Misconfiguratie — secret.txt",
+	"BVWA{M1scC0nf1g_D1r_2026}":  "Misconfiguratie — Debug Console",
 }
 
 type CTFController struct {
@@ -45,7 +45,7 @@ func (c *CTFController) Get() {
 		{"flag": "BVWA{D3sign_Fl4w_2026}", "name": "Insecure Design — Debug endpoint", "hint": "Is er een verborgen API-endpoint?"},
 		{"flag": "BVWA{1nt3gr1ty_Ch3ck_2026}", "name": "Data Integrity — Upload", "hint": "Upload een onverwacht bestandstype"},
 		{"flag": "BVWA{Brute_F0rc3_2026}", "name": "Auth — Brute force", "hint": "Probeer meer dan 10 keer in te loggen"},
-		{"flag": "BVWA{M1scC0nf1g_D1r_2026}", "name": "Misconfiguratie — Bestand", "hint": "Zijn er openbare statische bestanden?"},
+		{"flag": "BVWA{M1scC0nf1g_D1r_2026}", "name": "Misconfiguratie — Debug Console", "hint": "Kijk naar blootgestelde endpoints en openbare bestanden"},
 	}
 
 	c.Data["Title"]       = "CTF — Scorebord"
