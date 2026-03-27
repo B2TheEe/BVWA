@@ -10,6 +10,7 @@ var knownFlags = map[string]string{
 	"BVWA{1nt3gr1ty_Ch3ck_2026}": "Data Integrity — Upload",
 	"BVWA{Brute_F0rc3_2026}":     "Auth — Brute force",
 	"BVWA{M1scC0nf1g_D1r_2026}":  "Misconfiguratie — Debug Console",
+	"BVWA{Supp1y_Ch41n_2026}":    "Supply Chain — Tampered Package",
 }
 
 type CTFController struct {
@@ -46,6 +47,7 @@ func (c *CTFController) Get() {
 		{"flag": "BVWA{1nt3gr1ty_Ch3ck_2026}", "name": "Data Integrity — Upload", "hint": "Upload een onverwacht bestandstype"},
 		{"flag": "BVWA{Brute_F0rc3_2026}", "name": "Auth — Brute force", "hint": "Probeer meer dan 10 keer in te loggen"},
 		{"flag": "BVWA{M1scC0nf1g_D1r_2026}", "name": "Misconfiguratie — Debug Console", "hint": "Kijk naar blootgestelde endpoints en openbare bestanden"},
+		{"flag": "BVWA{Supp1y_Ch41n_2026}", "name": "Supply Chain — Tampered Package", "hint": "Probeer een package te installeren via de kwetsbare package manager"},
 	}
 
 	c.Data["Title"]       = "CTF — Scorebord"
