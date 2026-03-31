@@ -5,6 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{.Title}} - BVWA</title>
     <link rel="stylesheet" href="/static/css/bvwa.css">
+    <style>
+        .employee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+        .employee-table th {
+            background: #2c3e50;
+            color: #fff;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        .employee-table td {
+            padding: 7px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .employee-table tr:nth-child(even) td {
+            background: #f8f9fa;
+        }
+        .employee-table tr.hidden-row td {
+            background: #fdecea;
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .injection-banner {
+            background: #c0392b;
+            color: #fff;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .query-display {
+            background: #1e1e1e;
+            color: #f8f8f2;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-family: monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 8px 0;
+            word-break: break-all;
+        }
+    </style>
 </head>
 <body>
 
@@ -30,7 +76,7 @@
 
     <div class="module-header">
         <span class="badge">A05</span>
-        <h1>Injection — SQL</h1>
+        <h1>MegaCorp Medewerkersdirectory</h1>
         <button type="button" class="btn-info" id="openInfoBtn">
             Info &amp; CWEs
         </button>
@@ -64,29 +110,25 @@
                     Gebruikersinput wordt <strong>direct in de
                     SQL-query</strong> geplakt via string
                     concatenatie. Een aanvaller kan de query
-                    manipuleren.
+                    manipuleren en toegang krijgen tot data
+                    buiten de bedoelde scope.
                 </p>
 
                 <div class="code-block">
 <span class="ccmt">// KWETSBAAR: string concatenatie</span>
 query := fmt.Sprintf(
-    <span class="cstr">"SELECT * FROM users WHERE username='%s'"</span>,
-    username) <span class="ccmt">// gevaarlijk!</span>
+    <span class="cstr">"SELECT ... FROM employees WHERE name LIKE '%%%s%%'"</span>,
+    name) <span class="ccmt">// naam direct ingeplakt — gevaarlijk!</span>
                 </div>
-
-                <p style="font-size:13px; color:#e74c3c; font-weight:bold;">
-                    Probeer payload: <code>' OR '1'='1</code>
-                </p>
 
                 <form method="GET" action="/injection/sql/vulnerable">
                     <div class="input-group">
-                        <label>Gebruikersnaam:</label>
-                        <input type="text" name="username"
-                               value="{{.Username}}"
-                               placeholder="' OR '1'='1">
+                        <label>Zoek medewerker op naam:</label>
+                        <input type="text" name="name"
+                               value="{{.Name}}"
+                               placeholder="Bijv. alice">
                     </div>
-                    <button type="submit"
-                            class="btn-submit red">
+                    <button type="submit" class="btn-submit red">
                         Zoeken (kwetsbaar)
                     </button>
                 </form>
@@ -107,23 +149,18 @@ query := fmt.Sprintf(
                 <div class="code-block">
 <span class="ccmt">// VEILIG: geparametriseerde query</span>
 o.Raw(
-    <span class="cstr">"SELECT * FROM users WHERE username = ?"</span>,
-    username).Values(&amp;result)
+    <span class="cstr">"SELECT ... FROM employees WHERE name LIKE ?"</span>,
+    "%"+name+"%").Values(&amp;result)
                 </div>
-
-                <p style="font-size:13px; color:#27ae60; font-weight:bold;">
-                    Payload wordt als tekst behandeld, niet als SQL.
-                </p>
 
                 <form method="GET" action="/injection/sql/secure">
                     <div class="input-group">
-                        <label>Gebruikersnaam:</label>
-                        <input type="text" name="username"
-                               value="{{.Username}}"
-                               placeholder="admin">
+                        <label>Zoek medewerker op naam:</label>
+                        <input type="text" name="name"
+                               value="{{.Name}}"
+                               placeholder="Bijv. alice">
                     </div>
-                    <button type="submit"
-                            class="btn-submit green">
+                    <button type="submit" class="btn-submit green">
                         Zoeken (veilig)
                     </button>
                 </form>
@@ -133,67 +170,67 @@ o.Raw(
     </div>
 
     <!-- Result box -->
-<div class="result-box">
-    <h3>Resultaat voor: <strong>{{.Title}}</strong></h3>
+    <div class="result-box">
+        <h3>
+            {{if eq .Title "SQL Injection (Kwetsbaar)"}}
+            <span class="tag-vuln">KWETSBAAR</span>
+            {{else}}
+            <span class="tag-safe">VEILIG</span>
+            {{end}}
+            Resultaat &mdash; MegaCorp Medewerkersdirectory
+        </h3>
 
-    {{if eq .Title "SQL Injection (Kwetsbaar)"}}
-    <span class="tag-vuln">KWETSBAAR</span>
-    {{if .Query}}
-    <p>Uitgevoerde query:</p>
-    <div class="query-display">{{.Query}}</div>
+        {{if .Name}}
 
-    {{if .Result}}
-    <p style="margin-top:10px;"><strong>Resultaat:</strong></p>
-    <div style="background:#fdecea; border:1px solid #e74c3c;
-                border-radius:6px; padding:12px; margin-top:6px;
-                font-size:14px; color:#c0392b;">
-        {{.Result}}
+        {{if .Query}}
+        <p style="font-size:13px; color:#888; margin-bottom:4px;">Uitgevoerde query:</p>
+        <div class="query-display">{{.Query}}</div>
+        {{end}}
+
+        {{if .Injected}}
+        <div class="injection-banner">
+            SQL injection geslaagd &mdash; WHERE-conditie omzeild, alle records teruggegeven
+        </div>
+        {{end}}
+
+        {{if .Results}}
+        <table class="employee-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Naam</th>
+                    <th>Afdeling</th>
+                    <th>Functie</th>
+                    <th>E-mail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .Results}}
+                <tr {{if eq .ID 0}}class="hidden-row"{{end}}>
+                    <td>{{.ID}}</td>
+                    <td>{{.Name}}</td>
+                    <td>{{.Department}}</td>
+                    <td>{{.Role}}</td>
+                    <td>{{.Email}}</td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+        {{else}}
+        <p style="color:#888; font-style:italic; margin-top:10px;">
+            Geen medewerkers gevonden voor &ldquo;{{.Name}}&rdquo;.
+        </p>
+        {{end}}
+
+        {{else}}
+        <p style="color:#888;">Voer een naam in om de directory te doorzoeken.</p>
+        {{end}}
+
+        <div class="tip">
+            Tip: Gebruik altijd geparametriseerde queries of een ORM.
+            Vergelijk de resultaten tussen de kwetsbare en veilige versie.
+        </div>
     </div>
-    {{end}}
-
-    <p style="margin-top:10px; color:#e74c3c; font-size:13px;">
-        Let op: payload <code>' OR '1'='1</code> geeft alle
-        records terug!
-    </p>
-    {{else}}
-    <p>Voer een gebruikersnaam in om de kwetsbaarheid te testen.</p>
-    <p style="font-size:13px; color:#888; margin-top:6px;">
-        Geldige gebruikers: admin, user, alice, bob
-    </p>
-    {{end}}
-
-    {{else}}
-    <span class="tag-safe">VEILIG</span>
-    {{if .Query}}
-    <p>Uitgevoerde query (geparametriseerd):</p>
-    <div class="query-display">{{.Query}}</div>
-
-    {{if .Result}}
-    <p style="margin-top:10px;"><strong>Resultaat:</strong></p>
-    <div style="background:#eafaf1; border:1px solid #27ae60;
-                border-radius:6px; padding:12px; margin-top:6px;
-                font-size:14px; color:#1e8449;">
-        {{.Result}}
-    </div>
-    {{end}}
-
-    {{else}}
-    <p>
-        De geparametriseerde query beschermt tegen SQL injection.
-        Input wordt als tekst behandeld, nooit als SQL-code.
-    </p>
-    <p style="font-size:13px; color:#888; margin-top:6px;">
-        Geldige gebruikers: admin, user, alice, bob
-    </p>
-    {{end}}
-    {{end}}
-
-    <div class="tip">
-        Tip: Gebruik altijd geparametriseerde queries of een ORM.
-        Probeer payload <code>' OR '1'='1</code> op beide versies
-        om het verschil te zien.
-    </div>
-</div>
 
 </div>
 
@@ -295,33 +332,8 @@ o.Raw(
                 <span class="cwe-tag">CWE-75 Failure to Sanitize Special Elements</span>
                 <span class="cwe-tag">CWE-77 Command Injection</span>
                 <span class="cwe-tag">CWE-78 OS Command Injection</span>
-                <span class="cwe-tag">CWE-79 Cross-site Scripting (XSS)</span>
-                <span class="cwe-tag">CWE-80 Basic XSS</span>
-                <span class="cwe-tag">CWE-83 Improper Neutralization in Attributes</span>
-                <span class="cwe-tag">CWE-87 Improper Neutralization of Script Syntax</span>
-                <span class="cwe-tag">CWE-88 Argument Injection</span>
                 <span class="cwe-tag">CWE-89 SQL Injection</span>
                 <span class="cwe-tag">CWE-90 LDAP Injection</span>
-                <span class="cwe-tag">CWE-91 XML Injection</span>
-                <span class="cwe-tag">CWE-93 CRLF Injection</span>
-                <span class="cwe-tag">CWE-94 Code Injection</span>
-                <span class="cwe-tag">CWE-95 Eval Injection</span>
-                <span class="cwe-tag">CWE-96 Static Code Injection</span>
-                <span class="cwe-tag">CWE-97 Server-Side Include Injection</span>
-                <span class="cwe-tag">CWE-98 PHP File Inclusion</span>
-                <span class="cwe-tag">CWE-99 Resource Injection</span>
-                <span class="cwe-tag">CWE-100 Deprecated: Was catch-all</span>
-                <span class="cwe-tag">CWE-113 HTTP Response Splitting</span>
-                <span class="cwe-tag">CWE-116 Improper Encoding/Escaping</span>
-                <span class="cwe-tag">CWE-138 Improper Neutralization</span>
-                <span class="cwe-tag">CWE-184 Incomplete List of Disallowed Inputs</span>
-                <span class="cwe-tag">CWE-470 Use of Externally-Controlled Input</span>
-                <span class="cwe-tag">CWE-564 SQL Injection via Hibernate</span>
-                <span class="cwe-tag">CWE-610 Externally Controlled Reference</span>
-                <span class="cwe-tag">CWE-643 XPath Injection</span>
-                <span class="cwe-tag">CWE-644 Improper Neutralization of HTTP Headers</span>
-                <span class="cwe-tag">CWE-652 XQuery Injection</span>
-                <span class="cwe-tag">CWE-917 Expression Language Injection</span>
             </div>
         </div>
         <hr>
@@ -332,19 +344,17 @@ o.Raw(
                 De kwetsbare versie gebruikt
                 <strong>string concatenatie</strong> (CWE-89):
                 <ul>
-                    <li><strong>Directe input in query:</strong>
-                        <code>' OR '1'='1</code> maakt de WHERE
-                        conditie altijd waar</li>
+                    <li><strong>WHERE omzeild:</strong>
+                        speciale tekens breken de querystructuur open</li>
                     <li><strong>Alle records blootgesteld:</strong>
-                        aanvaller krijgt toegang tot volledige
-                        gebruikerstabel</li>
-                    <li><strong>Data manipulatie:</strong> met
-                        <code>; DROP TABLE users; --</code>
-                        kan een tabel verwijderd worden</li>
+                        aanvaller krijgt toegang tot de volledige tabel</li>
+                    <li><strong>Verborgen accounts:</strong>
+                        systeemaccounts die normaal onzichtbaar zijn
+                        worden teruggegeven</li>
+                    <li><strong>Data manipulatie:</strong>
+                        stacked queries kunnen data wijzigen of verwijderen</li>
                     <li><strong>Authenticatie bypass:</strong>
                         inloggen zonder geldig wachtwoord</li>
-                    <li><strong>Blind SQL injection:</strong>
-                        via timing attacks data uitlezen</li>
                 </ul>
             </div>
         </div>
@@ -368,8 +378,6 @@ o.Raw(
                     <li><strong>Type checking:</strong>
                         parameters worden als correct type
                         doorgegeven</li>
-                    <li>Payload <code>' OR '1'='1</code>
-                        wordt letterlijk gezocht als username</li>
                 </ul>
             </div>
         </div>
@@ -383,8 +391,6 @@ o.Raw(
                 Gebruik het principe van least privilege voor
                 database accounts. Implementeer WAF (Web
                 Application Firewall) als extra laag.
-                Gebruik prepared statements in alle database
-                interacties.
             </p>
         </div>
 
@@ -395,8 +401,6 @@ o.Raw(
     BVWA is uitsluitend bedoeld voor educatieve doeleinden -
     gebruik alleen in een geisoleerde testomgeving.
 </footer>
-
-
 
 <script type="text/javascript" src="/static/js/modal.js"></script>
 

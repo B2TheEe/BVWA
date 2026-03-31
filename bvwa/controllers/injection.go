@@ -1,140 +1,179 @@
 package controllers
 
 import (
-    "fmt"
-    "html"
-    beego "github.com/beego/beego/v2/server/web"
+	"fmt"
+	"html"
+	"strings"
+
+	beego "github.com/beego/beego/v2/server/web"
 )
 
-// Gesimuleerde gebruikersdatabase
-var fakeUsers = map[string]string{
-    "admin":    "Administrator",
-    "user":     "Gewone gebruiker",
-    "alice":    "Alice Jansen",
-    "bob":      "Bob de Vries",
+// Employee vertegenwoordigt een medewerker in de MegaCorp-directory.
+type Employee struct {
+	ID         int
+	Name       string
+	Department string
+	Role       string
+	Email      string
+}
+
+// employeeDB simuleert een bedrijfsdirectory van MegaCorp.
+var employeeDB = []Employee{
+	{1, "Sven Bakker",  "IT",      "System Administrator", "s.bakker@megacorp.nl"},
+	{2, "Alice Jansen", "Finance", "Senior Accountant",    "a.jansen@megacorp.nl"},
+	{3, "Bob de Vries", "HR",      "HR Manager",           "b.devries@megacorp.nl"},
+	{4, "Carol Peters", "IT",      "Software Developer",   "c.peters@megacorp.nl"},
+	{5, "Dave Smit",    "Sales",   "Account Manager",      "d.smit@megacorp.nl"},
+}
+
+// hiddenRecord simuleert een beheerdersaccount dat nooit via normaal gebruik
+// zichtbaar is — maar wél via SQL injection wordt blootgesteld.
+var hiddenRecord = Employee{
+	ID:         0,
+	Name:       "db_admin",
+	Department: "SYSTEM",
+	Role:       "Database Root Account",
+	Email:      "BVWA{SQLi_D1r3ct0ry_2026}",
+}
+
+// isInjectionAttempt herkent veelgebruikte SQL-injectietechnieken.
+func isInjectionAttempt(input string) bool {
+	lower := strings.ToLower(strings.TrimSpace(input))
+	patterns := []string{
+		"' or ",
+		"'or ",
+		" or '",
+		"or 1=1",
+		"' or'",
+		"1=1",
+		"--",
+		"union select",
+		"union all",
+		"'; ",
+		"';",
+		"sleep(",
+		"benchmark(",
+		"waitfor",
+	}
+	for _, p := range patterns {
+		if strings.Contains(lower, p) {
+			return true
+		}
+	}
+	return false
 }
 
 // =====================
 // SQL INJECTION
 // =====================
 
-// KWETSBAAR: directe string concatenatie
+// VulnerableSQLController simuleert de kwetsbare medewerkerszoekopdracht
+// waarbij gebruikersinput direct in de SQL-query wordt geconcateneerd.
 type VulnerableSQLController struct {
-    beego.Controller
+	beego.Controller
 }
 
 func (c *VulnerableSQLController) Get() {
-    username := c.GetString("username")
+	name := c.GetString("name")
 
-    // KWETSBAAR: input direct in query — SQL injection mogelijk!
-    query := ""
-    result := ""
+	query := ""
+	var results []Employee
+	injected := false
 
-    if username != "" {
-        query = fmt.Sprintf(
-            "SELECT * FROM users WHERE username='%s'",
-            username)
+	if name != "" {
+		// KWETSBAAR: input direct geconcateneerd in de query
+		query = fmt.Sprintf(
+			"SELECT id, name, department, role, email FROM employees WHERE name LIKE '%%%s%%'",
+			name)
 
-        // Simuleer wat een echte DB zou doen met de payload
-        // ' OR '1'='1 geeft toegang tot alle records
-        if username == "' OR '1'='1" ||
-            username == "' OR 1=1--" ||
-            username == "' OR '1'='1'--" {
-            result = "ALLE gebruikers teruggegeven: " +
-                "admin, user, alice, bob " +
-                "(SQL injection geslaagd!)"
-        } else if name, ok := fakeUsers[username]; ok {
-            result = fmt.Sprintf(
-                "Gebruiker gevonden: %s", name)
-        } else {
-            result = "Geen gebruiker gevonden <!-- BVWA{SQLi_Un10n_2026} -->"
-        }
-    }
+		if isInjectionAttempt(name) {
+			// Injectie geslaagd: WHERE-conditie omzeild, alle records teruggegeven
+			injected = true
+			results = append(append([]Employee{}, employeeDB...), hiddenRecord)
+		} else {
+			lower := strings.ToLower(name)
+			for _, emp := range employeeDB {
+				if strings.Contains(strings.ToLower(emp.Name), lower) {
+					results = append(results, emp)
+				}
+			}
+		}
+	}
 
-
-
-    c.Data["Title"]    = "SQL Injection (Kwetsbaar)"
-    c.Data["Username"] = username
-    c.Data["Query"]    = query
-    c.Data["Result"]   = result
-    c.Data["Warning"]  = "Directe string concatenatie - gevaarlijk!"
-    c.TplName = "injection/sql.tpl"
+	c.Ctx.ResponseWriter.Header().Set("X-CTF-Flag", "BVWA{SQLi_D1r3ct0ry_2026}")
+	c.Data["Title"]    = "SQL Injection (Kwetsbaar)"
+	c.Data["Name"]     = name
+	c.Data["Query"]    = query
+	c.Data["Results"]  = results
+	c.Data["Injected"] = injected
+	c.TplName = "injection/sql.tpl"
 }
 
-// VEILIG: gesimuleerde geparametriseerde query
+// SecureSQLController gebruikt een geparametriseerde query; injectie is onmogelijk.
 type SecureSQLController struct {
-    beego.Controller
+	beego.Controller
 }
 
 func (c *SecureSQLController) Get() {
-    username := c.GetString("username")
+	name := c.GetString("name")
 
-    result := ""
-    query  := ""
+	query := ""
+	var results []Employee
 
-    if username != "" {
-        // VEILIG: parameter gescheiden van query
-        // Simuleer geparametriseerde query
-        query = fmt.Sprintf(
-            "SELECT * FROM users WHERE username = ? "+
-                "[parameter: '%s']",
-            username)
+	if name != "" {
+		// VEILIG: input als parameter, nooit als SQL-code uitgevoerd
+		query = fmt.Sprintf(
+			"SELECT id, name, department, role, email FROM employees WHERE name LIKE ? [parameter: '%%%s%%']",
+			name)
 
-        // Input wordt als letterlijke tekst behandeld
-        // ' OR '1'='1 wordt gezocht als gebruikersnaam
-        // — niet als SQL-code uitgevoerd
-        if name, ok := fakeUsers[username]; ok {
-            result = fmt.Sprintf(
-                "Gebruiker gevonden: %s", name)
-        } else {
-            // SQL injection payloads worden als tekst behandeld
-            result = fmt.Sprintf(
-                "Geen gebruiker gevonden voor: '%s' "+
-                    "(input behandeld als tekst, niet als SQL)",
-                username)
-        }
-    }
+		// Injectie-payloads worden als letterlijke zoektermen behandeld — geen match
+		lower := strings.ToLower(name)
+		for _, emp := range employeeDB {
+			if strings.Contains(strings.ToLower(emp.Name), lower) {
+				results = append(results, emp)
+			}
+		}
+	}
 
-    c.Data["Title"]    = "SQL Injection (Veilig)"
-    c.Data["Username"] = username
-    c.Data["Query"]    = query
-    c.Data["Result"]   = result
-    c.Data["Info"]     = "Geparametriseerde query - veilig!"
-    c.TplName = "injection/sql.tpl"
+	c.Data["Title"]    = "SQL Injection (Veilig)"
+	c.Data["Name"]     = name
+	c.Data["Query"]    = query
+	c.Data["Results"]  = results
+	c.Data["Injected"] = false
+	c.TplName = "injection/sql.tpl"
 }
 
 // =====================
 // XSS INJECTION
 // =====================
 
-// KWETSBAAR: raw HTML output
+// VulnerableXSSController — zoekterm wordt als raw HTML teruggegeven.
 type VulnerableXSSController struct {
-    beego.Controller
+	beego.Controller
 }
 
 func (c *VulnerableXSSController) Get() {
-    input := c.GetString("input")
+	input := c.GetString("q")
 
-    c.Data["Title"]    = "XSS Injection (Kwetsbaar)"
-    c.Data["RawInput"] = input
-    c.Data["Warning"]  = "Input wordt ongesaniteerd weergegeven!"
-    c.TplName = "injection/xss.tpl"
+	c.Ctx.ResponseWriter.Header().Set("X-CTF-Flag", "BVWA{XSS_R3fl3ct3d_2026}")
+	c.Data["Title"]    = "XSS Injection (Kwetsbaar)"
+	c.Data["RawInput"] = input
+	c.Data["Warning"]  = "Zoekterm wordt ongesaniteerd weergegeven!"
+	c.TplName = "injection/xss.tpl"
 }
 
-// VEILIG: input wordt geescaped
+// SecureXSSController — zoekterm wordt geescaped weergegeven.
 type SecureXSSController struct {
-    beego.Controller
+	beego.Controller
 }
 
 func (c *SecureXSSController) Get() {
-    input := c.GetString("input")
+	input := c.GetString("q")
+	escaped := html.EscapeString(input)
 
-    // Laat zien wat escaping doet
-    escaped := html.EscapeString(input)
-
-    c.Data["Title"]      = "XSS Injection (Veilig)"
-    c.Data["SafeInput"]  = input
-    c.Data["Escaped"]    = escaped
-    c.Data["Info"]       = "Input wordt automatisch geescaped!"
-    c.TplName = "injection/xss.tpl"
+	c.Data["Title"]     = "XSS Injection (Veilig)"
+	c.Data["SafeInput"] = input
+	c.Data["Escaped"]   = escaped
+	c.Data["Info"]      = "Zoekterm wordt automatisch geescaped!"
+	c.TplName = "injection/xss.tpl"
 }
