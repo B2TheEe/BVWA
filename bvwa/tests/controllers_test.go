@@ -219,20 +219,16 @@ func TestSecureAuth_JuisteCredentials(t *testing.T) {
 
 // ─── A09: Security Logging & Alerting ─────────────────────
 func TestSecureLogging_MislukteLogin_WordtGelogd(t *testing.T) {
-	for i := 0; i < 4; i++ {
-		body := strings.NewReader("username=admin&password=fout")
-		r, _ := http.NewRequest("POST", "/logging/secure", body)
-		r.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-		r.RemoteAddr = "10.0.0.1:12345"
-		w := httptest.NewRecorder()
-		beego.BeeApp.Handlers.ServeHTTP(w, r)
+	controllers.ResetA09Logs()
+	r, _ := http.NewRequest("GET", "/logging/secure?cmd=login+admin+fout", nil)
+	w := httptest.NewRecorder()
+	beego.BeeApp.Handlers.ServeHTTP(w, r)
 
-		respBody := w.Body.String()
-		if i >= 3 {
-			if strings.Contains(respBody, "geblokkeerd") || strings.Contains(respBody, "pogingen") {
-				t.Logf("A09 Veilig: rate limit actief na poging %d", i+1)
-			}
-		}
+	if w.Code != http.StatusOK {
+		t.Errorf("[A09 Veilig] Verwacht 200, kreeg %d", w.Code)
+	}
+	if strings.Contains(w.Body.String(), "BVWA{S3ns1tive_L0g_2026}") {
+		t.Error("[A09 Veilig] CTF flag mag niet zichtbaar zijn in veilige versie")
 	}
 	t.Log("A09 Veilig: logging en alerting getest via HTTP")
 }
