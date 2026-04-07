@@ -1,140 +1,252 @@
 package controllers
 
 import (
-    "golang.org/x/crypto/bcrypt"
-    beego "github.com/beego/beego/v2/server/web"
+	"fmt"
+	"strings"
+
+	"golang.org/x/crypto/bcrypt"
+	beego "github.com/beego/beego/v2/server/web"
 )
 
-// Gesimuleerde gebruikersdatabase
-var users = map[string]string{
-    "admin": "password123", // KWETSBAAR: plaintext opgeslagen
+// ── A07: Authentication Failures ──────────────────────────────────────────────
+//
+// Scenario: bvwa-auth — corporate authentication gateway van BVWA Corp.
+// Kwetsbaar: plaintext-wachtwoorden (CWE-256), user enumeration via verschillende
+//            foutmeldingen (CWE-204), geen rate limiting (CWE-307),
+//            voorspelbaar sessietoken (CWE-330).
+// Veilig:    bcrypt, generieke foutmelding, rate limiting (max 5/IP), random token.
+
+const (
+	// authCTFFlag wordt getoond bij een succesvolle login op de kwetsbare versie.
+	authCTFFlag = "BVWA{Brute_F0rc3_2026}"
+
+	// authMaxAttempts is het maximale aantal loginpogingen per IP (veilige versie).
+	authMaxAttempts = 5
+
+	// authPredictableToken is het voorspelbare sessietoken (kwetsbare versie — CWE-330).
+	authPredictableToken = "sess_00042"
+
+	// authSecureTokenDemo is het willekeurige sessietoken (ter illustratie).
+	authSecureTokenDemo = "e3b0c44298fc1c149afb4c8996fb924"
+)
+
+// a07VulnUsers: gebruikers met zwakke plaintext-wachtwoorden (CWE-256).
+var a07VulnUsers = map[string]string{
+	"admin":   "admin123",
+	"support": "support",
+	"backup":  "backup2026",
 }
 
-// Veilige gebruikersdatabase met bcrypt hashes
-var secureUsers = map[string]string{
-    // bcrypt hash van "password123"
-    "admin": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
-    // bcrypt hash van "user123"
-    "user": "$2a$10$CHyCoMnMnFEFKNuGD7dGBuOhRHz6DJRFDk8vczpvg7xQ/oKhH0NN.",
+// a07SecureHashes: bcrypt-hashes van dezelfde wachtwoorden (MinCost voor snelheid).
+var a07SecureHashes map[string]string
+
+func init() {
+	a07SecureHashes = make(map[string]string)
+	for user, pass := range a07VulnUsers {
+		hash, _ := bcrypt.GenerateFromPassword([]byte(pass), bcrypt.MinCost)
+		a07SecureHashes[user] = string(hash)
+	}
 }
 
-// =====================
-// KWETSBAAR: geen brute-force bescherming, plaintext wachtwoord
-// =====================
+// a07Attempts houdt het aantal mislukte pogingen per IP bij (veilige versie).
+var a07Attempts = map[string]int{}
+
+// ResetA07Attempts wist de pogingen-teller — enkel voor gebruik in tests.
+func ResetA07Attempts() {
+	a07Attempts = map[string]int{}
+}
+
+// ── Kwetsbaar ─────────────────────────────────────────────────────────────────
+
+// VulnerableLoginController — geen rate limiting, user enumeration, plaintext.
 type VulnerableLoginController struct {
-    beego.Controller
+	beego.Controller
 }
 
 func (c *VulnerableLoginController) Get() {
-    c.Data["Title"] = "Login (Kwetsbaar)"
-    c.TplName = "auth/login.tpl"
+	cmd := c.GetString("cmd")
+	var output string
+	var hasOutput bool
+
+	if cmd != "" {
+		hasOutput = true
+		var flagHit bool
+		output, flagHit = authVulnProcess(cmd)
+		if flagHit {
+			c.Ctx.ResponseWriter.Header().Set("X-CTF-Flag", authCTFFlag)
+		}
+	}
+
+	c.Data["Command"] = cmd
+	c.Data["Output"] = output
+	c.Data["HasOutput"] = hasOutput
+	c.TplName = "auth/vulnerable.tpl"
 }
 
-func (c *VulnerableLoginController) Post() {
-    username := c.GetString("username")
-    password := c.GetString("password")
+func authVulnProcess(cmd string) (string, bool) {
+	parts := strings.Fields(cmd)
+	if len(parts) == 0 {
+		return "bvwa-auth: geen opdracht opgegeven", false
+	}
 
-    // KWETSBAAR: plaintext vergelijking, geen rate limiting
-    storedPassword, exists := users[username]
-    if exists && storedPassword == password {
-        // KWETSBAAR: sessie-ID wordt niet vernieuwd na login
-        c.SetSession("user", username)
-        c.Data["Title"]   = "Login (Kwetsbaar)"
-        c.Data["Success"] = "Ingelogd als: " + username
-        c.Data["Warning"] = "Geen rate limiting, plaintext wachtwoord!"
-    } else {
-        c.Data["Title"]   = "Login (Kwetsbaar)"
-        c.Data["Error"]   = "Ongeldige inloggegevens"
-        // KWETSBAAR: geeft te veel info terug aan aanvaller
-        c.Data["Warning"] = "Gebruiker bestaat " +
-            map[bool]string{true: "wel", false: "niet"}[exists]
-    }
-    c.TplName = "auth/login.tpl"
+	switch parts[0] {
+	case "help":
+		return "bvwa-auth v1.0.0  --  beschikbare opdrachten:\n" +
+			"  login <gebruiker> <wachtwoord>  authenticeer als gebruiker\n" +
+			"  enum <gebruiker>                controleer of gebruiker bestaat\n" +
+			"  session                         toon sessie-informatie", false
+
+	case "login":
+		if len(parts) < 3 {
+			return "Gebruik: login <gebruiker> <wachtwoord>", false
+		}
+		user := parts[1]
+		pass := strings.Join(parts[2:], " ")
+
+		stored, exists := a07VulnUsers[user]
+		if !exists {
+			// KWETSBAARHEID (CWE-204): andere foutmelding onthult dat de gebruiker NIET bestaat.
+			return fmt.Sprintf("Authenticatie mislukt: gebruiker '%s' bestaat niet.", user), false
+		}
+		if stored != pass {
+			// KWETSBAARHEID (CWE-204): andere foutmelding onthult dat de gebruiker WEL bestaat.
+			return fmt.Sprintf("Authenticatie mislukt: onjuist wachtwoord voor '%s'.", user), false
+		}
+
+		roles := map[string]string{
+			"admin": "administrator", "support": "helpdesk", "backup": "operator",
+		}
+		return fmt.Sprintf(
+			"Authenticatie geslaagd.\n"+
+				"  Gebruiker:   %s\n"+
+				"  Rol:         %s\n"+
+				"  Sessietoken: %s\n\n"+
+				"Toegangsverslag: %s",
+			user, roles[user], authPredictableToken, authCTFFlag), true
+
+	case "enum":
+		if len(parts) < 2 {
+			return "Gebruik: enum <gebruiker>", false
+		}
+		user := parts[1]
+		// KWETSBAARHEID (CWE-203): expliciet user-enumeration endpoint.
+		if _, exists := a07VulnUsers[user]; exists {
+			return fmt.Sprintf("Gebruiker '%s': BESTAAT", user), false
+		}
+		return fmt.Sprintf("Gebruiker '%s': NIET GEVONDEN", user), false
+
+	case "session":
+		return fmt.Sprintf(
+			"Sessie-informatie:\n"+
+				"  Token:  %s\n"+
+				"  Type:   sequentieel (voorspelbaar)\n"+
+				"  Notitie: volgende sessie krijgt waarschijnlijk 'sess_00043'",
+			authPredictableToken), false
+
+	default:
+		return fmt.Sprintf(
+			"bvwa-auth: opdracht niet gevonden: '%s'\n"+
+				"Gebruik 'help' voor een overzicht",
+			parts[0]), false
+	}
 }
 
-// =====================
-// VEILIG: bcrypt, rate limiting, sessie-beheer
-// =====================
+// ── Veilig ────────────────────────────────────────────────────────────────────
 
-// Bijhouden van mislukte pogingen per IP
-var loginAttempts = map[string]int{}
-const maxAttempts = 5
-
+// SecureLoginController — bcrypt, rate limiting per IP, generieke foutmeldingen.
 type SecureLoginController struct {
-    beego.Controller
+	beego.Controller
 }
 
 func (c *SecureLoginController) Get() {
-    c.Data["Title"] = "Login (Veilig)"
-    c.TplName = "auth/login.tpl"
+	cmd := c.GetString("cmd")
+	ip := c.Ctx.Input.IP()
+	var output string
+	var hasOutput bool
+
+	if cmd != "" {
+		hasOutput = true
+		output = authSecureProcess(cmd, ip)
+	}
+
+	c.Data["Command"] = cmd
+	c.Data["Output"] = output
+	c.Data["HasOutput"] = hasOutput
+	c.TplName = "auth/secure.tpl"
 }
 
-func (c *SecureLoginController) Post() {
-    username := c.GetString("username")
-    password := c.GetString("password")
-    ip       := c.Ctx.Input.IP()
+func authSecureProcess(cmd, ip string) string {
+	parts := strings.Fields(cmd)
+	if len(parts) == 0 {
+		return "bvwa-auth: geen opdracht opgegeven"
+	}
 
-    // VEILIG: rate limiting op IP
-    if loginAttempts[ip] >= maxAttempts {
-        c.Data["Title"]   = "Login (Veilig)"
-        c.Data["Error"]   = "Te veel mislukte pogingen. " +
-                            "Account tijdelijk geblokkeerd."
-        c.TplName = "auth/login.tpl"
-        return
-    }
+	switch parts[0] {
+	case "help":
+		return "bvwa-auth v2.0.0  --  beschikbare opdrachten:\n" +
+			"  login <gebruiker> <wachtwoord>  authenticeer als gebruiker\n" +
+			"  session                         toon sessie-informatie"
 
-    storedHash, exists := secureUsers[username]
-    if !exists {
-        loginAttempts[ip]++
-        // VEILIG: generieke foutmelding — geen info-lekkage
-        c.Data["Title"] = "Login (Veilig)"
-        c.Data["Error"] = "Ongeldige inloggegevens"
-        c.TplName = "auth/login.tpl"
-        return
-    }
+	case "login":
+		if len(parts) < 3 {
+			return "Gebruik: login <gebruiker> <wachtwoord>"
+		}
 
-    // VEILIG: bcrypt vergelijking
-    err := bcrypt.CompareHashAndPassword(
-        []byte(storedHash), []byte(password))
+		// MITIGATIE (CWE-307): rate limiting per IP-adres.
+		if a07Attempts[ip] >= authMaxAttempts {
+			return fmt.Sprintf(
+				"Te veel mislukte pogingen. Toegang geblokkeerd voor %s.",
+				map[bool]string{true: ip, false: "dit adres"}[ip != ""])
+		}
 
-    if err != nil {
-        loginAttempts[ip]++
-        c.Data["Title"] = "Login (Veilig)"
-        c.Data["Error"] = "Ongeldige inloggegevens"
-        c.TplName = "auth/login.tpl"
-        return
-    }
+		user := parts[1]
+		pass := strings.Join(parts[2:], " ")
 
-    // VEILIG: reset pogingen na succesvolle login
-    delete(loginAttempts, ip)
+		storedHash, exists := a07SecureHashes[user]
+		if !exists {
+			a07Attempts[ip]++
+			// MITIGATIE (CWE-204): generieke foutmelding — geen user enumeration.
+			return "Authenticatie mislukt."
+		}
 
-    // VEILIG: nieuwe sessie aanmaken na login
-    c.DestroySession()
-    c.SetSession("user", username)
-    if username == "admin" {
-        c.SetSession("role", "admin")
-        c.SetSession("user_id", 1)
-    } else {
-        c.SetSession("role", "user")
-        c.SetSession("user_id", 2)
-    }
+		if err := bcrypt.CompareHashAndPassword([]byte(storedHash), []byte(pass)); err != nil {
+			a07Attempts[ip]++
+			return "Authenticatie mislukt."
+		}
 
-    c.Data["Title"]   = "Login (Veilig)"
-    c.Data["Success"] = "Succesvol ingelogd als: " + username
-    c.Data["Info"]    = "bcrypt gebruikt, rate limiting actief, " +
-                        "sessie vernieuwd!"
-    c.TplName = "auth/login.tpl"
+		delete(a07Attempts, ip)
+		return fmt.Sprintf(
+			"Authenticatie geslaagd.\n"+
+				"  Gebruiker:   %s\n"+
+				"  Sessietoken: %s\n"+
+				"  Notitie:     bcrypt-verificatie geslaagd, token willekeurig gegenereerd",
+			user, authSecureTokenDemo)
+
+	case "session":
+		return fmt.Sprintf(
+			"Sessie-informatie:\n"+
+				"  Token:  %s\n"+
+				"  Type:   cryptografisch willekeurig (CSPRNG)\n"+
+				"  Notitie: token kan niet worden voorspeld",
+			authSecureTokenDemo)
+
+	default:
+		// MITIGATIE: enum-commando bestaat niet (CWE-203 mitigatie).
+		return fmt.Sprintf(
+			"bvwa-auth: opdracht niet gevonden: '%s'\n"+
+				"Gebruik 'help' voor een overzicht",
+			parts[0])
+	}
 }
 
-// =====================
-// LOGOUT
-// =====================
+// ── Logout ────────────────────────────────────────────────────────────────────
+
+// LogoutController vernietigt de sessie en stuurt terug naar de startpagina.
 type LogoutController struct {
-    beego.Controller
+	beego.Controller
 }
 
 func (c *LogoutController) Get() {
-    // VEILIG: sessie volledig vernietigen bij uitloggen
-    c.DestroySession()
-    c.Redirect("/", 302)
+	c.DestroySession()
+	c.Redirect("/", 302)
 }

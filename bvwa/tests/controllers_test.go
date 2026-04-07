@@ -8,6 +8,7 @@ import (
 	"strings"
 	"testing"
 
+	"bvwa/controllers"
 	_ "bvwa/routers"
 	beego "github.com/beego/beego/v2/server/web"
 )
@@ -194,9 +195,7 @@ func TestSecureSQL_NormaleInput(t *testing.T) {
 
 // ─── A07: Authentication Failures ─────────────────────────
 func TestVulnerableAuth_FouteCredentials(t *testing.T) {
-	body := strings.NewReader("username=admin&password=fout")
-	r, _ := http.NewRequest("POST", "/auth/vulnerable", body)
-	r.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	r, _ := http.NewRequest("GET", "/auth/vulnerable?cmd=login+admin+fout", nil)
 	w := httptest.NewRecorder()
 	beego.BeeApp.Handlers.ServeHTTP(w, r)
 
@@ -207,9 +206,8 @@ func TestVulnerableAuth_FouteCredentials(t *testing.T) {
 }
 
 func TestSecureAuth_JuisteCredentials(t *testing.T) {
-	body := strings.NewReader("username=admin&password=password123")
-	r, _ := http.NewRequest("POST", "/auth/secure", body)
-	r.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	controllers.ResetA07Attempts()
+	r, _ := http.NewRequest("GET", "/auth/secure?cmd=login+admin+admin123", nil)
 	w := httptest.NewRecorder()
 	beego.BeeApp.Handlers.ServeHTTP(w, r)
 
