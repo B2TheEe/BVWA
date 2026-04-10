@@ -234,36 +234,44 @@ func TestSecureLogging_MislukteLogin_WordtGelogd(t *testing.T) {
 }
 
 // ─── A10: Exception Handling ───────────────────────────────
-func TestSecureException_OngeldieInput(t *testing.T) {
-	r, _ := http.NewRequest("GET", "/exceptions/secure?id=abc", nil)
+func TestSecureException_PayOngeldigBedrag(t *testing.T) {
+	r, _ := http.NewRequest("GET", "/exceptions/secure?cmd=pay+abc+alice", nil)
 	w := httptest.NewRecorder()
 	beego.BeeApp.Handlers.ServeHTTP(w, r)
 
-	if w.Code != http.StatusBadRequest {
-		t.Errorf("[A10 Veilig] Verwacht 400, kreeg %d", w.Code)
+	if w.Code != http.StatusOK {
+		t.Errorf("[A10 Veilig] Verwacht 200, kreeg %d", w.Code)
 	}
-	t.Log("A10 Veilig: ongeldige input correct afgehandeld")
+	if !strings.Contains(w.Body.String(), "geweigerd") {
+		t.Error("[A10 Veilig] ongeldig bedrag: 'geweigerd' ontbreekt in response")
+	}
+	t.Log("A10 Veilig: ongeldig betalingsbedrag correct afgehandeld")
 }
 
-func TestSecureException_NietGevonden(t *testing.T) {
-	r, _ := http.NewRequest("GET", "/exceptions/secure?id=999", nil)
+func TestSecureException_CheckAuthFailClosed(t *testing.T) {
+	r, _ := http.NewRequest("GET", "/exceptions/secure?cmd=check+auth", nil)
 	w := httptest.NewRecorder()
 	beego.BeeApp.Handlers.ServeHTTP(w, r)
 
-	if w.Code != http.StatusNotFound {
-		t.Errorf("[A10 Veilig] Verwacht 404, kreeg %d", w.Code)
+	if w.Code != http.StatusOK {
+		t.Errorf("[A10 Veilig] Verwacht 200, kreeg %d", w.Code)
 	}
-	t.Log("A10 Veilig: niet gevonden correct afgehandeld")
+	if !strings.Contains(w.Body.String(), "fail-closed") {
+		t.Error("[A10 Veilig] check auth: fail-closed melding ontbreekt")
+	}
+	t.Log("A10 Veilig: auth-fout fail-closed afgehandeld")
 }
 
-func TestVulnerableException_NegatiefID(t *testing.T) {
-	r, _ := http.NewRequest("GET", "/exceptions/vulnerable?id=-1", nil)
+func TestVulnerableException_CheckAuthFailOpen(t *testing.T) {
+	r, _ := http.NewRequest("GET", "/exceptions/vulnerable?cmd=check+auth", nil)
 	w := httptest.NewRecorder()
 	beego.BeeApp.Handlers.ServeHTTP(w, r)
 
-	if w.Code == http.StatusInternalServerError {
-		t.Log("A10 Kwetsbaar: server error gelekt")
-	} else {
-		t.Logf("A10 Kwetsbaar: antwoord code %d", w.Code)
+	if w.Code != http.StatusOK {
+		t.Errorf("[A10 Kwetsbaar] Verwacht 200, kreeg %d", w.Code)
 	}
+	if !strings.Contains(w.Body.String(), "fail-open") {
+		t.Error("[A10 Kwetsbaar] check auth: fail-open melding ontbreekt")
+	}
+	t.Log("A10 Kwetsbaar: auth-fout fail-open gedrag aangetoond")
 }
