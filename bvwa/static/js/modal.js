@@ -40,6 +40,7 @@
     function initAllModals() {
         initModal('infoModal',     'openInfoBtn',     'closeInfoBtn');
         initModal('examplesModal', 'openExamplesBtn', 'closeExamplesBtn');
+        initModal('helpModal',     'openHelpBtn',     'closeHelpBtn');
     }
 
     document.addEventListener('keydown', function(e) {

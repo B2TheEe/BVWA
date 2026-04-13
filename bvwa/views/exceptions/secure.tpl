@@ -105,6 +105,7 @@
         <h1>Mishandling of Exceptional Conditions</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -141,6 +142,92 @@ Verbonden met NovaPay Platform &mdash; Welkom, operator</div>
         </form>
     </div>
 
+</div>
+
+<!-- COMMANDO'S MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Commando&rsquo;s &mdash; NovaPay DiagTool (veilig)</h2>
+        <p class="subtitle">Beschikbare commando&rsquo;s voor het beveiligde beheerpaneel</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>status</h3>
+            <div class="safe-box">
+                <code>status</code>
+                <p>Toon systeemstatus. Geeft alleen een generieke melding terug
+                zonder interne paden, versies of procesdetails
+                (<strong>CWE-209 mitigatie</strong>).</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>check</h3>
+            <div class="safe-box">
+                <code>check &lt;service&gt;</code>
+                <p>Controleer een dienst. Beschikbare services: <code>auth</code>,
+                <code>db</code>, <code>payment</code>.</p>
+                <ul>
+                    <li><code>check auth</code> &mdash; bij een auth-fout wordt
+                    toegang <em>geweigerd</em> (fail-closed). Geen stacktrace of
+                    interne details, alleen een foutcode
+                    (<strong>CWE-636 mitigatie</strong>).</li>
+                    <li><code>check db</code> &mdash; generieke foutmelding zonder
+                    connection string of wachtwoord
+                    (<strong>CWE-209 mitigatie</strong>).</li>
+                    <li><code>check payment</code> &mdash; normale statuscheck.</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>pay</h3>
+            <div class="safe-box">
+                <code>pay &lt;bedrag&gt; &lt;ontvanger&gt;</code>
+                <p>Verwerk een betaling. Parse-fouten worden expliciet afgehandeld
+                en de transactie geweigerd (<strong>CWE-391 mitigatie</strong>).
+                Negatieve en nulbedragen worden geblokkeerd
+                (<strong>CWE-636 mitigatie</strong>).</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>pay 100 bob</code><br>
+                <code>pay -50 eve</code><br>
+                <code>pay abc carol</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>config</h3>
+            <div class="safe-box">
+                <code>config</code>
+                <p>Toegang geweigerd. Configuratiegegevens zijn niet beschikbaar
+                via de terminal (<strong>CWE-209 mitigatie</strong>).</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>txlog</h3>
+            <div class="safe-box">
+                <code>txlog</code>
+                <p>Toon de transactiegeschiedenis. Bevat alleen correct verwerkte
+                transacties &mdash; geweigerde betalingen verschijnen niet in het
+                log.</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>help</h3>
+            <div class="safe-box">
+                <code>help</code>
+                <p>Toon het ingebouwde overzicht van beschikbare commando&rsquo;s.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- ECHTE VOORBEELDEN MODAL -->

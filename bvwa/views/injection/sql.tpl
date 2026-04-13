@@ -83,6 +83,7 @@
         <button type="button" class="btn-examples" id="openExamplesBtn">
             Echte Voorbeelden
         </button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <!-- Sub-navigation -->
@@ -402,7 +403,122 @@ o.Raw(
     gebruik alleen in een geisoleerde testomgeving.
 </footer>
 
+<!-- HULP MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Hulp — A05 SQL Injection</h2>
+        <p class="subtitle">Testinvoer voor het zoekveld van de MegaCorp Medewerkersdirectory</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>Normale zoekopdrachten</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Invoer in zoekveld</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Verwacht resultaat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">alice</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Alice Jansen (Finance)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">sven</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Sven Bakker (IT)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">bob</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Bob de Vries (HR)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">carol</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Carol Peters (IT)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">dave</td>
+                        <td style="padding:8px 12px;">Dave Smit (Sales)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>SQL injection payloads (kwetsbare versie)</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Payload</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Wat het doet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">' OR '1'='1</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">WHERE-conditie omzeild — alle records teruggegeven inclusief verborgen account</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">' OR 1=1--</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Zelfde effect, rest van query als commentaar behandeld</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">1=1</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Kortere variant — geeft alle records terug</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">union select</td>
+                        <td style="padding:8px 12px;">UNION-gebaseerde injectie — herkend als aanvalspayload</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size:13px; color:#888; margin-top:8px;">
+                Op de <strong>veilige versie</strong> worden dezelfde payloads als letterlijke zoektermen behandeld — geen resultaten.
+            </p>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>CTF-tip</h3>
+            <p>Gebruik een SQL injection payload op de <strong>kwetsbare versie</strong>. Het verborgen
+            systeemaccount <code>db_admin</code> wordt teruggegeven — de CTF-flag staat in het
+            e-mailadresveld van dit record.</p>
+        </div>
+
+    </div>
+</div>
+
+<style>
+.btn-help {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.btn-help:hover { background: #6d28d9; }
+</style>
+
 <script type="text/javascript" src="/static/js/modal.js"></script>
+<script>
+(function () {
+    var openBtn  = document.getElementById('openHelpBtn');
+    var closeBtn = document.getElementById('closeHelpBtn');
+    var overlay  = document.getElementById('helpModal');
+    if (openBtn)  openBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'block'; document.body.style.overflow = 'hidden'; };
+    if (closeBtn) closeBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'none'; document.body.style.overflow = ''; };
+    if (overlay)  overlay.onclick = function (e) { if (e.target === overlay) { overlay.style.display = 'none'; document.body.style.overflow = ''; } };
+})();
+</script>
 
 </body>
 </html>

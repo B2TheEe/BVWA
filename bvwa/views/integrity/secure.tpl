@@ -105,6 +105,7 @@
         <h1>Software/Data Integrity Failures</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -141,6 +142,81 @@ Verbonden met deploy.bvwa-corp.local &mdash; Welkom, deployer</div>
         </form>
     </div>
 
+</div>
+
+<!-- COMMANDO'S MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Commando&rsquo;s &mdash; bvwa-deploy (veilig)</h2>
+        <p class="subtitle">Beschikbare commando&rsquo;s voor de beveiligde CI/CD deployment pipeline</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>token</h3>
+            <div class="safe-box">
+                <code>token</code>
+                <p>Toon het huidige gesigneerde deployment-token. Het token heeft het
+                formaat <code>&lt;base64-payload&gt;.&lt;hmac-sha256-hex&gt;</code>.
+                De handtekening is cryptografisch gekoppeld aan de payload en kan niet
+                worden vervalst zonder de server-sleutel
+                (<strong>CWE-347 mitigatie</strong>).</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>decode</h3>
+            <div class="safe-box">
+                <code>decode &lt;token&gt;</code>
+                <p>Decodeer de payload van een token (het deel v&oacute;&oacute;r de punt).
+                Toont de JSON-inhoud. Gebruik <code>verify</code> om de handtekening
+                apart te controleren.</p>
+                <p><em>Voorbeeld:</em><br>
+                <code>decode &lt;token uit &lsquo;token&rsquo; commando&gt;</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>verify</h3>
+            <div class="safe-box">
+                <code>verify &lt;token&gt;</code>
+                <p>Verifieer de HMAC-SHA256-handtekening van een token. Geeft
+                <em>GELDIG</em> of <em>ONGELDIG</em> terug. Probeer een gemanipuleerde
+                payload door te sturen &mdash; de handtekening zal niet meer kloppen.</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>verify &lt;geldig token&gt;</code><br>
+                <code>verify &lt;aangepaste base64&gt;.&lt;originele handtekening&gt;</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>deploy</h3>
+            <div class="safe-box">
+                <code>deploy &lt;token&gt;</code>
+                <p>Voer een deployment uit. De server verifieert eerst de
+                HMAC-SHA256-handtekening via timing-safe vergelijking
+                (<code>hmac.Equal()</code>). Bij een ongeldige handtekening wordt
+                het artifact geweigerd en vindt er <strong>geen</strong> deployment
+                plaats (fail-closed).</p>
+                <p><em>Voorbeeld:</em><br>
+                <code>deploy &lt;geldig gesigneerd token&gt;</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>help</h3>
+            <div class="safe-box">
+                <code>help</code>
+                <p>Toon het ingebouwde overzicht van beschikbare commando&rsquo;s.
+                Het <code>encode</code>-commando bestaat niet in deze versie &mdash;
+                tokens kunnen alleen server-side worden aangemaakt.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- ECHTE VOORBEELDEN MODAL -->

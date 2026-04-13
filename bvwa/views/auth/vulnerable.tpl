@@ -105,6 +105,7 @@
         <h1>Authentication Failures</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -141,6 +142,66 @@ Verbonden met auth.bvwa-corp.local &mdash; Niet ingelogd</div>
         </form>
     </div>
 
+</div>
+
+<!-- COMMANDO'S MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Commando&rsquo;s &mdash; bvwa-auth (kwetsbaar)</h2>
+        <p class="subtitle">Beschikbare commando&rsquo;s voor de kwetsbare authenticatie-gateway</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>login</h3>
+            <div class="vuln-box">
+                <code>login &lt;gebruiker&gt; &lt;wachtwoord&gt;</code>
+                <p>Authenticeer als een gebruiker. Geeft een andere foutmelding terug
+                afhankelijk van of de gebruiker bestaat of het wachtwoord onjuist is
+                (<strong>CWE-204 &mdash; user enumeration</strong>). Bij succes wordt
+                een voorspelbaar sessietoken (<code>sess_00042</code>) teruggegeven.</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>login admin admin123</code><br>
+                <code>login admin fout</code><br>
+                <code>login niemand test</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>enum</h3>
+            <div class="vuln-box">
+                <code>enum &lt;gebruiker&gt;</code>
+                <p>Controleer expliciet of een gebruiker bestaat in het systeem
+                (<strong>CWE-203 &mdash; user enumeration endpoint</strong>). Geeft
+                &ldquo;BESTAAT&rdquo; of &ldquo;NIET GEVONDEN&rdquo; terug.</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>enum admin</code><br>
+                <code>enum support</code><br>
+                <code>enum backup</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>session</h3>
+            <div class="vuln-box">
+                <code>session</code>
+                <p>Toon het huidige sessietoken. Het token is sequentieel en daardoor
+                voorspelbaar (<strong>CWE-330</strong>): het volgende token is
+                waarschijnlijk <code>sess_00043</code>.</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>help</h3>
+            <div class="vuln-box">
+                <code>help</code>
+                <p>Toon het ingebouwde overzicht van beschikbare commando&rsquo;s.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- ECHTE VOORBEELDEN MODAL -->

@@ -105,6 +105,7 @@
         <h1>Software/Data Integrity Failures</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -141,6 +142,80 @@ Verbonden met deploy.bvwa-corp.local &mdash; Welkom, deployer</div>
         </form>
     </div>
 
+</div>
+
+<!-- COMMANDO'S MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Commando&rsquo;s &mdash; bvwa-deploy (kwetsbaar)</h2>
+        <p class="subtitle">Beschikbare commando&rsquo;s voor de kwetsbare CI/CD deployment pipeline</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>token</h3>
+            <div class="vuln-box">
+                <code>token</code>
+                <p>Toon het huidige deployment-token. Het token is puur Base64-gecodeerde JSON
+                &mdash; geen handtekening, geen integriteitscontrole
+                (<strong>CWE-345/502</strong>). De inhoud is triviaal leesbaar en aanpasbaar.</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>decode</h3>
+            <div class="vuln-box">
+                <code>decode &lt;token&gt;</code>
+                <p>Decodeer een Base64-token naar de JSON-payload. Laat zien dat Base64
+                geen encryptie is &mdash; de <code>role</code>, <code>user</code> en
+                overige velden zijn direct leesbaar.</p>
+                <p><em>Voorbeeld:</em><br>
+                <code>decode &lt;token uit &lsquo;token&rsquo; commando&gt;</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>encode</h3>
+            <div class="vuln-box">
+                <code>encode &lt;json&gt;</code>
+                <p>Encodeer eigen JSON naar een deployment-token. Hiermee kun je de payload
+                manipuleren, bijvoorbeeld <code>role</code> wijzigen van
+                <code>"user"</code> naar <code>"admin"</code>
+                (<strong>privilege escalation</strong>). De server accepteert dit token
+                blind.</p>
+                <p><em>Aanvalsvoorbeeld:</em><br>
+                <code>encode {"user":"hacker","role":"admin","package":"pwn","env":"production"}</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>deploy</h3>
+            <div class="vuln-box">
+                <code>deploy &lt;token&gt;</code>
+                <p>Voer een deployment uit met het opgegeven token. De server verifieert
+                de integriteit <strong>niet</strong> &mdash; elk geldig Base64-token wordt
+                geaccepteerd. Gebruik een gemanipuleerd token om als admin te deployen
+                en de CTF-flag te ontvangen.</p>
+                <p><em>Aanvalsstroom:</em><br>
+                1. <code>token</code> &rarr; kopieer token<br>
+                2. <code>decode &lt;token&gt;</code> &rarr; bekijk payload<br>
+                3. <code>encode {"user":"hacker","role":"admin","package":"pwn","env":"production"}</code> &rarr; maak admin-token<br>
+                4. <code>deploy &lt;admin-token&gt;</code> &rarr; privilege escalation</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>help</h3>
+            <div class="vuln-box">
+                <code>help</code>
+                <p>Toon het ingebouwde overzicht van beschikbare commando&rsquo;s.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- ECHTE VOORBEELDEN MODAL -->

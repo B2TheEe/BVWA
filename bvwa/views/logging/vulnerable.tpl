@@ -105,6 +105,7 @@
         <h1>Security Logging &amp; Alerting Failures</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -141,6 +142,82 @@ Verbonden met auditd.bvwa-corp.local &mdash; Welkom, operator</div>
         </form>
     </div>
 
+</div>
+
+<!-- COMMANDO'S MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Commando&rsquo;s &mdash; bvwa-auditd (kwetsbaar)</h2>
+        <p class="subtitle">Beschikbare commando&rsquo;s voor de kwetsbare audit-daemon</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>logs</h3>
+            <div class="vuln-box">
+                <code>logs [n]</code>
+                <p>Toon de laatste <em>n</em> logregels (standaard 20). De logs bevatten
+                wachtwoorden in plaintext (<strong>CWE-532</strong>). Zoek naar regels
+                met <code>pass=</code> om credentials te lezen. Er zijn ook vier
+                mislukte pogingen zichtbaar zonder brute-force-alert
+                (<strong>CWE-223</strong>).</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>logs</code><br>
+                <code>logs 5</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>login</h3>
+            <div class="vuln-box">
+                <code>login &lt;gebruiker&gt; &lt;wachtwoord&gt;</code>
+                <p>Authenticeer bij auditd. Het ingevoerde wachtwoord wordt in plaintext
+                in het auditlog opgeslagen (<strong>CWE-532</strong>), ook bij een
+                mislukte poging. Er is geen alerting bij herhaalde mislukkingen
+                (<strong>CWE-223</strong>).</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>login admin admin123</code><br>
+                <code>login admin fout</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>search</h3>
+            <div class="vuln-box">
+                <code>search &lt;zoekterm&gt;</code>
+                <p>Doorzoek het auditlog op een zoekterm. Zoek op <code>pass=</code>
+                om alle gelogde wachtwoorden te vinden, of op een gebruikersnaam om
+                alle activiteit van die gebruiker te zien.</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>search pass=</code><br>
+                <code>search sysadmin</code><br>
+                <code>search GESLAAGD</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>stats</h3>
+            <div class="vuln-box">
+                <code>stats</code>
+                <p>Toon verbindingsstatistieken: totale pogingen, geslaagd en mislukt.
+                Let op: er worden geen beveiligingsalerts getoond, ook niet bij
+                meerdere mislukte pogingen van hetzelfde IP-adres
+                (<strong>CWE-223</strong>).</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>help</h3>
+            <div class="vuln-box">
+                <code>help</code>
+                <p>Toon het ingebouwde overzicht van beschikbare commando&rsquo;s.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- ECHTE VOORBEELDEN MODAL -->

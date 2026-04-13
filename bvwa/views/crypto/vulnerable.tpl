@@ -105,6 +105,7 @@
         <h1>Cryptographic Failures</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -252,7 +253,136 @@ Connected to bvwa-corp.local</div>
     gebruik alleen in een ge&iuml;soleerde testomgeving.
 </footer>
 
+<!-- HULP MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Hulp — A04 Cryptographic Failures (Kwetsbaar)</h2>
+        <p class="subtitle">Beschikbare <code>bvwa-passwd</code>-commando's op het kwetsbare credential management systeem</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>Commando's</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Commando</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Wat het doet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">help</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Lijst alle commando's</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">login &lt;user&gt; &lt;pass&gt;</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Inloggen — gebruikt <strong style="color:#e74c3c;">MD5 zonder salt</strong> (CWE-328)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">token</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Huidig auth-token tonen — <strong style="color:#e74c3c;">Base64-only, geen handtekening</strong> (CWE-325)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">whoami</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Sessie-informatie tonen — lekt interne velden inclusief CTF-flag</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">hash &lt;waarde&gt;</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">MD5-hash berekenen van een waarde</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">crack &lt;md5hash&gt;</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">MD5-hash opzoeken in rainbow table</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">decode &lt;base64&gt;</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Base64-string decoderen (bijv. het auth-token)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">users</td>
+                        <td style="padding:8px 12px;">Alle gebruikers + MD5-hashes tonen — <strong style="color:#e74c3c;">geen autorisatiecheck</strong> (CWE-862)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Bekende gebruikers</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Gebruiker</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Wachtwoord</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Rol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">admin</td>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">password</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">admin</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">alice</td>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">12345</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">user</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">bob</td>
+                        <td style="padding:8px 12px; font-family:monospace;">test</td>
+                        <td style="padding:8px 12px;">user</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Aanbevolen testvolgorde</h3>
+            <ol style="font-size:14px; padding-left:20px; line-height:2;">
+                <li><code>users</code> — haal MD5-hashes op zonder authenticatie</li>
+                <li><code>crack 5f4dcc3b5aa765d61d8327deb882cf99</code> — kraak de admin-hash</li>
+                <li><code>login admin password</code> — log in en zie het MD5-algoritme</li>
+                <li><code>token</code> — bekijk het Base64-token (geen handtekening)</li>
+                <li><code>decode &lt;token&gt;</code> — decodeer het token en lees de payload</li>
+                <li><code>whoami</code> — zie de CTF-flag in de sessie-informatie</li>
+            </ol>
+        </div>
+
+    </div>
+</div>
+
+<style>
+.btn-help {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.btn-help:hover { background: #6d28d9; }
+</style>
+
 <script type="text/javascript" src="/static/js/modal.js"></script>
+<script>
+(function () {
+    var openBtn  = document.getElementById('openHelpBtn');
+    var closeBtn = document.getElementById('closeHelpBtn');
+    var overlay  = document.getElementById('helpModal');
+    if (openBtn)  openBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'block'; document.body.style.overflow = 'hidden'; };
+    if (closeBtn) closeBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'none'; document.body.style.overflow = ''; };
+    if (overlay)  overlay.onclick = function (e) { if (e.target === overlay) { overlay.style.display = 'none'; document.body.style.overflow = ''; } };
+})();
+</script>
 
 </body>
 </html>

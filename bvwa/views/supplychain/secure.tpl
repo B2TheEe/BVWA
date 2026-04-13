@@ -105,6 +105,7 @@
         <h1>Software Supply Chain Failures</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -232,7 +233,133 @@ Integrity verification: enabled</div>
     gebruik alleen in een gei&euml;soleerde testomgeving.
 </footer>
 
+<!-- HULP MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Hulp — A03 Supply Chain (Veilig)</h2>
+        <p class="subtitle">Beschikbare <code>bvwa-pkg</code>-commando's op de veilige package manager</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>Commando's</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Commando</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Wat het doet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">list</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Beschikbare packages tonen</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">info &lt;pkg&gt;</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Details van een package tonen (checksum, auteur, dependencies)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">install &lt;pkg&gt;</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Package installeren <strong style="color:#27ae60;">(checksum geverifieerd)</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">verify &lt;pkg&gt;</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Checksum van een package handmatig controleren</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">audit</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Volledige security audit van alle geïnstalleerde packages</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">search &lt;term&gt;</td>
+                        <td style="padding:8px 12px;">Zoek packages op naam of beschrijving</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Aanbevolen testvolgorde</h3>
+            <ol style="font-size:14px; padding-left:20px; line-height:2;">
+                <li><code>list</code> — bekijk alle packages</li>
+                <li><code>info bvwa-logger</code> — zie de verwachte checksum</li>
+                <li><code>verify bvwa-logger</code> — detecteer de checksum-mismatch</li>
+                <li><code>install bvwa-logger</code> — installatie geblokkeerd vanwege mismatch</li>
+                <li><code>audit</code> — overzicht van alle getampereerde packages</li>
+                <li><code>install bvwa-utils</code> — voorbeeld van een geslaagde installatie</li>
+            </ol>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Beschikbare packages</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Package</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Versie</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Checksum-status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">bvwa-utils</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">1.2.0</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#27ae60;">OK</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">bvwa-logger</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">2.1.3</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#e74c3c;">MISMATCH — installatie geblokkeerd</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">bvwa-crypto</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">0.9.1</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#e67e22;">OK maar deprecated</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">bvwa-auth</td>
+                        <td style="padding:8px 12px;">1.0.4</td>
+                        <td style="padding:8px 12px; color:#27ae60;">OK</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<style>
+.btn-help {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.btn-help:hover { background: #6d28d9; }
+</style>
+
 <script type="text/javascript" src="/static/js/modal.js"></script>
+<script>
+(function () {
+    var openBtn  = document.getElementById('openHelpBtn');
+    var closeBtn = document.getElementById('closeHelpBtn');
+    var overlay  = document.getElementById('helpModal');
+    if (openBtn)  openBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'block'; document.body.style.overflow = 'hidden'; };
+    if (closeBtn) closeBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'none'; document.body.style.overflow = ''; };
+    if (overlay)  overlay.onclick = function (e) { if (e.target === overlay) { overlay.style.display = 'none'; document.body.style.overflow = ''; } };
+})();
+</script>
 
 </body>
 </html>

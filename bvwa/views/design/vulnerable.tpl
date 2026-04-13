@@ -81,6 +81,17 @@
             cursor: pointer;
         }
         .terminal-input-bar button:hover { background: #2ea043; }
+        .btn-help {
+            background: #7c3aed;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-help:hover { background: #6d28d9; }
     </style>
 </head>
 <body>
@@ -105,6 +116,7 @@
         <h1>Insecure Design</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -265,6 +277,86 @@ Verbonden met bvwa-bank.nl &mdash; Welkom, BVWA Demo User</div>
 </footer>
 
 <script type="text/javascript" src="/static/js/modal.js"></script>
+
+<!-- HULP MODAL -->
+<div class="modal-overlay" id="helpModal" style="display:none;">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Hulp &mdash; bvwa-bank (Kwetsbaar)</h2>
+        <p class="subtitle">Beschikbare opdrachten en exploitatie-scenario&rsquo;s</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>Beschikbare opdrachten</h3>
+            <table class="help-table">
+                <thead><tr><th>Opdracht</th><th>Beschrijving</th></tr></thead>
+                <tbody>
+                    <tr><td><code>help</code></td><td>Toon overzicht van opdrachten</td></tr>
+                    <tr><td><code>balance</code></td><td>Toon huidig rekeningsaldo (€ 1.000)</td></tr>
+                    <tr><td><code>accounts</code></td><td>Lijst beschikbare rekeningen (NL02BVWA...)</td></tr>
+                    <tr><td><code>history</code></td><td>Toon recente transacties</td></tr>
+                    <tr><td><code>transfer &lt;rekening&gt; &lt;bedrag&gt;</code></td><td>Maak bedrag over naar rekening</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Exploitatie-scenario&rsquo;s</h3>
+            <div class="vuln-box">
+                <table class="help-table">
+                    <thead><tr><th>Invoer</th><th>Effect</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><code>transfer NL02BVWA0000000001 100</code></td>
+                            <td>Normale overboeking &mdash; saldo daalt naar € 900</td>
+                        </tr>
+                        <tr>
+                            <td><code>transfer NL02BVWA0000000001 2000</code></td>
+                            <td>Overdraft &mdash; saldo wordt negatief (niet geblokkeerd)</td>
+                        </tr>
+                        <tr>
+                            <td><code>transfer NL02BVWA0000000001 -500</code></td>
+                            <td>Negatief bedrag &mdash; geld <em>ontvangen</em> in plaats van verzonden + CTF-flag</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>CTF-tip</h3>
+            <p>Gebruik een <strong>negatief bedrag</strong> bij een transfer om de business logic flaw te triggeren.
+            De CTF-flag verschijnt in de terminal-output <em>en</em> in de <code>X-CTF-Flag</code> response-header
+            (F12 &rarr; Netwerk &rarr; Response Headers).</p>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    var btn = document.getElementById('openHelpBtn');
+    var modal = document.getElementById('helpModal');
+    var closeBtn = document.getElementById('closeHelpBtn');
+    if (btn && modal) {
+        btn.addEventListener('click', function () {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        });
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+    }
+}());
+</script>
 
 </body>
 </html>

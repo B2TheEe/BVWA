@@ -119,6 +119,7 @@
         <h1>Security Misconfiguration</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -253,7 +254,141 @@ bvwa-server diagnostic interface v1.0 &mdash; authorized access only</div>
     gebruik alleen in een gei&euml;soleerde testomgeving.
 </footer>
 
+<!-- HULP MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Hulp — A02 Security Misconfiguration (Kwetsbaar)</h2>
+        <p class="subtitle">Beschikbare shell-commando's op dit niet-beveiligde diagnostics-endpoint</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>Systeem-informatie</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Commando</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Wat het doet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">hostname</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Servernaam tonen</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">whoami</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Huidige gebruiker tonen</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">id</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">User-ID en groepen tonen</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">uname -a</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Kernelversie en architectuur</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">ps aux</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Actieve processen tonen</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">ifconfig</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Netwerkinformatie (ook: <code>ip a</code>)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">netstat -an</td>
+                        <td style="padding:8px 12px;">Open TCP-poorten tonen</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Bestanden en configuratie</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Commando</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Wat het doet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">ls</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Bestanden in huidige map</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">ls /</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Rootmap tonen</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">ls /var/www</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Webroot tonen (bevat gevoelige bestanden)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">cat bvwa.conf</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Configuratiebestand met DB-credentials</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">cat secret.txt</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Gevoelig bestand in webroot</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">cat /etc/passwd</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Systeemgebruikers tonen</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">env</td>
+                        <td style="padding:8px 12px;">Omgevingsvariabelen tonen (bevat credentials)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>CTF-tip</h3>
+            <p>De CTF-flag is op twee manieren te vinden:</p>
+            <ul style="font-size:14px; margin-top:6px; padding-left:20px; line-height:1.8;">
+                <li>Via <code>env</code> of <code>cat secret.txt</code> in de terminal</li>
+                <li>Via <strong>F12 &rarr; Network &rarr; Response Headers</strong>: zoek naar <code>X-CTF-Flag</code></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<style>
+.btn-help {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.btn-help:hover { background: #6d28d9; }
+</style>
+
 <script type="text/javascript" src="/static/js/modal.js"></script>
+<script>
+(function () {
+    var openBtn  = document.getElementById('openHelpBtn');
+    var closeBtn = document.getElementById('closeHelpBtn');
+    var overlay  = document.getElementById('helpModal');
+    if (openBtn)  openBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'block'; document.body.style.overflow = 'hidden'; };
+    if (closeBtn) closeBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'none'; document.body.style.overflow = ''; };
+    if (overlay)  overlay.onclick = function (e) { if (e.target === overlay) { overlay.style.display = 'none'; document.body.style.overflow = ''; } };
+})();
+</script>
 
 </body>
 </html>

@@ -36,6 +36,7 @@
         <button type="button" class="btn-examples" id="openExamplesBtn">
             Echte Voorbeelden
         </button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <!-- ── OVERZICHT: twee kaarten ── -->
@@ -402,7 +403,162 @@ emp := profileDB[id] <span class="cmt">// iedereen leest elk profiel</span>
     gebruik alleen in een geïsoleerde testomgeving.
 </footer>
 
+<!-- ── HULP MODAL ── -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">✕</button>
+
+        <h2>Hulp — A01 Broken Access Control</h2>
+        <p class="subtitle">
+            Beschikbare URL-parameters en test-scenario's voor dit HR-portaal
+        </p>
+        <hr>
+
+        <div class="info-section">
+            <h3>URL-parameter</h3>
+            <p>
+                Dit portaal gebruikt de <code>?id=</code> parameter om een
+                medewerkersprofiel op te vragen:
+            </p>
+            <div class="code-block">/admin/vulnerable?id=&lt;nummer&gt;
+/admin/secure?id=&lt;nummer&gt;</div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Bekende medewerker-ID's</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px; margin-top:6px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">?id=</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Medewerker</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Afdeling</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">1</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">admin</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">IT</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">2</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">alice</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Finance</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">3</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">bob</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Operations</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">4</td>
+                        <td style="padding:8px 12px;">carol</td>
+                        <td style="padding:8px 12px;">Sales</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Test-scenario's</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px; margin-top:6px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">URL</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Verwacht resultaat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">?id=1</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Admin-profiel met vertrouwelijke HR-notities</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">?id=2</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Profiel van alice (standaard inloggebruiker)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">?id=3</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Profiel van bob — BSN en ziekteverlof zichtbaar</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">?id=4</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Profiel van carol — bonuspercentage zichtbaar</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">?id=999</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Medewerker niet gevonden</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">?id=abc</td>
+                        <td style="padding:8px 12px;">Ongeldig formaat</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Inloggegevens (veilige versie)</h3>
+            <p>De veilige versie vereist een actieve sessie. Log in via
+            <a href="/login" style="color:#3b82f6;">/login</a> met:</p>
+            <table style="width:100%; border-collapse:collapse; font-size:14px; margin-top:6px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Gebruiker</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Wachtwoord</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Rol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">admin</td>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">password123</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Admin — mag alle profielen zien</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">user</td>
+                        <td style="padding:8px 12px; font-family:monospace;">user123</td>
+                        <td style="padding:8px 12px;">Medewerker — alleen eigen profiel</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div><!-- /modal -->
+</div><!-- /helpModal -->
+
+<style>
+.btn-help {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.btn-help:hover { background: #6d28d9; }
+</style>
+
 <script type="text/javascript" src="/static/js/modal.js"></script>
+<script>
+(function () {
+    var openBtn  = document.getElementById('openHelpBtn');
+    var closeBtn = document.getElementById('closeHelpBtn');
+    var overlay  = document.getElementById('helpModal');
+    if (openBtn)  openBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'block'; document.body.style.overflow = 'hidden'; };
+    if (closeBtn) closeBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'none'; document.body.style.overflow = ''; };
+    if (overlay)  overlay.onclick = function (e) { if (e.target === overlay) { overlay.style.display = 'none'; document.body.style.overflow = ''; } };
+})();
+</script>
 
 </body>
 </html>

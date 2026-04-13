@@ -105,6 +105,7 @@
         <h1>Authentication Failures</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -141,6 +142,54 @@ Verbonden met auth.bvwa-corp.local &mdash; Niet ingelogd</div>
         </form>
     </div>
 
+</div>
+
+<!-- COMMANDO'S MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Commando&rsquo;s &mdash; bvwa-auth (veilig)</h2>
+        <p class="subtitle">Beschikbare commando&rsquo;s voor de beveiligde authenticatie-gateway</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>login</h3>
+            <div class="safe-box">
+                <code>login &lt;gebruiker&gt; &lt;wachtwoord&gt;</code>
+                <p>Authenticeer als een gebruiker. Altijd dezelfde generieke foutmelding
+                ongeacht of de gebruiker bestaat of het wachtwoord onjuist is
+                (<strong>CWE-204 mitigatie</strong>). Na 5 mislukte pogingen wordt het
+                IP-adres geblokkeerd (<strong>CWE-307 mitigatie</strong>). Wachtwoorden
+                worden geverifieerd via bcrypt (<strong>CWE-256 mitigatie</strong>).</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>login admin admin123</code><br>
+                <code>login admin fout</code><br>
+                <code>login niemand test</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>session</h3>
+            <div class="safe-box">
+                <code>session</code>
+                <p>Toon het huidige sessietoken. Het token is cryptografisch willekeurig
+                gegenereerd via CSPRNG en daardoor niet voorspelbaar
+                (<strong>CWE-330 mitigatie</strong>).</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>help</h3>
+            <div class="safe-box">
+                <code>help</code>
+                <p>Toon het ingebouwde overzicht van beschikbare commando&rsquo;s.
+                Het <code>enum</code>-commando bestaat niet in deze versie
+                (<strong>CWE-203 mitigatie</strong>).</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- ECHTE VOORBEELDEN MODAL -->

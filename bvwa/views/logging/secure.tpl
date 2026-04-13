@@ -105,6 +105,7 @@
         <h1>Security Logging &amp; Alerting Failures</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -141,6 +142,86 @@ Verbonden met auditd.bvwa-corp.local &mdash; Welkom, operator</div>
         </form>
     </div>
 
+</div>
+
+<!-- COMMANDO'S MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Commando&rsquo;s &mdash; bvwa-auditd (veilig)</h2>
+        <p class="subtitle">Beschikbare commando&rsquo;s voor de beveiligde audit-daemon</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>logs</h3>
+            <div class="safe-box">
+                <code>logs [n]</code>
+                <p>Toon de laatste <em>n</em> logregels (standaard 20). Wachtwoorden
+                zijn vervangen door <code>***REDACTED***</code>
+                (<strong>CWE-532 mitigatie</strong>). Bij vier mislukte pogingen van
+                hetzelfde IP-adres is een <code>[ALERT]</code>-regel aanwezig
+                (<strong>CWE-223 mitigatie</strong>).</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>logs</code><br>
+                <code>logs 5</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>login</h3>
+            <div class="safe-box">
+                <code>login &lt;gebruiker&gt; &lt;wachtwoord&gt;</code>
+                <p>Authenticeer bij auditd. Het wachtwoord wordt <strong>nooit</strong>
+                gelogd &mdash; ook niet bij een mislukte poging
+                (<strong>CWE-532 mitigatie</strong>). Na 3 mislukte pogingen van
+                hetzelfde IP-adres wordt automatisch een brute-force-alert aangemaakt
+                (<strong>CWE-223 mitigatie</strong>).</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>login admin admin123</code><br>
+                <code>login admin fout</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>search</h3>
+            <div class="safe-box">
+                <code>search &lt;zoekterm&gt;</code>
+                <p>Doorzoek het auditlog op een zoekterm. Zoek op <code>ALERT</code>
+                om beveiligingswaarschuwingen te zien, of op een gebruikersnaam voor
+                de activiteit van die gebruiker. Wachtwoorden zijn niet vindbaar
+                omdat ze nooit worden gelogd.</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>search ALERT</code><br>
+                <code>search admin</code><br>
+                <code>search MISLUKT</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>stats</h3>
+            <div class="safe-box">
+                <code>stats</code>
+                <p>Toon verbindingsstatistieken inclusief het aantal actieve
+                brute-force-alerts. Toont expliciet hoeveel
+                <code>[ALERT]</code>-events er in het log staan
+                (<strong>CWE-223 mitigatie</strong>).</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>help</h3>
+            <div class="safe-box">
+                <code>help</code>
+                <p>Toon het ingebouwde overzicht van beschikbare commando&rsquo;s.
+                Invoer wordt gesaniteerd om log injection te voorkomen
+                (<strong>CWE-117 mitigatie</strong>).</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- ECHTE VOORBEELDEN MODAL -->

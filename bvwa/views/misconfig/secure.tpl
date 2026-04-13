@@ -28,6 +28,7 @@
         <h1>Security Misconfiguration</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="cards">
@@ -199,7 +200,117 @@ h.Set("Strict-Transport-Security", "max-age=63072000; includeSubDomains")</div>
     gebruik alleen in een gei&euml;soleerde testomgeving.
 </footer>
 
+<!-- HULP MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Hulp — A02 Security Misconfiguration (Veilig)</h2>
+        <p class="subtitle">Wat te inspecteren op de veilige versie</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>Debug console — uitgeschakeld</h3>
+            <p>De veilige versie heeft <strong>geen terminal</strong>. Het diagnostics-endpoint is volledig
+            verwijderd. Op de <a href="/misconfig/vulnerable" style="color:#3b82f6;">kwetsbare versie</a>
+            zijn de volgende commando's beschikbaar:</p>
+            <table style="width:100%; border-collapse:collapse; font-size:14px; margin-top:8px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Commando</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Wat het lekte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">env</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">DB-credentials en CTF-flag in omgevingsvariabelen</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">cat bvwa.conf</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Volledige databaseconfiguratie inclusief wachtwoord</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">cat secret.txt</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Direct de CTF-flag</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">whoami / id</td>
+                        <td style="padding:8px 12px;">Server draaide als <code>root</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Security headers — inspecteren via DevTools</h3>
+            <p>Open <strong>F12 &rarr; Network &rarr; klik op de pagina-request &rarr; Response Headers</strong>
+            om te controleren welke headers aanwezig zijn. Vergelijk kwetsbaar vs. veilig:</p>
+            <table style="width:100%; border-collapse:collapse; font-size:14px; margin-top:8px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Header</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Kwetsbaar</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Veilig</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">X-CTF-Flag</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#e74c3c;">Aanwezig (CTF-flag zichtbaar)</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#27ae60;">Afwezig</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">X-Powered-By</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#e74c3c;">Go/1.21 Beego/2.0.7 (debug)</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#27ae60;">Afwezig</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">Content-Security-Policy</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#e74c3c;">Afwezig</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#27ae60;">default-src 'self'</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">X-Frame-Options</td>
+                        <td style="padding:8px 12px; color:#e74c3c;">Afwezig</td>
+                        <td style="padding:8px 12px; color:#27ae60;">DENY</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<style>
+.btn-help {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.btn-help:hover { background: #6d28d9; }
+</style>
+
 <script type="text/javascript" src="/static/js/modal.js"></script>
+<script>
+(function () {
+    var openBtn  = document.getElementById('openHelpBtn');
+    var closeBtn = document.getElementById('closeHelpBtn');
+    var overlay  = document.getElementById('helpModal');
+    if (openBtn)  openBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'block'; document.body.style.overflow = 'hidden'; };
+    if (closeBtn) closeBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'none'; document.body.style.overflow = ''; };
+    if (overlay)  overlay.onclick = function (e) { if (e.target === overlay) { overlay.style.display = 'none'; document.body.style.overflow = ''; } };
+})();
+</script>
 
 </body>
 </html>

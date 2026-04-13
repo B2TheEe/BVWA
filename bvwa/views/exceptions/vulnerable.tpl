@@ -105,6 +105,7 @@
         <h1>Mishandling of Exceptional Conditions</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -141,6 +142,93 @@ Verbonden met prod-api-01.novapay.local &mdash; Welkom, operator</div>
         </form>
     </div>
 
+</div>
+
+<!-- COMMANDO'S MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Commando&rsquo;s &mdash; NovaPay DiagTool (kwetsbaar)</h2>
+        <p class="subtitle">Beschikbare commando&rsquo;s voor het kwetsbare beheerpaneel</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>status</h3>
+            <div class="vuln-box">
+                <code>status</code>
+                <p>Toon systeemstatus. Lekt interne details zoals bestandspaden,
+                PID, Go-versie en het aantal goroutines
+                (<strong>CWE-209</strong>). Deze informatie helpt een aanvaller
+                de serveromgeving in kaart te brengen.</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>check</h3>
+            <div class="vuln-box">
+                <code>check &lt;service&gt;</code>
+                <p>Controleer een dienst. Beschikbare services: <code>auth</code>,
+                <code>db</code>, <code>payment</code>.</p>
+                <ul>
+                    <li><code>check auth</code> &mdash; simuleert een auth-paniek die
+                    <em>fail-open</em> afgehandeld wordt: de fout wordt stilletjes
+                    genegeerd en toegang toch verleend (<strong>CWE-636 + CWE-391</strong>).
+                    De stacktrace bevat de CTF-flag.</li>
+                    <li><code>check db</code> &mdash; lekt database connection string
+                    inclusief wachtwoord en intern pad (<strong>CWE-209</strong>).</li>
+                    <li><code>check payment</code> &mdash; normale statuscheck.</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>pay</h3>
+            <div class="vuln-box">
+                <code>pay &lt;bedrag&gt; &lt;ontvanger&gt;</code>
+                <p>Verwerk een betaling. Parse-fouten worden stilletjes genegeerd
+                &mdash; een ongeldig bedrag wordt op €0.00 gezet
+                (<strong>CWE-391</strong>). Negatieve bedragen worden niet
+                geweigerd (<strong>CWE-636</strong>).</p>
+                <p><em>Voorbeelden:</em><br>
+                <code>pay 100 bob</code><br>
+                <code>pay -50 eve</code><br>
+                <code>pay abc carol</code></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>config</h3>
+            <div class="vuln-box">
+                <code>config</code>
+                <p>Toont de volledige systeemconfiguratie inclusief
+                databasewachtwoord, JWT-secret en betaal-API-sleutel
+                (<strong>CWE-209</strong>).</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>txlog</h3>
+            <div class="vuln-box">
+                <code>txlog</code>
+                <p>Toon de transactiegeschiedenis. Bevat een regel met
+                <code>[bedragfout genegeerd]</code> als bewijs van de
+                CWE-391-kwetsbaarheid.</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>help</h3>
+            <div class="vuln-box">
+                <code>help</code>
+                <p>Toon het ingebouwde overzicht van beschikbare commando&rsquo;s.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- ECHTE VOORBEELDEN MODAL -->

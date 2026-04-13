@@ -105,6 +105,7 @@
         <h1>Cryptographic Failures</h1>
         <button type="button" class="btn-info" id="openInfoBtn">Info &amp; CWEs</button>
         <button type="button" class="btn-examples" id="openExamplesBtn">Echte Voorbeelden</button>
+        <button type="button" class="btn-help" id="openHelpBtn">Hulp &amp; Commando&rsquo;s</button>
     </div>
 
     <div class="terminal-panel">
@@ -217,7 +218,142 @@ Connected to bvwa-corp.local</div>
     gebruik alleen in een ge&iuml;soleerde testomgeving.
 </footer>
 
+<!-- HULP MODAL -->
+<div class="modal-overlay" id="helpModal">
+    <div class="modal">
+        <button type="button" class="modal-close" id="closeHelpBtn">X</button>
+        <h2>Hulp — A04 Cryptographic Failures (Veilig)</h2>
+        <p class="subtitle">Beschikbare <code>bvwa-passwd</code>-commando's op het veilige credential management systeem</p>
+        <hr>
+
+        <div class="info-section">
+            <h3>Commando's</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Commando</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Wat het doet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">help</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Lijst alle commando's</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">login &lt;user&gt; &lt;pass&gt;</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Inloggen — gebruikt <strong style="color:#27ae60;">bcrypt (cost=10)</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">token</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Huidig auth-token tonen — <strong style="color:#27ae60;">HMAC-SHA256 gesigneerd</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">whoami</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Sessie-informatie tonen — geen interne velden, geen CTF-flag</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">hash &lt;waarde&gt;</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">SHA-256 hash berekenen (voor data-integriteit, niet wachtwoorden)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">verify &lt;token&gt;</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">HMAC-SHA256 handtekening van een token verifi&euml;ren</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace; border-bottom:1px solid #f0f0f0;">crack &lt;hash&gt;</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Uitgeschakeld in deze build — bcrypt is niet kwetsbaar voor rainbow tables</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; font-family:monospace;">users &lt;token&gt;</td>
+                        <td style="padding:8px 12px;">Gebruikerslijst — <strong style="color:#27ae60;">vereist geldig admin-token</strong> (geen MD5-hashes teruggegeven)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Aanbevolen testvolgorde</h3>
+            <ol style="font-size:14px; padding-left:20px; line-height:2;">
+                <li><code>login admin password123</code> — log in en ontvang een HMAC-gesigneerd token</li>
+                <li><code>token</code> — bekijk de structuur: <code>&lt;payload&gt;.&lt;handtekening&gt;</code></li>
+                <li><code>verify &lt;token&gt;</code> — verifi&euml;er de handtekening van het token</li>
+                <li><code>whoami</code> — sessie-info zonder interne velden</li>
+                <li><code>users</code> — zie de toegangsweigering zonder token</li>
+                <li><code>users &lt;token&gt;</code> — toegang met geldig token (geen hashes zichtbaar)</li>
+                <li><code>crack test</code> — zie dat crack uitgeschakeld is</li>
+            </ol>
+        </div>
+        <hr>
+
+        <div class="info-section">
+            <h3>Vergelijking met de kwetsbare versie</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead>
+                    <tr style="background:#f6f8fa; text-align:left;">
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Onderdeel</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Kwetsbaar</th>
+                        <th style="padding:8px 12px; border-bottom:1px solid #e0e0e0;">Veilig</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Wachtwoord-hashing</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#e74c3c;">MD5 zonder salt</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#27ae60;">bcrypt (cost=10)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">Auth-token</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#e74c3c;">Base64-only, vervalsbaar</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#27ae60;">HMAC-SHA256 gesigneerd</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0;">users-commando</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#e74c3c;">Geen auth, hashes zichtbaar</td>
+                        <td style="padding:8px 12px; border-bottom:1px solid #f0f0f0; color:#27ae60;">Token vereist, geen hashes</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 12px;">crack-commando</td>
+                        <td style="padding:8px 12px; color:#e74c3c;">Rainbow table beschikbaar</td>
+                        <td style="padding:8px 12px; color:#27ae60;">Uitgeschakeld</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<style>
+.btn-help {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.btn-help:hover { background: #6d28d9; }
+</style>
+
 <script type="text/javascript" src="/static/js/modal.js"></script>
+<script>
+(function () {
+    var openBtn  = document.getElementById('openHelpBtn');
+    var closeBtn = document.getElementById('closeHelpBtn');
+    var overlay  = document.getElementById('helpModal');
+    if (openBtn)  openBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'block'; document.body.style.overflow = 'hidden'; };
+    if (closeBtn) closeBtn.onclick = function (e) { e.preventDefault(); overlay.style.display = 'none'; document.body.style.overflow = ''; };
+    if (overlay)  overlay.onclick = function (e) { if (e.target === overlay) { overlay.style.display = 'none'; document.body.style.overflow = ''; } };
+})();
+</script>
 
 </body>
 </html>

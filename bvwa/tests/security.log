@@ -58,3 +58,303 @@ SECURITY: 2026/03/27 14:52:49 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1
 SECURITY: 2026/03/27 14:52:49 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 14:52:49
 SECURITY: 2026/03/27 14:52:49 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 14:52:49
 SECURITY: 2026/03/27 14:52:49 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 14:52:49
+SECURITY: 2026/03/27 17:38:50 [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:38:50 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:38:50 [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:38:50 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:38:50 [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:38:50 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:38:50 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:38:50 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:38:50 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:38:50 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:38:50 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:38:50 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:38:50
+SECURITY: 2026/03/27 17:53:25 [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/27 17:53:25 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/27 17:53:25 [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/27 17:53:25 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/27 17:53:25 [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/27 17:53:25 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/27 17:53:25 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/27 17:53:25 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/27 17:53:25 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/27 17:53:25 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/27 17:53:25 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/27 17:53:25 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-27 17:53:25
+SECURITY: 2026/03/31 16:25:23 [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:23 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:23 [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:23 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:23 [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:23 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:23 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:23 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:23 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:23 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:23 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:23 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:23
+SECURITY: 2026/03/31 16:25:33 [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:25:33 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:25:33 [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:25:33 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:25:33 [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:25:33 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:25:33 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:25:33 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:25:33 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:25:33 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:25:33 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:25:33 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:25:33
+SECURITY: 2026/03/31 16:44:36 [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:36 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:36 [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:36 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:36 [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:36 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:36 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:36 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:36 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:36 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:36 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:36 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:36
+SECURITY: 2026/03/31 16:44:51 [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/03/31 16:44:51 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/03/31 16:44:51 [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/03/31 16:44:51 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/03/31 16:44:51 [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/03/31 16:44:51 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/03/31 16:44:51 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/03/31 16:44:51 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/03/31 16:44:51 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/03/31 16:44:51 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/03/31 16:44:51 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/03/31 16:44:51 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-03-31 16:44:51
+SECURITY: 2026/04/07 13:06:49 [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:06:49 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:06:49 [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:06:49 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:06:49 [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:06:49 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:06:49 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:06:49 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:06:49 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:06:49 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:06:49 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:06:49 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:06:49
+SECURITY: 2026/04/07 13:30:32 [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:32 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:32 [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:32 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:32 [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:32 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:32 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:32 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:32 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:32 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:32 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:32 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:32
+SECURITY: 2026/04/07 13:30:40 [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:30:40 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:30:40 [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:30:40 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:30:40 [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:30:40 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:30:40 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:30:40 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:30:40 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:30:40 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:30:40 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:30:40 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:30:40
+SECURITY: 2026/04/07 13:31:25 [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 13:31:25 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 13:31:25 [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 13:31:25 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 13:31:25 [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 13:31:25 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 13:31:25 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 13:31:25 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 13:31:25 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 13:31:25 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 13:31:25 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 13:31:25 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 13:31:25
+SECURITY: 2026/04/07 14:02:14 [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+SECURITY: 2026/04/07 14:02:14 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 1) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+SECURITY: 2026/04/07 14:02:14 [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+SECURITY: 2026/04/07 14:02:14 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 2) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+SECURITY: 2026/04/07 14:02:14 [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+SECURITY: 2026/04/07 14:02:14 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 3) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+SECURITY: 2026/04/07 14:02:14 [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+SECURITY: 2026/04/07 14:02:14 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (3 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+SECURITY: 2026/04/07 14:02:14 [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+SECURITY: 2026/04/07 14:02:14 🚨 BEVEILIGINGSALERT: [WARNING] Mislukte login (poging 4) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+SECURITY: 2026/04/07 14:02:14 [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+SECURITY: 2026/04/07 14:02:14 🚨 BEVEILIGINGSALERT: [CRITICAL] Mogelijke brute force aanval (4 pogingen) | IP: 10.0.0.1 | Gebruiker: admin | Tijd: 2026-04-07 14:02:14
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: hacker (pass=geheimww) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: niemand (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: hacker (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [ALERT] BRUTE FORCE GEDETECTEERD: admin (4 pogingen) van 
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [WARN]  Login: test (pass=testpass) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:23:01 [2026-04-07 14:23:01] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/07 14:24:05 [2026-04-07 14:24:05] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:24:05 [2026-04-07 14:24:05] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:24:05 [2026-04-07 14:24:05] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:24:05 [2026-04-07 14:24:05] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:24:05 [2026-04-07 14:24:05] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:24:05 [2026-04-07 14:24:05] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:24:05 [2026-04-07 14:24:05] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/07 14:24:05 [2026-04-07 14:24:05] [WARN]  Login: test (pass=testpass) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: hacker (pass=geheimww) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: niemand (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: hacker (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [ALERT] BRUTE FORCE GEDETECTEERD: admin (4 pogingen) van 
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: admin (pass=UNIQUETESTPASS999) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [WARN]  Login: test (pass=UNIQUETESTPASS999) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:30 [2026-04-07 14:25:30] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: hacker (pass=geheimww) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: niemand (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: hacker (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [ALERT] BRUTE FORCE GEDETECTEERD: admin (4 pogingen) van 
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: admin (pass=UNIQUETESTPASS999) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [WARN]  Login: test (pass=UNIQUETESTPASS999) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/07 14:25:38 [2026-04-07 14:25:38] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: hacker (pass=geheimww) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: niemand (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: hacker (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [ALERT] BRUTE FORCE GEDETECTEERD: admin (4 pogingen) van 
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: admin (pass=UNIQUETESTPASS999) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [WARN]  Login: test (pass=UNIQUETESTPASS999) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:07:32 [2026-04-10 14:07:32] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/10 14:08:12 [2026-04-10 14:08:12] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: hacker (pass=geheimww) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: niemand (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: hacker (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [ALERT] BRUTE FORCE GEDETECTEERD: admin (4 pogingen) van 
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: admin (pass=UNIQUETESTPASS999) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [WARN]  Login: test (pass=UNIQUETESTPASS999) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:13 [2026-04-10 14:08:13] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [INFO]  Login: admin (pass=admin123) van 0.0.0.0 — GESLAAGD
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: hacker (pass=geheimww) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: niemand (pass=fout) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: hacker (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [ALERT] BRUTE FORCE GEDETECTEERD: admin (4 pogingen) van 
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [ALERT] BRUTE FORCE GEDETECTEERD: admin (3 pogingen) van 
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=***REDACTED***) van  — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: admin (pass=UNIQUETESTPASS999) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [WARN]  Login: test (pass=UNIQUETESTPASS999) van 0.0.0.0 — MISLUKT
+AUDIT: 2026/04/10 14:08:48 [2026-04-10 14:08:48] [INFO]  Login: admin (pass=***REDACTED***) van  — GESLAAGD
