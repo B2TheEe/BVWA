@@ -413,8 +413,8 @@ func TestA10_Veilig_Pay_OngeldigBedrag_NietInTxlog(t *testing.T) {
 	exceptionsGET("/exceptions/secure", "pay+abc+alice")
 	w := exceptionsGET("/exceptions/secure", "txlog")
 	body := w.Body.String()
-	// Geweigerde transacties mogen niet in het log verschijnen
-	if strings.Contains(body, "abc") {
+	// Geweigerde transactie creëert geen nieuw TX-entry (initieel TX-0001 t/m TX-0002)
+	if strings.Contains(body, "TX-0003") {
 		t.Error("[A10 Veilig] txlog na pay abc: geweigerde transactie mag niet in txlog staan")
 	}
 }

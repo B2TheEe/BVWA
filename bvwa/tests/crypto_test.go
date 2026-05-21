@@ -48,7 +48,7 @@ func TestA04_Kwetsbaar_StatusOK(t *testing.T) {
 
 func TestA04_Kwetsbaar_AuthTokenCookieGezet(t *testing.T) {
 	w := cryptoGET("/crypto/vulnerable", "")
-	cookieHeader := w.Header().Get("Set-Cookie")
+	cookieHeader := strings.Join(w.Header()["Set-Cookie"], "\n")
 	if !strings.Contains(cookieHeader, "auth_token") {
 		t.Error("[A04 Kwetsbaar] auth_token cookie ontbreekt in Set-Cookie header")
 	}
@@ -57,7 +57,7 @@ func TestA04_Kwetsbaar_AuthTokenCookieGezet(t *testing.T) {
 func TestA04_Kwetsbaar_CookieIsBase64(t *testing.T) {
 	// Kwetsbaarheid: de cookie-waarde is puur Base64 — geen handtekening
 	w := cryptoGET("/crypto/vulnerable", "")
-	cookieHeader := w.Header().Get("Set-Cookie")
+	cookieHeader := strings.Join(w.Header()["Set-Cookie"], "\n")
 	// Base64 StdEncoding eindigt op '=' of bevat alleen A-Za-z0-9+/=
 	if !strings.Contains(cookieHeader, "=") {
 		t.Error("[A04 Kwetsbaar] cookie lijkt geen Base64 — padding '=' ontbreekt")
@@ -248,7 +248,8 @@ func TestA04_Veilig_StatusOK(t *testing.T) {
 
 func TestA04_Veilig_AuthTokenCookieGezet(t *testing.T) {
 	w := cryptoGET("/crypto/secure", "")
-	if !strings.Contains(w.Header().Get("Set-Cookie"), "auth_token") {
+	cookieHeader := strings.Join(w.Header()["Set-Cookie"], "\n")
+	if !strings.Contains(cookieHeader, "auth_token") {
 		t.Error("[A04 Veilig] auth_token cookie ontbreekt")
 	}
 }

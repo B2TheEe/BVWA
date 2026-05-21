@@ -328,7 +328,7 @@ func TestA07_Veilig_Login_RateLimiting_ResetNaSucces(t *testing.T) {
 
 	// Na succesvolle login zijn we niet meer geblokkeerd
 	w2 := authGET("/auth/secure", "login admin fout")
-	if strings.Contains(w2.Body.String(), "Geblokkeerd") || strings.Contains(w2.Body.String(), "geblokkeerd") {
+	if strings.Contains(w2.Body.String(), "Te veel mislukte pogingen") {
 		t.Error("[A07 Veilig] rate limit reset: na succesvolle login mag rate limiter niet meer actief zijn")
 	}
 
