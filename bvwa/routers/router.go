@@ -2,10 +2,15 @@ package routers
 
 import (
 	"bvwa/controllers"
+	"strings"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
 func init() {
+	beego.AddFuncMap("contains", strings.Contains)
+	beego.BConfig.WebConfig.Session.SessionOn = true
+	beego.BConfig.WebConfig.Session.SessionName = "bvwasession"
+
 	beego.Router("/", &controllers.HomeController{})
 
 	// Authenticatie

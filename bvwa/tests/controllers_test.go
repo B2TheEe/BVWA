@@ -17,6 +17,8 @@ func init() {
 	appPath, _ := filepath.Abs(
 		filepath.Dir(filepath.Join(filename,
 			".."+string(filepath.Separator))))
+	beego.BConfig.WebConfig.Session.SessionOn = true
+	beego.BConfig.WebConfig.Session.SessionName = "bvwasession"
 	beego.TestBeegoInit(appPath)
 }
 
